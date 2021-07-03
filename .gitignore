@@ -1,0 +1,23 @@
+### macos
+.DS_Store
+
+### IntelliJ IDEA
+.idea/
+*.iml
+
+### vscode
+.vscode
+
+### Virtualenv
+.venv
+__pycache__/
+
+### fonts
+resources/fonts/
+*.TTF
+
+### env
+.envrc
+
+### tmp
+tmp/

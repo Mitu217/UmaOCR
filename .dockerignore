@@ -1,0 +1,10 @@
+.venv
+.pytest_cache
+.envrc
+
+tests/
+
+Makefile
+README.md
+
+*.TTF

@@ -1,0 +1,24 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pillow = "*"
+pyocr = "*"
+opencv-python = "*"
+flask = "*"
+jinja2 = "*"
+pytest = "*"
+isort = "*"
+yapf = "*"
+levenshtein = "*"
+autopep8 = "*"
+
+[requires]
+python_version = "3.8"
+
+[dev-packages]
+beautifulsoup4 = "*"
+chardet = "*"
+autopep8 = "*"

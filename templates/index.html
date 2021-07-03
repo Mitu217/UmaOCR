@@ -1,0 +1,289 @@
+{% extends "layout.html" %}
+{% block content %}
+<link href="/static/css/main.css" rel="stylesheet">
+
+<div id="container">
+  <div>
+    <form id="upload">
+      <input type="file" id="file">
+      <button>Upload</button>
+    </form>
+  </div>
+  <p id="response"></p>
+
+  <h3>Character</h3>
+  <div>
+    <table border="1">
+      <tr>
+        <td>name</td>
+        <td id="character-value"></td>
+      </tr>
+      <tr>
+        <td>rank</td>
+        <td id="rank-value"></td>
+      </tr>
+    </table>
+  </div>
+  
+  <h3>Ability</h3>
+  <div>
+    <table border="1">
+      <tr>
+        <td rowspan="2">fields</td>
+        <td>turf</td>
+        <td id="turf-value"></td>
+      </tr>
+      <tr>
+        <td>dirt</td>
+        <td id="dirt-value"></td>
+      </tr>
+      <tr>
+        <td rowspan="4">distances</td>
+        <td>short</td>
+        <td id="short-value"></td>
+      </tr>
+      <tr>
+        <td>miles</td>
+        <td id="miles-value"></td>
+      </tr>
+      <tr>
+        <td>medium</td>
+        <td id="medium-value"></td>
+      </tr>
+      <tr>
+        <td>long</td>
+        <td id="long-value"></td>
+      </tr>
+      <tr>
+        <td rowspan="4">strategies</td>
+        <td>first</td>
+        <td id="first-value"></td>
+      </tr>
+      <tr>
+        <td>half_first</td>
+        <td id="half-first-value"></td>
+      </tr>
+      <tr>
+        <td>half_last</td>
+        <td id="half-last-value"></td>
+      </tr>
+      <tr>
+        <td>last</td>
+        <td id="last-value"></td>
+      </tr>
+    </table>
+  </div>
+
+  <h3>Params</h3>
+  <div>
+    <table border="1">
+      <tr>
+        <td>Speed</td>
+        <td id="speed-value"></td>
+      </tr>
+      <tr>
+        <td>Stamina</td>
+        <td id="stamina-value"></td>
+      </tr>
+      <tr>
+        <td>Power</td>
+        <td id="power-value"></td>
+      </tr>
+      <tr>
+        <td>Guts</td>
+        <td id="guts-value"></td>
+      </tr>
+      <tr>
+        <td>Wise</td>
+        <td id="wise-value"></td>
+      </tr>
+    </table>
+  </div>
+
+  <h3>Skills</h3>
+  <div>
+    <table border="1">
+      <tr>
+        <th></th>
+        <th>name</th>
+        <th>lv</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td id="skill-1"></td>
+        <td id="skill-level-1"></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td id="skill-2"></td>
+        <td id="skill-level-2"></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td id="skill-3"></td>
+        <td id="skill-level-3"></td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td id="skill-4"></td>
+        <td id="skill-level-4"></td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td id="skill-5"></td>
+        <td id="skill-level-5"></td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td id="skill-6"></td>
+        <td id="skill-level-6"></td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td id="skill-7"></td>
+        <td id="skill-level-7"></td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td id="skill-8"></td>
+        <td id="skill-level-8"></td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td id="skill-9"></td>
+        <td id="skill-level-9"></td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td id="skill-10"></td>
+        <td id="skill-level-10"></td>
+      </tr>
+      <tr>
+        <td>11</td>
+        <td id="skill-11"></td>
+        <td id="skill-level-11"></td>
+      </tr>
+      <tr>
+        <td>12</td>
+        <td id="skill-12"></td>
+        <td id="skill-level-12"></td>
+      </tr>
+      <tr>
+        <td>13</td>
+        <td id="skill-13"></td>
+        <td id="skill-level-13"></td>
+      </tr>
+      <tr>
+        <td>14</td>
+        <td id="skill-14"></td>
+        <td id="skill-level-14"></td>
+      </tr>
+    </table>
+  <div>
+
+  </div>
+</div>
+
+<script>
+const file = document.querySelector("#file");
+const response = document.querySelector("#response");
+
+const character = document.getElementById("character-value")
+const rank = document.getElementById("rank-value")
+const turf = document.getElementById("turf-value")
+const dirt = document.getElementById("dirt-value")
+const short = document.getElementById("short-value")
+const miles = document.getElementById("miles-value")
+const medium = document.getElementById("medium-value")
+const long = document.getElementById("long-value")
+const first = document.getElementById("first-value")
+const halfFirst = document.getElementById("half-first-value")
+const halfLast = document.getElementById("half-last-value")
+const last = document.getElementById("last-value")
+
+const speed = document.getElementById("speed-value");
+const stamina = document.getElementById("stamina-value");
+const power = document.getElementById("power-value");
+const guts = document.getElementById("guts-value");
+const wise = document.getElementById("wise-value");
+
+window.onload = () =>{
+  document.querySelector("#upload").addEventListener("submit", (e)=>{
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("file", file.files[0]);
+
+    const param = {
+      method: "POST",
+      body: formData
+    }
+
+    character.textContent = '';
+    rank.textContent = '';
+    
+    turf.textContent = '';
+    dirt.textContent = '';
+    short.textContent = '';
+    miles.textContent = '';
+    medium.textContent = '';
+    long.textContent = '';
+    first.textContent = '';
+    halfFirst.textContent = '';
+    halfLast.textContent = '';
+    last.textContent = '';
+
+    speed.textContent = '';
+    stamina.textContent = '';
+    power.textContent = '';
+    guts.textContent = '';
+    wise.textContent = '';
+
+    for (let i = 0; i < 14; i++) {
+      document.querySelector("#skill-" + (i+1)).textContent = ''
+      document.querySelector("#skill-level-" + (i+1)).textContent = ''
+    }
+
+    fetch("/api/v1/ocr/status", param)
+      .then((res)=>{
+        return( res.json() );
+      })
+      .then((json)=>{
+          response.textContent = JSON.stringify(json, undefined, 1);
+
+          if (json.data) {
+            character.textContent = json.data.character;
+            rank.textContent = json.data.rank;
+            
+            console.log(json.data.abilities)
+            turf.textContent = json.data.abilities.fields.turf;
+            dirt.textContent = json.data.abilities.fields.dirt;
+            short.textContent = json.data.abilities.distances.short;
+            miles.textContent = json.data.abilities.distances.miles;
+            medium.textContent = json.data.abilities.distances.medium;
+            long.textContent = json.data.abilities.distances.long;
+            first.textContent = json.data.abilities.strategies.first;
+            halfFirst.textContent = json.data.abilities.strategies.half_first;
+            halfLast.textContent = json.data.abilities.strategies.half_last;
+            last.textContent = json.data.abilities.strategies.last;
+
+            speed.textContent = json.data.params.speed;
+            stamina.textContent = json.data.params.stamina;
+            power.textContent = json.data.params.power;
+            guts.textContent = json.data.params.guts;
+            wise.textContent = json.data.params.wise;
+
+            for (let i = 0; i < json.data.skills.length; i++) {
+              document.querySelector("#skill-" + (i+1)).textContent = json.data.skills[i].name
+              document.querySelector("#skill-level-" + (i+1)).textContent = json.data.skills[i].level
+            }
+          }
+      })
+      .catch((error)=>{
+        response.textContent = error;
+      });
+  });
+};
+</script>
+
+{% endblock %}

@@ -1,0 +1,375 @@
+import json
+import os
+import re
+from logging import Logger
+
+import cv2
+import Levenshtein
+import numpy as np
+from PIL import Image
+
+from src.domain.parameters import Parameters
+from src.domain.skill import Skill, Skills
+from src.interface.driver.file_driver import LocalFileDriver
+from src.interface.usecase.status_usecase import StatusUsecase
+from src.library.matching_template import (multi_scale_matching_template,
+                                           multi_scale_matching_template_impl)
+from src.library.ocr import (
+    get_digit_with_single_text_line_and_eng_from_image,
+    get_line_box_with_single_text_line_and_jpn_from_image)
+from src.library.pillow import binarized, crop_pil, pil2cv, resize_pil
+
+TEMPLATE_WIDTH = 1024
+TEMPLATE_HEIGHT = 100
+
+
+class StatusInteractor(StatusUsecase):
+
+    def __init__(self, local_file_driver: LocalFileDriver, logger: Logger, *, debug=False):
+        self.local_file_driver = local_file_driver
+        self.logger = logger
+        self.pattern_digital = r'\D'
+        self.debug = debug
+        self.cache_master_skills_map_by_weight = None
+
+    async def get_parameters_from_image(self, image: Image) -> Parameters:
+        templ = await self.local_file_driver.open_image(
+            os.path.join('resources', 'images', 'ocr_params', 'template_1024.png')
+        )
+        (tW, tH) = templ.size
+        cv2_templ = pil2cv(templ)
+
+        # 処理高速化のため、次の操作を行う
+        #  * templateと画像のwidthを合わせる
+        #  * パラメーターは画像上半分にしかないため、画像の下半分を捨てる
+        image = resize_pil(image, tW)
+        (iW, iH) = image.size
+        image = crop_pil(image, (0, iH * 0.1, iW, iH * 0.5))
+        cv2_image = pil2cv(image)
+        if self.debug:
+            await self.local_file_driver.save_image(
+                image, os.path.join('tmp', 'get_parameters_from_image', 'init_image.png')
+            )
+
+        # マルチスケールテンプレートマッチングでtemplateと一致する箇所の座標を抽出
+        loc = multi_scale_matching_template(cv2_image, cv2_templ, np.linspace(1.1, 1.5, 10))
+        if loc is None:
+            return Parameters(0, 0, 0, 0, 0)
+        if self.debug:
+            (start_x, start_y), (end_x, end_y) = loc
+            await self.local_file_driver.save_image(
+                crop_pil(image, (start_x, start_y, end_x, end_y)),
+                os.path.join('tmp', 'get_parameters_from_image', 'multi_scale_matching_template.png')
+            )
+
+        (start_x, start_y), (end_x, end_y) = loc
+
+        h = (end_y - start_y) * 2
+        w = end_x - start_x
+        p = w / 5
+        lo = p * 0.365
+        ro = p * 0.05
+
+        # TODO: 並列化
+        cropped_speed = crop_pil(image, (start_x + p * 0 + lo, end_y, start_x + p * 1 - ro, end_y + h))
+        binarized_speed = binarized(cropped_speed, 210, 210, 210)
+        speed = await self.get_parameter_from_image(binarized_speed)
+        if self.debug:
+            await self.local_file_driver.save_image(
+                cropped_speed, os.path.join('tmp', 'get_parameters_from_image', 'cropped_speed.png')
+            )
+            await self.local_file_driver.save_image(
+                binarized_speed, os.path.join('tmp', 'get_parameters_from_image', 'binarized_speed.png')
+            )
+
+        cropped_stamina = crop_pil(image, (start_x + p * 1 + lo, end_y, start_x + p * 2 - ro, end_y + h))
+        binarized_stamina = binarized(cropped_stamina, 210, 210, 210)
+        stamina = await self.get_parameter_from_image(binarized_stamina)
+        if self.debug:
+            await self.local_file_driver.save_image(
+                cropped_stamina, os.path.join('tmp', 'get_parameters_from_image', 'cropped_stamina.png')
+            )
+            await self.local_file_driver.save_image(
+                binarized_stamina, os.path.join('tmp', 'get_parameters_from_image', 'binarized_stamina.png')
+            )
+
+        cropped_power = crop_pil(image, (start_x + p * 2 + lo, end_y, start_x + p * 3 - ro, end_y + h))
+        binarized_power = binarized(cropped_power, 210, 210, 210)
+        power = await self.get_parameter_from_image(binarized_power)
+        if self.debug:
+            await self.local_file_driver.save_image(
+                cropped_power, os.path.join('tmp', 'get_parameters_from_image', 'cropped_power.png')
+            )
+            await self.local_file_driver.save_image(
+                binarized_power, os.path.join('tmp', 'get_parameters_from_image', 'binarized_power.png')
+            )
+
+        cropped_guts = crop_pil(image, (start_x + p * 3 + lo, end_y, start_x + p * 4 - ro, end_y + h))
+        binarized_guts = binarized(cropped_guts, 210, 210, 210)
+        guts = await self.get_parameter_from_image(binarized_guts)
+        if self.debug:
+            await self.local_file_driver.save_image(
+                cropped_guts, os.path.join('tmp', 'get_parameters_from_image', 'cropped_guts.png')
+            )
+            await self.local_file_driver.save_image(
+                binarized_guts, os.path.join('tmp', 'get_parameters_from_image', 'binarized_guts.png')
+            )
+
+        cropped_wise = crop_pil(image, (start_x + p * 4 + lo, end_y, start_x + p * 5 - ro, end_y + h))
+        binarized_wise = binarized(cropped_wise, 210, 210, 210)
+        wise = await self.get_parameter_from_image(binarized_wise)
+        if self.debug:
+            await self.local_file_driver.save_image(
+                cropped_wise, os.path.join('tmp', 'get_parameters_from_image', 'cropped_wise.png')
+            )
+            await self.local_file_driver.save_image(
+                binarized_wise, os.path.join('tmp', 'get_parameters_from_image', 'binarized_wise.png')
+            )
+
+        return Parameters(
+            speed,
+            stamina,
+            power,
+            guts,
+            wise,
+        )
+
+    async def get_parameter_from_image(self, image: Image) -> int:
+        digit_text = re.sub(self.pattern_digital, '', get_digit_with_single_text_line_and_eng_from_image(image))
+        return digit_text or 0
+
+    async def get_skills_from_image(self, image: Image) -> Skills:
+        # 処理高速化のため、次の操作を行う
+        #  * templateと画像のwidthを合わせる
+        #  * パラメーターは画像下半分にしかないため、画像の上半分を捨てる
+        image = resize_pil(image, TEMPLATE_WIDTH)
+        image = crop_pil(image, (0, image.size[1] * 0.4, image.size[0], image.size[1] * 0.9))
+        if self.debug:
+            await self.local_file_driver.save_image(
+                image, os.path.join('tmp', 'get_skills_from_image', 'optimize_image_1.png')
+            )
+
+        skill_tab_loc = await self.get_skill_tab_location(image)
+        if skill_tab_loc is None:
+            return Skills([])
+
+        (start_x, start_y), (end_x, end_y) = skill_tab_loc
+        (st_w, st_h) = end_x - start_x, end_y - start_y
+
+        # スキル欄の表示エリアに合わせて、更に画像を最適化
+        image = crop_pil(image, (0, end_y, image.size[0], st_h * 20))
+        if self.debug:
+            await self.local_file_driver.save_image(
+                image, os.path.join('tmp', 'get_skills_from_image', 'optimize_image_2.png')
+            )
+
+        skill_frame_locs = await self.get_skill_frame_locations(image)
+
+        skills = []
+        rgb_border = [150, 150, 150]
+
+        for i in range(len(skill_frame_locs)):
+            (start_x, start_y), (end_x, end_y) = skill_frame_locs[i]
+
+            cropped_skill = crop_pil(image, (
+                start_x + st_w * 0.07, start_y + st_h * 0.3, start_x + st_w * 0.435, end_y - st_h * 0.3))
+            binarized_skill = binarized(cropped_skill, rgb_border[0], rgb_border[1], rgb_border[2])
+            skill_name = await self.get_skill_name_from_image(binarized_skill)
+
+            cropped_level = crop_pil(image, (
+                start_x + st_w * 0.435, start_y + st_h * 0.3, start_x + st_w * 0.5, end_y - st_h * 0.3))
+            binarized_level = binarized(cropped_level, rgb_border[0], rgb_border[1], rgb_border[2])
+            skill_level = await self.get_skill_level_from_image(binarized_level)
+
+            if self.debug:
+                await self.local_file_driver.save_image(
+                    cropped_skill,
+                    os.path.join('tmp', 'get_skills_from_image', 'skill' + str(i + 1) + '_name_cropped.png')
+                )
+                await self.local_file_driver.save_image(
+                    binarized_skill,
+                    os.path.join('tmp', 'get_skills_from_image', 'skill' + str(i + 1) + '_name_binarized.png')
+                )
+                await self.local_file_driver.save_image(
+                    cropped_level,
+                    os.path.join('tmp', 'get_skills_from_image', 'skill' + str(i + 1) + '_level_cropped.png')
+                )
+                await self.local_file_driver.save_image(
+                    binarized_level,
+                    os.path.join('tmp', 'get_skills_from_image', 'skill' + str(i + 1) + '_level_binarized.png')
+                )
+
+            skills.append(Skill(
+                skill_name,
+                int(skill_level)),
+            )
+
+        return Skills(skills)
+
+    async def get_skill_tab_location(self, image: Image):
+        # optimize
+        if image.size[0] != TEMPLATE_WIDTH:
+            image = resize_pil(image, TEMPLATE_WIDTH)
+
+        templ = await self.local_file_driver.open_image(
+            os.path.join('resources', 'images', 'ocr_skills', 'template_skill_tab_w_1024.png')
+        )
+
+        (tW, tH) = templ.size
+        cv2_image = pil2cv(image)
+        cv2_templ = pil2cv(templ)
+
+        multi_scale_matching_template_results = multi_scale_matching_template_impl(cv2_image, cv2_templ,
+                                                                                   linspace=np.linspace(1.1, 1.5, 10))
+
+        found = None
+        for multi_scale_matching_template_result in multi_scale_matching_template_results:
+            r = multi_scale_matching_template_result.ratio
+            result = multi_scale_matching_template_result.result
+
+            (_, maxVal, _, maxLoc) = cv2.minMaxLoc(result)
+
+            if found is None or maxVal > found[0]:
+                found = (maxVal, maxLoc, r)
+
+        if found is None:
+            self.logger.debug('not found get_skill_tab')
+            return None
+
+        (_, maxLoc, r) = found
+        (start_x, start_y) = (int(maxLoc[0] * r), int(maxLoc[1] * r))
+        (end_x, end_y) = (int((maxLoc[0] + tW) * r), int((maxLoc[1] + tH) * r))
+
+        if self.debug:
+            await self.local_file_driver.save_image(
+                crop_pil(image, (start_x, start_y, end_x, end_y)),
+                os.path.join('tmp', 'get_skill_tab_location', 'multi_scale_matching_template.png')
+            )
+
+        return (start_x, start_y), (end_x, end_y)
+
+    async def get_skill_frame_locations(self, image: Image):
+        # optimize
+        if image.size[0] != TEMPLATE_WIDTH:
+            image = resize_pil(image, TEMPLATE_WIDTH)
+
+        templ = await self.local_file_driver.open_image(
+            os.path.join('resources', 'images', 'ocr_skills', 'template_skill_frame_h_100.png')
+        )
+
+        cv2_image = pil2cv(image)
+        cv2_templ = pil2cv(templ)
+
+        multi_scale_matching_template_results = multi_scale_matching_template_impl(cv2_image, cv2_templ,
+                                                                                   linspace=np.linspace(1.0, 1.1, 10))
+
+        start_locs = []
+        locs = []
+
+        for i in range(len(multi_scale_matching_template_results)):
+            multi_scale_matching_template_result = multi_scale_matching_template_results[i]
+            r = multi_scale_matching_template_result.ratio
+            result = multi_scale_matching_template_result.result
+
+            ys, xs = np.where(result >= 0.7)
+            for x, y in zip(xs, ys):
+                if len(start_locs) == 0:
+                    start_locs.append((x, y))
+                    locs.append((
+                        (int(x * r), int(y * r)),
+                        (int((x + cv2_templ.shape[1]) * r), int((y + cv2_templ.shape[0]) * r))
+                    ))
+                else:
+                    _, (nearest_x, nearest_y) = func_search_neighbourhood(start_locs, np.array([x, y]))
+                    if abs(x - nearest_x) < 100 and abs(y - nearest_y) < 80:
+                        continue
+                    else:
+                        start_locs.append((x, y))
+                        locs.append((
+                            (int(x * r), int(y * r)),
+                            (int((x + cv2_templ.shape[1]) * r), int((y + cv2_templ.shape[0]) * r))
+                        ))
+
+        if self.debug:
+            dst = cv2_image.copy()
+            for i in range(len(locs)):
+                (start_x, start_y), (end_x, end_y) = locs[i]
+                cv2.rectangle(
+                    dst,
+                    (start_x, start_y),
+                    (end_x, end_y),
+                    color=(255, 0, 0),
+                    thickness=2,
+                )
+            cv2.imwrite(os.path.join('tmp', 'get_skill_frame_locations', 'multi_scale_matching_template2.png'), dst)
+
+        return locs
+
+    async def get_skill_name_from_image(self, image: Image) -> str or None:
+        master_skills_map_by_weight = await self.get_master_skills_map_by_weight()
+
+        line_box = get_line_box_with_single_text_line_and_jpn_from_image(image)
+        if len(line_box) == 0:
+            return None
+        else:
+            (s_x, s_y), (e_x, e_y) = line_box[0].position
+            word_width = 25.5
+
+            text = line_box[0].content.replace(' ', '')
+            weight = int((e_x - s_x) / word_width + 1)
+            self.logger.info('[get_skill_name_from_image] skill_name: %s, weight: %d', text, weight)
+
+            if weight not in master_skills_map_by_weight:
+                return None
+
+            # master定義されているスキルネームと類似度を計算し、最も類似度が高いスキルを返す
+            # OCRの限界で読み間違えが発生しがちな文字列でも類似度を計算する
+            found_str = ''
+            found = 0
+            for master_skill in master_skills_map_by_weight[weight]:
+                skill_name = master_skill['name']
+                similar = master_skill['similar']
+                aro_dist = Levenshtein.jaro_winkler(text, skill_name)
+                if aro_dist > found:
+                    found_str = skill_name
+                    found = aro_dist
+                for similar_skill_name in similar:
+                    aro_dist = Levenshtein.jaro_winkler(text, similar_skill_name)
+                    if aro_dist > found:
+                        found_str = skill_name
+                        found = aro_dist
+
+            return found_str
+
+    async def get_skill_level_from_image(self, image: Image) -> int:
+        digit_text = re.sub(self.pattern_digital, '', get_digit_with_single_text_line_and_eng_from_image(image))
+        return digit_text or 0
+
+    async def get_master_skills_map_by_weight(self):
+        if self.cache_master_skills_map_by_weight is not None:
+            return self.cache_master_skills_map_by_weight
+
+        result = dict()
+
+        master_skills_json_file = await self.local_file_driver.open(
+            os.path.join('resources', 'master_data', 'skills.json'))
+        master_skills_json = json.load(master_skills_json_file)
+        for master_skills in master_skills_json.values():
+            for master_skill in master_skills[0:]:
+                weight = master_skill['weight']
+                if weight not in result:
+                    result[weight] = []
+                result[weight].append(master_skill)
+
+        self.cache_master_skills_map_by_weight = result
+        return result
+
+
+def func_search_neighbourhood(list, p0):
+    ps = np.array(list)
+    L = np.array([])
+    for i in range(ps.shape[0]):
+        norm = np.sqrt((ps[i][0] - p0[0]) * (ps[i][0] - p0[0]) +
+                       (ps[i][1] - p0[1]) * (ps[i][1] - p0[1]))
+        L = np.append(L, norm)
+    return np.argmin(L), ps[np.argmin(L)]
