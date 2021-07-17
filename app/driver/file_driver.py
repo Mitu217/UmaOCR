@@ -2,7 +2,7 @@ import os
 
 from PIL import Image
 
-from src.interface.driver.file_driver import LocalFileDriver
+from app.interface.driver.file_driver import LocalFileDriver
 
 
 class LocalFileDriverImpl(LocalFileDriver):

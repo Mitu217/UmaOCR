@@ -2,7 +2,7 @@ from abc import ABCMeta, abstractmethod
 
 from PIL import Image
 
-from src.domain.ability import (DistanceAbilities, FieldAbilities,
+from app.domain.ability import (DistanceAbilities, FieldAbilities,
                                 StrategiesAbilities)
 
 

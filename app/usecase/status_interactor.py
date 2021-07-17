@@ -8,16 +8,16 @@ import Levenshtein
 import numpy as np
 from PIL import Image
 
-from src.domain.parameters import Parameters
-from src.domain.skill import Skill, Skills
-from src.interface.driver.file_driver import LocalFileDriver
-from src.interface.usecase.status_usecase import StatusUsecase
-from src.library.matching_template import (multi_scale_matching_template,
+from app.domain.parameters import Parameters
+from app.domain.skill import Skill, Skills
+from app.interface.driver.file_driver import LocalFileDriver
+from app.interface.usecase.status_usecase import StatusUsecase
+from app.library.matching_template import (multi_scale_matching_template,
                                            multi_scale_matching_template_impl)
-from src.library.ocr import (
+from app.library.ocr import (
     get_digit_with_single_text_line_and_eng_from_image,
     get_line_box_with_single_text_line_and_jpn_from_image)
-from src.library.pillow import binarized, crop_pil, pil2cv, resize_pil
+from app.library.pillow import binarized, crop_pil, pil2cv, resize_pil
 
 TEMPLATE_WIDTH = 1024
 TEMPLATE_HEIGHT = 100

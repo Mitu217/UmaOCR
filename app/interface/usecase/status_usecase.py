@@ -2,8 +2,8 @@ from abc import ABCMeta, abstractmethod
 
 from PIL import Image
 
-from src.domain.parameters import Parameters
-from src.domain.skill import Skills
+from app.domain.parameters import Parameters
+from app.domain.skill import Skills
 
 
 class StatusUsecase(metaclass=ABCMeta):

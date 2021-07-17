@@ -3,9 +3,9 @@ import asyncio
 from flask import jsonify, make_response, request
 from PIL import Image
 
-from src.interface.usecase.appropriate import AppropriateUsecase
-from src.interface.usecase.character import CharacterUsecase
-from src.interface.usecase.status_usecase import StatusUsecase
+from app.interface.usecase.appropriate import AppropriateUsecase
+from app.interface.usecase.character import CharacterUsecase
+from app.interface.usecase.status_usecase import StatusUsecase
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 

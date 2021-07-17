@@ -5,14 +5,14 @@ import cv2
 import numpy as np
 from PIL import Image
 
-from src.domain.ability import (DistanceAbilities, FieldAbilities,
+from app.domain.ability import (DistanceAbilities, FieldAbilities,
                                 StrategiesAbilities)
-from src.interface.driver.file_driver import LocalFileDriver
-from src.interface.usecase.appropriate import AppropriateUsecase
-from src.interface.usecase.const import INPUT_IMAGE_WIDTH
-from src.library.matching_template import matching_template
-from src.library.pillow import crop_pil, pil2cv, resize_pil
-from src.usecase.character import get_matching_template_location
+from app.interface.driver.file_driver import LocalFileDriver
+from app.interface.usecase.appropriate import AppropriateUsecase
+from app.interface.usecase.const import INPUT_IMAGE_WIDTH
+from app.library.matching_template import matching_template
+from app.library.pillow import crop_pil, pil2cv, resize_pil
+from app.usecase.character import get_matching_template_location
 
 
 class AbilityInteractor(AppropriateUsecase):

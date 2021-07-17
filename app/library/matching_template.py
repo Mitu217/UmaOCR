@@ -5,7 +5,7 @@ import cv2
 import numpy
 from PIL import Image
 
-from src.library.pillow import pil2cv
+from app.library.pillow import pil2cv
 
 
 def matching_template(image, templ, *, method=cv2.TM_CCOEFF_NORMED):

@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from src.domain.collection import Collection
+from app.domain.collection import Collection
 
 
 @dataclass(frozen=True)
