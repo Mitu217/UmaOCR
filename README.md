@@ -4,7 +4,7 @@ OCR to get information from ウマ娘's UI image
 
 # Future
 
-- [x] Get status from StatusModal ScreenShot
+- [x] Get status from CharacterModal ScreenShot
 
 # Usage
 
