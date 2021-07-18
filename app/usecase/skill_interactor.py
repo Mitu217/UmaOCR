@@ -1,6 +1,8 @@
+import asyncio
 import json
 import os
 import re
+from concurrent import futures
 from logging import Logger
 
 import cv2
@@ -55,38 +57,51 @@ class SkillInteractor(SkillUsecase):
 
         rgb_border = [150, 150, 150]
 
-        for i in range(len(skill_frame_locs)):
-            (start_x, start_y), (end_x, end_y) = skill_frame_locs[i]
+        def p(index: int):
+            (start_x, start_y), (end_x, end_y) = skill_frame_locs[index]
 
             cropped_skill = crop_pil(image, (
                 start_x + st_w * 0.07, start_y + st_h * 0.3, start_x + st_w * 0.435, end_y - st_h * 0.3))
             binarized_skill = binarized(cropped_skill, rgb_border[0], rgb_border[1], rgb_border[2])
-            skill_name = await self.get_skill_name_from_image(binarized_skill)
-
-            cropped_level = crop_pil(image, (
-                start_x + st_w * 0.435, start_y + st_h * 0.3, start_x + st_w * 0.5, end_y - st_h * 0.3))
-            binarized_level = binarized(cropped_level, rgb_border[0], rgb_border[1], rgb_border[2])
-            skill_level = await self.get_skill_level_from_image(binarized_level)
+            skill_name = asyncio.run(self.get_skill_name_from_image(binarized_skill))
 
             if self.debug:
-                await self.local_file_driver.save_image(
+                asyncio.run(self.local_file_driver.save_image(
                     cropped_skill,
-                    os.path.join('tmp', 'get_skills_from_image', 'skill' + str(i + 1) + '_name_cropped.png')
-                )
-                await self.local_file_driver.save_image(
+                    os.path.join('tmp', 'get_skills_from_image', 'skill' + str(index + 1) + '_name_cropped.png')
+                ))
+                asyncio.run(self.local_file_driver.save_image(
                     binarized_skill,
-                    os.path.join('tmp', 'get_skills_from_image', 'skill' + str(i + 1) + '_name_binarized.png')
-                )
-                await self.local_file_driver.save_image(
-                    cropped_level,
-                    os.path.join('tmp', 'get_skills_from_image', 'skill' + str(i + 1) + '_level_cropped.png')
-                )
-                await self.local_file_driver.save_image(
-                    binarized_level,
-                    os.path.join('tmp', 'get_skills_from_image', 'skill' + str(i + 1) + '_level_binarized.png')
-                )
+                    os.path.join('tmp', 'get_skills_from_image', 'skill' + str(index + 1) + '_name_binarized.png')
+                ))
 
-            skills[i] = Skill(skill_name, skill_level)
+            if index == 0:
+                # Lvがあるのは固有スキル（index = 0）だけ
+                cropped_level = crop_pil(image, (
+                    start_x + st_w * 0.435, start_y + st_h * 0.3, start_x + st_w * 0.5, end_y - st_h * 0.3))
+                binarized_level = binarized(cropped_level, rgb_border[0], rgb_border[1], rgb_border[2])
+                skill_level = asyncio.run(self.get_skill_level_from_image(binarized_level))
+
+                if self.debug:
+                    asyncio.run(self.local_file_driver.save_image(
+                        cropped_level,
+                        os.path.join('tmp', 'get_skills_from_image', 'skill' + str(index + 1) + '_level_cropped.png')
+                    ))
+                    asyncio.run(self.local_file_driver.save_image(
+                        binarized_level,
+                        os.path.join('tmp', 'get_skills_from_image', 'skill' + str(index + 1) + '_level_binarized.png')
+                    ))
+            else:
+                skill_level = 0
+
+            skills[index] = Skill(skill_name, skill_level)
+
+        future_list = []
+        with futures.ThreadPoolExecutor(max_workers=os.cpu_count()) as executor:
+            for i in range(len(skill_frame_locs)):
+                future = executor.submit(fn=p, index=i)
+                future_list.append(future)
+            _ = futures.as_completed(fs=future_list)
 
         return Skills(skills)
 
