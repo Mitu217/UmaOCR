@@ -223,7 +223,6 @@ async def get_matching_template_location(image: Image, templ: Image, *, linspace
         return None
 
     (_, maxLoc, r) = found
-    print('found', r)
     (start_x, start_y) = (int(maxLoc[0] * r), int(maxLoc[1] * r))
     (end_x, end_y) = (int((maxLoc[0] + tW) * r), int((maxLoc[1] + tH) * r))
 
