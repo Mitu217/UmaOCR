@@ -4,8 +4,8 @@ import os
 from flask import Flask
 
 from app.driver.file_driver import LocalFileDriverImpl
-from app.rest.status import StatusResource
-from app.rest.web import WebResource
+from app.views.status import StatusResource
+from app.views.web import WebResource
 from app.usecase.ability import AbilityInteractor
 from app.usecase.character import CharacterInteractor
 from app.usecase.status_interactor import StatusInteractor
