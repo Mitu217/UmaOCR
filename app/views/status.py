@@ -22,7 +22,8 @@ class StatusResource:
     ability_usecase: AppropriateUsecase
     skill_usecase: SkillUsecase
 
-    def __init__(self, status_usecase: StatusUsecase,
+    def __init__(self,
+                 status_usecase: StatusUsecase,
                  character_usecase: CharacterUsecase,
                  ability_usecase: AppropriateUsecase,
                  skill_usecase: SkillUsecase):
@@ -44,29 +45,32 @@ class StatusResource:
                 jsonify({'result': 'support extension jpg, jpeg or png'}), 400)
 
         image = Image.open(file.stream)
-        character_name = asyncio.run(
-            self.character_usecase.get_character_name_from_image(image))
-        character_rank = asyncio.run(
-            self.character_usecase.get_character_rank_from_image(image))
-        ability_fields = asyncio.run(
-            self.ability_usecase.get_character_appropriate_fields_from_image(image))
-        ability_distances = asyncio.run(
-            self.ability_usecase.get_character_appropriate_distances_from_image(image))
-        ability_strategies = asyncio.run(
-            self.ability_usecase.get_character_appropriate_strategies_from_image(image))
-        parameters = asyncio.run(
-            self.status_usecase.get_parameters_from_image(image))
-        skills = asyncio.run(self.skill_usecase.get_skills_from_character_modal_image(image))
 
-        data = {
-            'character': character_name,
-            'rank': character_rank,
-            'params': parameters.to_dict(),
-            'skills': skills.to_dict_array(),
-            'abilities': {
-                'fields': ability_fields.to_dict(),
-                'distances': ability_distances.to_dict(),
-                'strategies': ability_strategies.to_dict(),
+        async def get_data():
+            tasks = [
+                asyncio.create_task(self.character_usecase.get_character_name_from_image(image)),
+                asyncio.create_task(self.character_usecase.get_character_rank_from_image(image)),
+                asyncio.create_task(self.status_usecase.get_parameters_from_image(image)),
+                asyncio.create_task(self.skill_usecase.get_skills_from_character_modal_image(image)),
+                asyncio.create_task(self.ability_usecase.get_character_appropriate_fields_from_image(image)),
+                asyncio.create_task(self.ability_usecase.get_character_appropriate_distances_from_image(image)),
+                asyncio.create_task(self.ability_usecase.get_character_appropriate_strategies_from_image(image)),
+            ]
+            results = await asyncio.gather(*tasks)
+
+            character_name, character_rank, parameters, skills, ability_fields, ability_distances, ability_strategies = results
+            return {
+                'character': character_name,
+                'rank': character_rank,
+                'params': parameters.to_dict(),
+                'skills': skills.to_dict_array(),
+                'abilities': {
+                    'fields': ability_fields.to_dict(),
+                    'distances': ability_distances.to_dict(),
+                    'strategies': ability_strategies.to_dict(),
+                }
             }
-        }
+
+        data = asyncio.run(get_data())
+
         return make_response(jsonify({'result': 'OK', 'data': data}), 200)

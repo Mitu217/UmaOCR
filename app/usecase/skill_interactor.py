@@ -17,8 +17,8 @@ from app.library.ocr import (
     get_digit_with_single_text_line_and_eng_from_image,
     get_line_box_with_single_text_line_and_jpn_from_image)
 from app.library.pillow import binarized, crop_pil, pil2cv, resize_pil
+from app.usecase import const
 
-TEMPLATE_WIDTH = 1024
 TEMPLATE_HEIGHT = 100
 
 
@@ -31,34 +31,28 @@ class SkillInteractor(SkillUsecase):
         self.debug = debug
         self.cache_master_skills_map_by_weight = None
 
-    async def get_skills_from_character_modal_image(self, image: Image) -> Skills:
-        # 処理高速化のため、次の操作を行う
-        #  * templateと画像のwidthを合わせる
-        #  * パラメーターは画像下半分にしかないため、画像の上半分を捨てる
-        image = resize_pil(image, TEMPLATE_WIDTH)
-        image = crop_pil(image, (0, image.size[1] * 0.4, image.size[0], image.size[1] * 0.9))
-        if self.debug:
-            await self.local_file_driver.save_image(
-                image, os.path.join('tmp', 'get_skills_from_image', 'optimize_image_1.png')
-            )
-
+    async def get_skills_from_image(self, image: Image) -> Skills:
+        # get skill_tab location
         skill_tab_loc = await self.get_skill_tab_location(image)
         if skill_tab_loc is None:
             return Skills([])
+        (skill_tab_loc_sx, skill_tab_loc_sy), (skill_tab_loc_ex, skill_tab_loc_ey) = skill_tab_loc
+        (st_w, st_h) = skill_tab_loc_ex - skill_tab_loc_sx, skill_tab_loc_ey - skill_tab_loc_sy
 
-        (start_x, start_y), (end_x, end_y) = skill_tab_loc
-        (st_w, st_h) = end_x - start_x, end_y - start_y
-
-        # スキル欄の表示エリアに合わせて、更に画像を最適化
-        image = crop_pil(image, (0, end_y, image.size[0], st_h * 20))
+        # cropped skill_frame by skill_tab location
+        skill_area_box = (0, skill_tab_loc_ey, image.size[0], st_h * 20)
+        image = crop_pil(image, skill_area_box)
         if self.debug:
             await self.local_file_driver.save_image(
-                image, os.path.join('tmp', 'get_skills_from_image', 'optimize_image_2.png')
+                image, os.path.join('tmp', 'get_skills_from_image', 'cropped_skill_area.png')
             )
 
         skill_frame_locs = await self.get_skill_frame_locations(image)
 
         skills = []
+        for i in range(len(skill_frame_locs)):
+            skills.append(Skill('', 0))
+
         rgb_border = [150, 150, 150]
 
         for i in range(len(skill_frame_locs)):
@@ -92,17 +86,32 @@ class SkillInteractor(SkillUsecase):
                     os.path.join('tmp', 'get_skills_from_image', 'skill' + str(i + 1) + '_level_binarized.png')
                 )
 
-            skills.append(Skill(
-                skill_name,
-                int(skill_level)),
-            )
+            skills[i] = Skill(skill_name, skill_level)
 
         return Skills(skills)
 
+    async def get_skills_from_character_modal_image(self, image: Image) -> Skills:
+        # resize image width to 1024px
+        image = resize_pil(image, const.INPUT_IMAGE_WIDTH)
+        if self.debug:
+            await self.local_file_driver.save_image(
+                image, os.path.join('tmp', 'get_skills_from_character_modal_image', 'resize_width_1024.png')
+            )
+
+        # rough adjust
+        image = crop_pil(image, (0, image.size[1] * 0.4, image.size[0], image.size[1] * 0.9))
+        if self.debug:
+            await self.local_file_driver.save_image(
+                image, os.path.join('tmp', 'get_skills_from_character_modal_image', 'rough_adjust.png')
+            )
+
+        skills = await self.get_skills_from_image(image)
+        return skills
+
     async def get_skill_tab_location(self, image: Image):
         # optimize
-        if image.size[0] != TEMPLATE_WIDTH:
-            image = resize_pil(image, TEMPLATE_WIDTH)
+        if image.size[0] != const.INPUT_IMAGE_WIDTH:
+            image = resize_pil(image, const.INPUT_IMAGE_WIDTH)
 
         templ = await self.local_file_driver.open_image(
             os.path.join(resources.__path__[0], 'images', 'ocr_skills', 'template_skill_tab_w_1024.png')
@@ -113,8 +122,7 @@ class SkillInteractor(SkillUsecase):
         cv2_templ = pil2cv(templ)
 
         multi_scale_matching_template_results = multi_scale_matching_template_impl(cv2_image, cv2_templ,
-                                                                                   linspace=np.linspace(1.1, 1.5, 10))
-
+                                                                                   linspace=np.linspace(1.1, 1.5, 3))
         found = None
         for multi_scale_matching_template_result in multi_scale_matching_template_results:
             r = multi_scale_matching_template_result.ratio
@@ -143,8 +151,8 @@ class SkillInteractor(SkillUsecase):
 
     async def get_skill_frame_locations(self, image: Image):
         # optimize
-        if image.size[0] != TEMPLATE_WIDTH:
-            image = resize_pil(image, TEMPLATE_WIDTH)
+        if image.size[0] != const.INPUT_IMAGE_WIDTH:
+            image = resize_pil(image, const.INPUT_IMAGE_WIDTH)
 
         templ = await self.local_file_driver.open_image(
             os.path.join(resources.__path__[0], 'images', 'ocr_skills', 'template_skill_frame_h_100.png')
@@ -198,12 +206,12 @@ class SkillInteractor(SkillUsecase):
 
         # sort locations
         # 左上から右下へ向かってソートする
-        locs = sorted(locs, key=lambda k: k[0][1])
-        for i in range(int(len(locs)/2)):
-            if locs[i*2][0][0] > locs[i*2+1][0][0]:
-                locs[i*2+1], locs[i*2] = locs[i*2], locs[i*2+1]
+        sorted_locs = sorted(locs, key=lambda k: k[0][1])
+        for i in range(int(len(sorted_locs) / 2)):
+            if sorted_locs[i * 2][0][0] > sorted_locs[i * 2 + 1][0][0]:
+                sorted_locs[i * 2 + 1], sorted_locs[i * 2] = sorted_locs[i * 2], sorted_locs[i * 2 + 1]
 
-        return locs
+        return sorted_locs
 
     async def get_skill_name_from_image(self, image: Image) -> str or None:
         master_skills_map_by_weight = await self.get_master_skills_map_by_weight()

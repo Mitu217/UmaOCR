@@ -9,10 +9,10 @@ from app.domain.ability import (DistanceAbilities, FieldAbilities,
                                 StrategiesAbilities)
 from app.interface.driver.file_driver import LocalFileDriver
 from app.interface.usecase.appropriate import AppropriateUsecase
-from app.interface.usecase.const import INPUT_IMAGE_WIDTH
 from app.library.matching_template import matching_template
 from app.library.pillow import crop_pil, pil2cv, resize_pil
 from app.usecase.character import get_matching_template_location
+from app.usecase.const import INPUT_IMAGE_WIDTH
 
 
 class AbilityInteractor(AppropriateUsecase):

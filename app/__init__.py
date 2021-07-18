@@ -1,3 +1,4 @@
+import asyncio
 import logging
 import os
 
@@ -13,8 +14,8 @@ from app.views.web import WebResource
 
 
 def create_app():
-    logging.basicConfig(level=logging.DEBUG)
-    debug = os.environ.get('ENABLE_DEBUG', False)
+    logging.basicConfig(level=logging.INFO)
+    debug = os.environ.get('ENABLE_DEBUG', True)
 
     app = Flask(__name__, instance_relative_config=True)
 
