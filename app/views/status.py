@@ -5,6 +5,7 @@ from PIL import Image
 
 from app.interface.usecase.appropriate import AppropriateUsecase
 from app.interface.usecase.character import CharacterUsecase
+from app.interface.usecase.skill_usecase import SkillUsecase
 from app.interface.usecase.status_usecase import StatusUsecase
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
@@ -19,13 +20,16 @@ class StatusResource:
     character_usecase: CharacterUsecase
     status_usecase: StatusUsecase
     ability_usecase: AppropriateUsecase
+    skill_usecase: SkillUsecase
 
     def __init__(self, status_usecase: StatusUsecase,
                  character_usecase: CharacterUsecase,
-                 ability_usecase: AppropriateUsecase):
+                 ability_usecase: AppropriateUsecase,
+                 skill_usecase: SkillUsecase):
         self.status_usecase = status_usecase
         self.character_usecase = character_usecase
         self.ability_usecase = ability_usecase
+        self.skill_usecase = skill_usecase
 
     def index(self):
         if 'file' not in request.files:
@@ -52,7 +56,7 @@ class StatusResource:
             self.ability_usecase.get_character_appropriate_strategies_from_image(image))
         parameters = asyncio.run(
             self.status_usecase.get_parameters_from_image(image))
-        skills = asyncio.run(self.status_usecase.get_skills_from_image(image))
+        skills = asyncio.run(self.skill_usecase.get_skills_from_character_modal_image(image))
 
         data = {
             'character': character_name,

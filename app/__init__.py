@@ -4,11 +4,12 @@ import os
 from flask import Flask
 
 from app.driver.file_driver import LocalFileDriverImpl
-from app.views.status import StatusResource
-from app.views.web import WebResource
 from app.usecase.ability import AbilityInteractor
 from app.usecase.character import CharacterInteractor
+from app.usecase.skill_interactor import SkillInteractor
 from app.usecase.status_interactor import StatusInteractor
+from app.views.status import StatusResource
+from app.views.web import WebResource
 
 
 def create_app():
@@ -32,6 +33,11 @@ def create_app():
             debug=debug,
         ),
         AbilityInteractor(
+            LocalFileDriverImpl(''),
+            app.logger,
+            debug=debug,
+        ),
+        SkillInteractor(
             LocalFileDriverImpl(''),
             app.logger,
             debug=debug,

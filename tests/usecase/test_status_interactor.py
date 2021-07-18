@@ -2,25 +2,28 @@ import asyncio
 import logging
 import os
 from unittest import TestCase
+
 from PIL import Image
 
 import resources
-from app.domain.skill import Skills, Skill
+from app.domain.skill import Skill, Skills
 from app.driver.file_driver import LocalFileDriverImpl
-from app.usecase.status_interactor import StatusInteractor
+from app.usecase.skill_interactor import SkillInteractor
 
 
 class TestStatusInteractor(TestCase):
-    def test_get_skills_from_image_iphone_character_1(self):
+    def test_get_skills_from_character_modal_image_iphone_character_1(self):
         logger = logging.getLogger('TEST')
-        status_interactor = StatusInteractor(
+        skill_interactor = SkillInteractor(
             LocalFileDriverImpl(''),
             logger,
         )
 
         with Image.open(
-                os.path.join(resources.__path__[0], 'tests', 'character_modal', 'iphone_character_1.png')) as image:
-            got = asyncio.run(status_interactor.get_skills_from_image(image))
+                os.path.join(resources.__path__[0], 'tests', 'character_modal',
+                             'iphone_character_1.png')) as image:
+            got = asyncio.run(
+                skill_interactor.get_skills_from_character_modal_image(image))
 
         want = Skills([
             Skill('カッティング×DRIVE！', 6),
@@ -45,16 +48,18 @@ class TestStatusInteractor(TestCase):
             logger.error('got: {}, want: {}', got, want)
             assert False
 
-    def test_get_skills_from_image_iphone_character_2(self):
+    def test_get_skills_from_character_modal_image_iphone_character_2(self):
         logger = logging.getLogger('TEST')
-        status_interactor = StatusInteractor(
+        skill_interactor = SkillInteractor(
             LocalFileDriverImpl(''),
             logger,
         )
 
         with Image.open(
-                os.path.join(resources.__path__[0], 'tests', 'character_modal', 'iphone_character_2.png')) as image:
-            got = asyncio.run(status_interactor.get_skills_from_image(image))
+                os.path.join(resources.__path__[0], 'tests', 'character_modal',
+                             'iphone_character_2.png')) as image:
+            got = asyncio.run(
+                skill_interactor.get_skills_from_character_modal_image(image))
 
         want = Skills([
             Skill('Call me KING', 1),
