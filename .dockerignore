@@ -8,3 +8,5 @@ Makefile
 README.md
 
 *.TTF
+
+tmp/
