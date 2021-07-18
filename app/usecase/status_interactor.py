@@ -8,6 +8,7 @@ import Levenshtein
 import numpy as np
 from PIL import Image
 
+import resources
 from app.domain.parameters import Parameters
 from app.domain.skill import Skill, Skills
 from app.interface.driver.file_driver import LocalFileDriver
@@ -212,7 +213,7 @@ class StatusInteractor(StatusUsecase):
             image = resize_pil(image, TEMPLATE_WIDTH)
 
         templ = await self.local_file_driver.open_image(
-            os.path.join('resources', 'images', 'ocr_skills', 'template_skill_tab_w_1024.png')
+            os.path.join(resources.__path__[0], 'images', 'ocr_skills', 'template_skill_tab_w_1024.png')
         )
 
         (tW, tH) = templ.size
@@ -254,7 +255,7 @@ class StatusInteractor(StatusUsecase):
             image = resize_pil(image, TEMPLATE_WIDTH)
 
         templ = await self.local_file_driver.open_image(
-            os.path.join('resources', 'images', 'ocr_skills', 'template_skill_frame_h_100.png')
+            os.path.join(resources.__path__[0], 'images', 'ocr_skills', 'template_skill_frame_h_100.png')
         )
 
         cv2_image = pil2cv(image)
@@ -302,6 +303,13 @@ class StatusInteractor(StatusUsecase):
                     thickness=2,
                 )
             cv2.imwrite(os.path.join('tmp', 'get_skill_frame_locations', 'multi_scale_matching_template2.png'), dst)
+
+        # sort locations
+        # 左上から右下へ向かってソートする
+        locs = sorted(locs, key=lambda k: k[0][1])
+        for i in range(int(len(locs)/2)):
+            if locs[i*2][0][0] > locs[i*2+1][0][0]:
+                locs[i*2+1], locs[i*2] = locs[i*2], locs[i*2+1]
 
         return locs
 
@@ -352,7 +360,7 @@ class StatusInteractor(StatusUsecase):
         result = dict()
 
         master_skills_json_file = await self.local_file_driver.open(
-            os.path.join('resources', 'master_data', 'skills.json'))
+            os.path.join(resources.__path__[0], 'master_data', 'skills.json'))
         master_skills_json = json.load(master_skills_json_file)
         for master_skills in master_skills_json.values():
             for master_skill in master_skills[0:]:
@@ -360,6 +368,7 @@ class StatusInteractor(StatusUsecase):
                 if weight not in result:
                     result[weight] = []
                 result[weight].append(master_skill)
+        master_skills_json_file.close()
 
         self.cache_master_skills_map_by_weight = result
         return result
