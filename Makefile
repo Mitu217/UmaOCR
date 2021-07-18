@@ -10,3 +10,7 @@ fmt:
 .PHONY: freeze
 freeze:
 	pip freeze > requirements.txt
+
+.PHONY: test
+test:
+	pipenv run pytest
