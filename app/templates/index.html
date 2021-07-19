@@ -255,24 +255,30 @@ window.onload = () =>{
             character.textContent = json.data.character;
             rank.textContent = json.data.rank;
             
-            console.log(json.data.abilities)
-            turf.textContent = json.data.abilities.fields.turf;
-            dirt.textContent = json.data.abilities.fields.dirt;
-            short.textContent = json.data.abilities.distances.short;
-            miles.textContent = json.data.abilities.distances.miles;
-            medium.textContent = json.data.abilities.distances.medium;
-            long.textContent = json.data.abilities.distances.long;
-            first.textContent = json.data.abilities.strategies.first;
-            halfFirst.textContent = json.data.abilities.strategies.half_first;
-            halfLast.textContent = json.data.abilities.strategies.half_last;
-            last.textContent = json.data.abilities.strategies.last;
-
-            speed.textContent = json.data.params.speed;
-            stamina.textContent = json.data.params.stamina;
-            power.textContent = json.data.params.power;
-            guts.textContent = json.data.params.guts;
-            wise.textContent = json.data.params.wise;
-
+            if (json.data.fields) {
+                turf.textContent = json.data.abilities.fields.turf;
+                dirt.textContent = json.data.abilities.fields.dirt;
+            }
+            if (json.data.fields) {
+                short.textContent = json.data.abilities.distances.short;
+                miles.textContent = json.data.abilities.distances.miles;
+                medium.textContent = json.data.abilities.distances.medium;
+                long.textContent = json.data.abilities.distances.long;
+            }
+            if (json.data.fields) {
+                first.textContent = json.data.abilities.strategies.first;
+                halfFirst.textContent = json.data.abilities.strategies.half_first;
+                halfLast.textContent = json.data.abilities.strategies.half_last;
+                last.textContent = json.data.abilities.strategies.last;
+            }
+            if (json.data.params) {
+                speed.textContent = json.data.params.speed;
+                stamina.textContent = json.data.params.stamina;
+                power.textContent = json.data.params.power;
+                guts.textContent = json.data.params.guts;
+                wise.textContent = json.data.params.wise;
+            }
+            
             for (let i = 0; i < json.data.skills.length; i++) {
               document.querySelector("#skill-" + (i+1)).textContent = json.data.skills[i].name
               document.querySelector("#skill-level-" + (i+1)).textContent = json.data.skills[i].level
