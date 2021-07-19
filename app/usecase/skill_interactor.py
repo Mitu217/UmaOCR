@@ -61,8 +61,8 @@ class SkillInteractor(SkillUsecase):
             (start_x, start_y), (end_x, end_y) = skill_frame_locs[index]
 
             cropped_skill = crop_pil(image, (
-                start_x + st_w * 0.07, start_y + st_h * 0.3, start_x + st_w * 0.435, end_y - st_h * 0.3))
-            binarized_skill = binarized(cropped_skill, rgb_border[0], rgb_border[1], rgb_border[2])
+                start_x + st_w * 0.075, start_y + st_h * 0.7, start_x + st_w * 0.435, end_y - st_h * 0.6))
+            binarized_skill = binarized(cropped_skill, rgb_border[0])
             skill_name = asyncio.run(self.get_skill_name_from_image(binarized_skill))
 
             if self.debug:
@@ -79,7 +79,7 @@ class SkillInteractor(SkillUsecase):
                 # Lvがあるのは固有スキル（index = 0）だけ
                 cropped_level = crop_pil(image, (
                     start_x + st_w * 0.435, start_y + st_h * 0.3, start_x + st_w * 0.5, end_y - st_h * 0.3))
-                binarized_level = binarized(cropped_level, rgb_border[0], rgb_border[1], rgb_border[2])
+                binarized_level = binarized(cropped_level, rgb_border[0])
                 skill_level = asyncio.run(self.get_skill_level_from_image(binarized_level))
 
                 if self.debug:

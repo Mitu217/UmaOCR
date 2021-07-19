@@ -65,7 +65,7 @@ class StatusInteractor(StatusUsecase):
 
         # TODO: 並列化
         cropped_speed = crop_pil(image, (start_x + p * 0 + lo, end_y, start_x + p * 1 - ro, end_y + h))
-        binarized_speed = binarized(cropped_speed, 210, 210, 210)
+        binarized_speed = binarized(cropped_speed, 210)
         speed = await self.get_parameter_from_image(binarized_speed)
         if self.debug:
             await self.local_file_driver.save_image(
@@ -76,7 +76,7 @@ class StatusInteractor(StatusUsecase):
             )
 
         cropped_stamina = crop_pil(image, (start_x + p * 1 + lo, end_y, start_x + p * 2 - ro, end_y + h))
-        binarized_stamina = binarized(cropped_stamina, 210, 210, 210)
+        binarized_stamina = binarized(cropped_stamina, 210)
         stamina = await self.get_parameter_from_image(binarized_stamina)
         if self.debug:
             await self.local_file_driver.save_image(
@@ -87,7 +87,7 @@ class StatusInteractor(StatusUsecase):
             )
 
         cropped_power = crop_pil(image, (start_x + p * 2 + lo, end_y, start_x + p * 3 - ro, end_y + h))
-        binarized_power = binarized(cropped_power, 210, 210, 210)
+        binarized_power = binarized(cropped_power, 210)
         power = await self.get_parameter_from_image(binarized_power)
         if self.debug:
             await self.local_file_driver.save_image(
@@ -98,7 +98,7 @@ class StatusInteractor(StatusUsecase):
             )
 
         cropped_guts = crop_pil(image, (start_x + p * 3 + lo, end_y, start_x + p * 4 - ro, end_y + h))
-        binarized_guts = binarized(cropped_guts, 210, 210, 210)
+        binarized_guts = binarized(cropped_guts, 210)
         guts = await self.get_parameter_from_image(binarized_guts)
         if self.debug:
             await self.local_file_driver.save_image(
@@ -109,7 +109,7 @@ class StatusInteractor(StatusUsecase):
             )
 
         cropped_wise = crop_pil(image, (start_x + p * 4 + lo, end_y, start_x + p * 5 - ro, end_y + h))
-        binarized_wise = binarized(cropped_wise, 210, 210, 210)
+        binarized_wise = binarized(cropped_wise, 210)
         wise = await self.get_parameter_from_image(binarized_wise)
         if self.debug:
             await self.local_file_driver.save_image(

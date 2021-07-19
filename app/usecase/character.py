@@ -83,7 +83,7 @@ class CharacterInteractor(CharacterUsecase):
                                               end_x - (st_x * 0.05),
                                               start_y - (st_y * 4.15)))
         binarized_character_name = binarized(
-            cropped_character_name, 150, 150, 150)
+            cropped_character_name, 150)
         text = get_text_with_single_text_line_and_jpn_from_image(
             binarized_character_name)
         if self.debug:

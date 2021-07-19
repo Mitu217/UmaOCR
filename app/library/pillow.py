@@ -42,33 +42,7 @@ def pil2cv(image_pil):
     return image_cv
 
 
-def binarized(image: Image, r_border: int, g_border: int, b_border: int, *, reverse=False) -> Image:
-    image = image.convert('RGB')
-    size = image.size
-
-    binarized_image = Image.new('RGB', size)
-
-    for x in range(size[0]):
-        for y in range(size[1]):
-            r, g, b = image.getpixel((x, y))
-            if r > r_border or g > g_border or b > b_border:
-                if reverse:
-                    r = 0
-                    g = 0
-                    b = 0
-                else:
-                    r = 255
-                    g = 255
-                    b = 255
-            else:
-                if reverse:
-                    r = 255
-                    g = 255
-                    b = 255
-                else:
-                    r = 0
-                    g = 0
-                    b = 0
-            binarized_image.putpixel((x, y), (r, g, b))
-
-    return binarized_image
+def binarized(image: Image, threshold: int) -> Image:
+    bin_img = image.convert("L")
+    bin_img = bin_img.point(lambda x: 0 if x < threshold else 255)
+    return bin_img
