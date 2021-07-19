@@ -42,11 +42,7 @@ class TestStatusInteractor(TestCase):
             Skill('危険回避', 0),
         ])
 
-        if got == want:
-            assert True
-        else:
-            logger.error('got: {}, want: {}', got, want)
-            assert False
+        self.assertEqual(got, want)
 
     def test_get_skills_from_character_modal_image_iphone_character_2(self):
         logger = logging.getLogger('TEST')
@@ -68,8 +64,4 @@ class TestStatusInteractor(TestCase):
             Skill('がんばり屋', 0),
         ])
 
-        if got == want:
-            assert True
-        else:
-            logger.error('got: {}, want: {}', got, want)
-            assert False
+        self.assertEqual(got, want)
