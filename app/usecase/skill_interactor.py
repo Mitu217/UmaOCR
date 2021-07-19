@@ -2,7 +2,6 @@ import asyncio
 import json
 import os
 import re
-import time
 from concurrent import futures
 from logging import Logger
 
@@ -57,13 +56,13 @@ class SkillInteractor(SkillUsecase):
         for i in range(len(skill_frame_locs)):
             skills.append(Skill('', 0))
 
-        binarized_image = binarized(image, 150)
+        binarized_image = binarized(image, 120)
 
         def p(index: int):
             (start_x, start_y), (end_x, end_y) = skill_frame_locs[index]
 
             cropped_skill = crop_pil(binarized_image, (
-                start_x + st_w * 0.075, start_y + st_h * 0.7, start_x + st_w * 0.435, end_y - st_h * 0.6))
+                start_x + st_w * 0.07, start_y + st_h * 0.7, start_x + st_w * 0.435, end_y - st_h * 0.55))
             skill_name = asyncio.run(self.get_skill_name_from_image(cropped_skill))
 
             if self.debug:
@@ -99,7 +98,7 @@ class SkillInteractor(SkillUsecase):
 
     async def get_skills_from_character_modal_image(self, image: Image) -> Skills:
         # resize image width to 1024px
-        image = resize_pil(image, const.INPUT_IMAGE_WIDTH)
+        image = resize_pil(image, const.INPUT_IMAGE_WIDTH, None, Image.CUBIC)
         if self.debug:
             await self.local_file_driver.save_image(
                 image, os.path.join('tmp', 'get_skills_from_character_modal_image', 'resize_width_1024.png')
