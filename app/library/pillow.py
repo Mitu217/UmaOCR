@@ -11,7 +11,7 @@ def crop_pil(image, box, *, debug=False):
     return cropped
 
 
-def resize_pil(image, width=None, height=None, inter=Image.CUBIC):
+def resize_pil(image, width=None, height=None, inter=Image.NEAREST):
     (w, h) = image.size
 
     if width is None and height is None:
