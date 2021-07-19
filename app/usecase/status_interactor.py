@@ -45,7 +45,7 @@ class StatusInteractor(StatusUsecase):
             )
 
         # マルチスケールテンプレートマッチングでtemplateと一致する箇所の座標を抽出
-        loc = multi_scale_matching_template(cv2_image, cv2_templ, np.linspace(1.1, 1.5, 10))
+        loc = multi_scale_matching_template(cv2_image, cv2_templ, np.linspace(1.1, 1.5, 3))
         if loc is None:
             return Parameters(0, 0, 0, 0, 0)
         if self.debug:

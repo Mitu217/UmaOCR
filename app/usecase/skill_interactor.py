@@ -176,7 +176,7 @@ class SkillInteractor(SkillUsecase):
         cv2_templ = pil2cv(templ)
 
         multi_scale_matching_template_results = multi_scale_matching_template_impl(cv2_image, cv2_templ,
-                                                                                   linspace=np.linspace(1.0, 1.1, 10))
+                                                                                   linspace=np.linspace(1.0, 1.1, 3))
 
         start_locs = []
         locs = []
