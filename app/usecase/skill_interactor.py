@@ -6,8 +6,8 @@ import time
 from concurrent import futures
 from logging import Logger
 
-import cv2
 import Levenshtein
+import cv2
 import numpy as np
 from PIL import Image
 
@@ -42,7 +42,7 @@ class SkillInteractor(SkillUsecase):
         (skill_tab_loc_sx, skill_tab_loc_sy), (skill_tab_loc_ex, skill_tab_loc_ey) = skill_tab_loc
         (st_w, st_h) = skill_tab_loc_ex - skill_tab_loc_sx, skill_tab_loc_ey - skill_tab_loc_sy
 
-        # cropped skill_frame by skill_tab location
+        # cropped skill_area by skill_tab location
         skill_area_box = (0, skill_tab_loc_ey, image.size[0], st_h * 20)
         image = crop_pil(image, skill_area_box)
         if self.debug:
@@ -50,45 +50,38 @@ class SkillInteractor(SkillUsecase):
                 image, os.path.join('tmp', 'get_skills_from_image', 'cropped_skill_area.png')
             )
 
+        # get skill_frame locations
         skill_frame_locs = await self.get_skill_frame_locations(image)
 
         skills = []
         for i in range(len(skill_frame_locs)):
             skills.append(Skill('', 0))
 
+        binarized_image = binarized(image, 150)
+
         def p(index: int):
             (start_x, start_y), (end_x, end_y) = skill_frame_locs[index]
 
-            cropped_skill = crop_pil(image, (
+            cropped_skill = crop_pil(binarized_image, (
                 start_x + st_w * 0.075, start_y + st_h * 0.7, start_x + st_w * 0.435, end_y - st_h * 0.6))
-            binarized_skill = binarized(cropped_skill, 150)
-            skill_name = asyncio.run(self.get_skill_name_from_image(binarized_skill))
+            skill_name = asyncio.run(self.get_skill_name_from_image(cropped_skill))
 
             if self.debug:
                 asyncio.run(self.local_file_driver.save_image(
                     cropped_skill,
                     os.path.join('tmp', 'get_skills_from_image', 'skill' + str(index + 1) + '_name_cropped.png')
                 ))
-                asyncio.run(self.local_file_driver.save_image(
-                    binarized_skill,
-                    os.path.join('tmp', 'get_skills_from_image', 'skill' + str(index + 1) + '_name_binarized.png')
-                ))
 
             if index == 0:
                 # Lvがあるのは固有スキル（index = 0）だけ
-                cropped_level = crop_pil(image, (
-                    start_x + st_w * 0.435, start_y + st_h * 0.3, start_x + st_w * 0.5, end_y - st_h * 0.3))
-                binarized_level = binarized(cropped_level, 150)
-                skill_level = int(asyncio.run(self.get_skill_level_from_image(binarized_level)))
+                cropped_level = crop_pil(binarized_image, (
+                    start_x + st_w * 0.435, start_y + st_h * 0.7, start_x + st_w * 0.5, end_y - st_h * 0.6))
+                skill_level = int(asyncio.run(self.get_skill_level_from_image(cropped_level)))
 
                 if self.debug:
                     asyncio.run(self.local_file_driver.save_image(
                         cropped_level,
                         os.path.join('tmp', 'get_skills_from_image', 'skill' + str(index + 1) + '_level_cropped.png')
-                    ))
-                    asyncio.run(self.local_file_driver.save_image(
-                        binarized_level,
-                        os.path.join('tmp', 'get_skills_from_image', 'skill' + str(index + 1) + '_level_binarized.png')
                     ))
             else:
                 skill_level = 0
@@ -130,12 +123,9 @@ class SkillInteractor(SkillUsecase):
         templ = await self.local_file_driver.open_image(
             os.path.join(resources.__path__[0], 'images', 'ocr_skills', 'template_skill_tab_w_1024.png')
         )
-
         (tW, tH) = templ.size
-        cv2_image = pil2cv(image)
-        cv2_templ = pil2cv(templ)
 
-        multi_scale_matching_template_results = multi_scale_matching_template_impl(cv2_image, cv2_templ,
+        multi_scale_matching_template_results = multi_scale_matching_template_impl(image, templ,
                                                                                    linspace=np.linspace(1.1, 1.5, 3))
         found = None
         for multi_scale_matching_template_result in multi_scale_matching_template_results:
