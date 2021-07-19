@@ -32,7 +32,6 @@ def resize_pil(image, width=None, height=None, inter=Image.CUBIC):
 def cv2pil(image_cv):
     image_cv = cv2.cvtColor(image_cv, cv2.COLOR_BGR2RGB)
     image_pil = Image.fromarray(image_cv)
-    image_pil = image_pil.convert('RGB')
 
     return image_pil
 
