@@ -2,6 +2,7 @@ import asyncio
 import json
 import os
 import re
+import time
 from concurrent import futures
 from logging import Logger
 
@@ -55,14 +56,12 @@ class SkillInteractor(SkillUsecase):
         for i in range(len(skill_frame_locs)):
             skills.append(Skill('', 0))
 
-        rgb_border = [150, 150, 150]
-
         def p(index: int):
             (start_x, start_y), (end_x, end_y) = skill_frame_locs[index]
 
             cropped_skill = crop_pil(image, (
                 start_x + st_w * 0.075, start_y + st_h * 0.7, start_x + st_w * 0.435, end_y - st_h * 0.6))
-            binarized_skill = binarized(cropped_skill, rgb_border[0])
+            binarized_skill = binarized(cropped_skill, 150)
             skill_name = asyncio.run(self.get_skill_name_from_image(binarized_skill))
 
             if self.debug:
@@ -79,8 +78,8 @@ class SkillInteractor(SkillUsecase):
                 # Lvがあるのは固有スキル（index = 0）だけ
                 cropped_level = crop_pil(image, (
                     start_x + st_w * 0.435, start_y + st_h * 0.3, start_x + st_w * 0.5, end_y - st_h * 0.3))
-                binarized_level = binarized(cropped_level, rgb_border[0])
-                skill_level = asyncio.run(self.get_skill_level_from_image(binarized_level))
+                binarized_level = binarized(cropped_level, 150)
+                skill_level = int(asyncio.run(self.get_skill_level_from_image(binarized_level)))
 
                 if self.debug:
                     asyncio.run(self.local_file_driver.save_image(
@@ -229,6 +228,7 @@ class SkillInteractor(SkillUsecase):
         return sorted_locs
 
     async def get_skill_name_from_image(self, image: Image) -> str or None:
+
         master_skills_map_by_weight = await self.get_master_skills_map_by_weight()
 
         line_box = get_line_box_with_single_text_line_and_jpn_from_image(image)
@@ -240,7 +240,6 @@ class SkillInteractor(SkillUsecase):
 
             text = line_box[0].content.replace(' ', '')
             weight = int((e_x - s_x) / word_width + 1)
-            self.logger.info('[get_skill_name_from_image] skill_name: %s, weight: %d', text, weight)
 
             if weight not in master_skills_map_by_weight:
                 return None
@@ -252,10 +251,12 @@ class SkillInteractor(SkillUsecase):
             for master_skill in master_skills_map_by_weight[weight]:
                 skill_name = master_skill['name']
                 similar = master_skill['similar']
+
                 aro_dist = Levenshtein.jaro_winkler(text, skill_name)
                 if aro_dist > found:
                     found_str = skill_name
                     found = aro_dist
+
                 for similar_skill_name in similar:
                     aro_dist = Levenshtein.jaro_winkler(text, similar_skill_name)
                     if aro_dist > found:
