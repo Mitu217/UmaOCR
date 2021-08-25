@@ -1411,6 +1411,13 @@
     },
     {
       "type": "rare",
+      "name": "天命士",
+      "weight": 3,
+      "desc": "",
+      "similar": []
+    },
+    {
+      "type": "rare",
       "name": "奇術師",
       "weight": 3,
       "desc": "",
@@ -1623,6 +1630,20 @@
     },
     {
       "type": "unique",
+      "name": "I Never Goof Up!",
+      "weight": 9,
+      "desc": "",
+      "similar": []
+    },
+    {
+      "type": "unique",
+      "name": "KEEP IT REAL.",
+      "weight": 8,
+      "desc": "",
+      "similar": []
+    },
+    {
+      "type": "unique",
       "name": "Nemesis",
       "weight": 5,
       "desc": "",
@@ -1632,6 +1653,13 @@
       "type": "unique",
       "name": "Pride of KING",
       "weight": 8,
+      "desc": "",
+      "similar": []
+    },
+    {
+      "type": "unique",
+      "name": "Schwarze Schwert",
+      "weight": 10,
       "desc": "",
       "similar": []
     },
@@ -1673,6 +1701,13 @@
     {
       "type": "unique",
       "name": "ひらめき☆ランディング",
+      "weight": 11,
+      "desc": "",
+      "similar": []
+    },
+    {
+      "type": "unique",
+      "name": "わやかわ♪マリンダイヴ",
       "weight": 11,
       "desc": "",
       "similar": []
@@ -1723,6 +1758,13 @@
       "type": "unique",
       "name": "クリアハート",
       "weight": 6,
+      "desc": "",
+      "similar": []
+    },
+    {
+      "type": "unique",
+      "name": "グッときて♪Chu",
+      "weight": 8,
       "desc": "",
       "similar": []
     },
