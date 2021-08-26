@@ -32,6 +32,72 @@ class SkillInteractor(SkillUsecase):
         self.pattern_digital = r'\D'
         self.debug = debug
         self.cache_master_skills_map_by_weight = None
+        self.cache_master_skills_map_by_type = None
+
+
+    async def get_skills_without_unique_from_image(self, image: Image) -> Skills:
+        # resize image width to 1024px
+        image = resize_pil(image, const.INPUT_IMAGE_WIDTH, None, Image.CUBIC)
+        if self.debug:
+            await self.local_file_driver.save_image(
+                image, os.path.join('tmp', 'get_skills_from_character_modal_image', 'resize_width_1024.png')
+            )
+
+        # rough adjust
+        image = crop_pil(image, (0, image.size[1] * 0.4, image.size[0], image.size[1] * 0.9))
+        if self.debug:
+            await self.local_file_driver.save_image(
+                image, os.path.join('tmp', 'get_skills_from_character_modal_image', 'rough_adjust.png')
+            )
+
+        skills = await self.get_skills_from_image(image)
+        skills_dict_array = skills.to_dict_array()
+
+        master_skills_map_by_type = await self.get_master_skills_map_by_type()
+        unique_skills = master_skills_map_by_type['unique_skills']
+
+        result = []
+        for skill_dict in skills_dict_array:
+            skill_name = skill_dict['name']
+            is_unique_skill = False
+            for unique_skill in unique_skills:
+                unique_skill_name = unique_skill['name']
+                if unique_skill_name == skill_name:
+                    is_unique_skill = True
+            if is_unique_skill is False:
+                result.append(Skill(skill_name, 0))
+
+        return Skills(result)
+
+    async def get_unique_skill_from_image(self, image: Image) -> Skill:
+        # resize image width to 1024px
+        image = resize_pil(image, const.INPUT_IMAGE_WIDTH, None, Image.CUBIC)
+        if self.debug:
+            await self.local_file_driver.save_image(
+                image, os.path.join('tmp', 'get_skills_from_character_modal_image', 'resize_width_1024.png')
+            )
+
+        # rough adjust
+        image = crop_pil(image, (0, image.size[1] * 0.4, image.size[0], image.size[1] * 0.9))
+        if self.debug:
+            await self.local_file_driver.save_image(
+                image, os.path.join('tmp', 'get_skills_from_character_modal_image', 'rough_adjust.png')
+            )
+
+        skills = await self.get_skills_from_image(image)
+        skills_dict_array = skills.to_dict_array()
+
+        master_skills_map_by_type = await self.get_master_skills_map_by_type()
+        unique_skills = master_skills_map_by_type['unique_skills']
+
+        for skill_dict in skills_dict_array:
+            skill_name = skill_dict['name']
+            for unique_skill in unique_skills:
+                unique_skill_name = unique_skill['name']
+                if unique_skill_name == skill_name:
+                    return Skill(skill_name, skill_dict['level'])
+
+        return Skill('', 0)
 
     async def get_skills_from_image(self, image: Image) -> Skills:
         # get skill_tab location
@@ -276,6 +342,24 @@ class SkillInteractor(SkillUsecase):
         master_skills_json_file.close()
 
         self.cache_master_skills_map_by_weight = result
+        return result
+
+    async def get_master_skills_map_by_type(self):
+        if self.cache_master_skills_map_by_type is not None:
+            return self.cache_master_skills_map_by_type
+
+        result = dict()
+
+        master_skills_json_file = await self.local_file_driver.open(
+            os.path.join(resources.__path__[0], 'master_data', 'skills.json'))
+        master_skills_json = json.load(master_skills_json_file)
+        for master_skill_items in master_skills_json.items():
+            type = master_skill_items[0]
+            if type not in result:
+                result[type] = master_skill_items[1]
+        master_skills_json_file.close()
+
+        self.cache_master_skills_map_by_type = result
         return result
 
 

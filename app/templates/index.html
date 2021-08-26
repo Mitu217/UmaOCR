@@ -100,6 +100,22 @@
     </table>
   </div>
 
+  <h3>Unique Skill</h3>
+  <div>
+    <table border="1">
+      <tr>
+        <th></th>
+        <th>name</th>
+        <th>lv</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td id="unique-skill-1"></td>
+        <td id="unique-skill-level-1"></td>
+      </tr>
+    </table>
+  <div>
+
   <h3>Skills</h3>
   <div>
     <table border="1">
@@ -280,10 +296,15 @@ window.onload = () =>{
                 guts.textContent = json.data.params.guts;
                 wise.textContent = json.data.params.wise;
             }
+
+            if (json.data.unique_skill) {
+                document.querySelector("#unique-skill-1").textContent = json.data.unique_skill.name
+                document.querySelector("#unique-skill-level-1").textContent = json.data.unique_skill.level
+            }
             
             for (let i = 0; i < json.data.skills.length; i++) {
-              document.querySelector("#skill-" + (i+1)).textContent = json.data.skills[i].name
-              document.querySelector("#skill-level-" + (i+1)).textContent = json.data.skills[i].level
+                document.querySelector("#skill-" + (i+1)).textContent = json.data.skills[i].name
+                document.querySelector("#skill-level-" + (i+1)).textContent = json.data.skills[i].level
             }
           }
       })
