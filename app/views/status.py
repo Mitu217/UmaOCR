@@ -59,11 +59,13 @@ class StatusResource:
             results = await asyncio.gather(*tasks)
 
             character_name, character_rank, parameters, skills, ability_fields, ability_distances, ability_strategies = results
+            skills_dict_array = skills.to_dict_array()
             return {
                 'character': character_name,
                 'rank': character_rank,
                 'params': parameters.to_dict(),
-                'skills': skills.to_dict_array(),
+                'special_skill': skills_dict_array[0],
+                'skills': skills_dict_array,
                 'abilities': {
                     'fields': ability_fields.to_dict(),
                     'distances': ability_distances.to_dict(),
