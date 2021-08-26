@@ -285,7 +285,7 @@ class AbilityInteractor(AppropriateUsecase):
         return StrategiesAbilities(ability_first, ability_half_first, ability_half_last, ability_last)
 
     async def get_ability_rank_from_image(self, image: Image) -> str or None:
-        border = 0.9
+        border = 0.88
         cv2_image = pil2cv(image)
         cv2_image = cv2.cvtColor(cv2_image, cv2.COLOR_BGR2GRAY)
 
