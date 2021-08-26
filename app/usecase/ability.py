@@ -75,7 +75,7 @@ class AbilityInteractor(AppropriateUsecase):
                                         (start_x + (st_x * 0.315),
                                          end_y + (st_y * 2.8),
                                          start_x + (st_x * 0.37),
-                                         end_y + (st_y * 4.0)))
+                                         end_y + (st_y * 4.2)))
         ability_turf = await self.get_ability_rank_from_image(cropped_ability_turf)
         if self.debug:
             await self.local_file_driver.save_image(
@@ -88,7 +88,7 @@ class AbilityInteractor(AppropriateUsecase):
                                         (start_x + (st_x * 0.515),
                                          end_y + (st_y * 2.8),
                                          start_x + (st_x * 0.57),
-                                         end_y + (st_y * 4.0)))
+                                         end_y + (st_y * 4.2)))
         ability_dirt = await self.get_ability_rank_from_image(cropped_ability_dirt)
         if self.debug:
             await self.local_file_driver.save_image(
@@ -142,7 +142,7 @@ class AbilityInteractor(AppropriateUsecase):
                                          (start_x + (st_x * 0.315),
                                           end_y + (st_y * 4.35),
                                           start_x + (st_x * 0.37),
-                                          end_y + (st_y * 5.55)))
+                                          end_y + (st_y * 5.75)))
         ability_short = await self.get_ability_rank_from_image(cropped_ability_short)
         if self.debug:
             await self.local_file_driver.save_image(
@@ -155,12 +155,12 @@ class AbilityInteractor(AppropriateUsecase):
                                          (start_x + (st_x * 0.515),
                                           end_y + (st_y * 4.35),
                                           start_x + (st_x * 0.57),
-                                          end_y + (st_y * 5.55)))
+                                          end_y + (st_y * 5.75)))
         ability_miles = await self.get_ability_rank_from_image(cropped_ability_miles)
         if self.debug:
             await self.local_file_driver.save_image(
                 cropped_ability_miles,
-                os.path.join('tmp', 'get_character_appropriate_distances_from_image', 'cropped_ability_dirt.png')
+                os.path.join('tmp', 'get_character_appropriate_distances_from_image', 'cropped_ability_mile.png')
             )
 
         # 中距離
@@ -168,7 +168,7 @@ class AbilityInteractor(AppropriateUsecase):
                                           (start_x + (st_x * 0.715),
                                            end_y + (st_y * 4.35),
                                            start_x + (st_x * 0.77),
-                                           end_y + (st_y * 5.55)))
+                                           end_y + (st_y * 5.75)))
         ability_medium = await self.get_ability_rank_from_image(cropped_ability_medium)
         if self.debug:
             await self.local_file_driver.save_image(
@@ -181,7 +181,7 @@ class AbilityInteractor(AppropriateUsecase):
                                         (start_x + (st_x * 0.915),
                                          end_y + (st_y * 4.35),
                                          start_x + (st_x * 0.97),
-                                         end_y + (st_y * 5.55)))
+                                         end_y + (st_y * 5.75)))
         ability_long = await self.get_ability_rank_from_image(cropped_ability_long)
         if self.debug:
             await self.local_file_driver.save_image(
@@ -235,7 +235,7 @@ class AbilityInteractor(AppropriateUsecase):
                                          (start_x + (st_x * 0.315),
                                           end_y + (st_y * 5.9),
                                           start_x + (st_x * 0.37),
-                                          end_y + (st_y * 7.1)))
+                                          end_y + (st_y * 7.3)))
         ability_first = await self.get_ability_rank_from_image(cropped_ability_first)
         if self.debug:
             await self.local_file_driver.save_image(
@@ -248,7 +248,7 @@ class AbilityInteractor(AppropriateUsecase):
                                               (start_x + (st_x * 0.515),
                                                end_y + (st_y * 5.9),
                                                start_x + (st_x * 0.57),
-                                               end_y + (st_y * 7.1)))
+                                               end_y + (st_y * 7.3)))
         ability_half_first = await self.get_ability_rank_from_image(cropped_ability_half_first)
         if self.debug:
             await self.local_file_driver.save_image(
@@ -261,7 +261,7 @@ class AbilityInteractor(AppropriateUsecase):
                                               (start_x + (st_x * 0.715),
                                                end_y + (st_y * 5.9),
                                                start_x + (st_x * 0.77),
-                                               end_y + (st_y * 7.1)))
+                                               end_y + (st_y * 7.3)))
         ability_half_last = await self.get_ability_rank_from_image(cropped_ability_half_last)
         if self.debug:
             await self.local_file_driver.save_image(
@@ -274,7 +274,7 @@ class AbilityInteractor(AppropriateUsecase):
                                          (start_x + (st_x * 0.915),
                                           end_y + (st_y * 5.9),
                                           start_x + (st_x * 0.97),
-                                          end_y + (st_y * 7.1)))
+                                          end_y + (st_y * 7.3)))
         ability_last = await self.get_ability_rank_from_image(cropped_ability_last)
         if self.debug:
             await self.local_file_driver.save_image(
