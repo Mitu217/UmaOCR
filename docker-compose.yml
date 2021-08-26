@@ -3,7 +3,8 @@ services:
   api:
     build: .
     volumes:
-      - .:/src
+      - .:/app
+      - ./tmp:/app/tmp
     ports:
       - "8080:8080"
     environment:
