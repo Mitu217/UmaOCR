@@ -59,13 +59,14 @@ class SkillInteractor(SkillUsecase):
         result = []
         for skill_dict in skills_dict_array:
             skill_name = skill_dict['name']
+            skill_level = skill_dict['level']
             is_unique_skill = False
             for unique_skill in unique_skills:
                 unique_skill_name = unique_skill['name']
-                if unique_skill_name == skill_name:
+                if unique_skill_name == skill_name and skill_level > 0:
                     is_unique_skill = True
             if is_unique_skill is False:
-                result.append(Skill(skill_name, 0))
+                result.append(Skill(skill_name, skill_level))
 
         return Skills(result)
 
@@ -92,10 +93,11 @@ class SkillInteractor(SkillUsecase):
 
         for skill_dict in skills_dict_array:
             skill_name = skill_dict['name']
+            skill_level = skill_dict['level']
             for unique_skill in unique_skills:
                 unique_skill_name = unique_skill['name']
-                if unique_skill_name == skill_name:
-                    return Skill(skill_name, skill_dict['level'])
+                if unique_skill_name == skill_name and skill_level > 0:
+                    return Skill(skill_name, skill_level)
 
         return Skill('', 0)
 
