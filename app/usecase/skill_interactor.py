@@ -124,7 +124,7 @@ class SkillInteractor(SkillUsecase):
         for i in range(len(skill_frame_locs)):
             skills.append(Skill('', 0))
 
-        binarized_image = binarized(image, 120)
+        binarized_image = binarized(image, 135)
 
         def p(index: int):
             (start_x, start_y), (end_x, end_y) = skill_frame_locs[index]
