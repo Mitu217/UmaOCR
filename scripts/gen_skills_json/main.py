@@ -117,6 +117,8 @@ def normalize_name(name):
         name = '#LookatCurren'
     if name == 'G00 1stF∞':
         name = 'G00 1st.F∞;'
+    if name == '優等生×バクシン=大勝利ッ':
+        name = '優等生✕バクシン＝大勝利ッ'
 
     return name
 
@@ -128,6 +130,8 @@ def get_similar_skill_names(skill_name):
     # 逃げ -> 透け
     if '逃げ' in skill_name:
         similar_names.append(skill_name.replace('逃げ', '透け'))
+    if '努力' in skill_name:
+        similar_names.append(skill_name.replace('努力', '即力'))
 
     return similar_names
 

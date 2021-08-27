@@ -1379,7 +1379,9 @@
       "name": "努力家",
       "weight": 3,
       "desc": "",
-      "similar": []
+      "similar": [
+        "即力家"
+      ]
     },
     {
       "type": "rare",
@@ -1889,8 +1891,8 @@
     },
     {
       "type": "unique",
-      "name": "優等生×バクシン=大勝利ッ",
-      "weight": 12,
+      "name": "優等生✕バクシン＝大勝利ッ",
+      "weight": 13,
       "desc": "",
       "similar": []
     },
