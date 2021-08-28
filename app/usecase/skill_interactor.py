@@ -36,20 +36,6 @@ class SkillInteractor(SkillUsecase):
 
 
     async def get_skills_without_unique_from_image(self, image: Image) -> Skills:
-        # resize image width to 1024px
-        image = resize_pil(image, const.INPUT_IMAGE_WIDTH, None, Image.CUBIC)
-        if self.debug:
-            await self.local_file_driver.save_image(
-                image, os.path.join('tmp', 'get_skills_from_character_modal_image', 'resize_width_1024.png')
-            )
-
-        # rough adjust
-        image = crop_pil(image, (0, image.size[1] * 0.4, image.size[0], image.size[1] * 0.95))
-        if self.debug:
-            await self.local_file_driver.save_image(
-                image, os.path.join('tmp', 'get_skills_from_character_modal_image', 'rough_adjust.png')
-            )
-
         skills = await self.get_skills_from_image(image)
         skills_dict_array = skills.to_dict_array()
 
@@ -71,20 +57,6 @@ class SkillInteractor(SkillUsecase):
         return Skills(result)
 
     async def get_unique_skill_from_image(self, image: Image) -> Skill:
-        # resize image width to 1024px
-        image = resize_pil(image, const.INPUT_IMAGE_WIDTH, None, Image.CUBIC)
-        if self.debug:
-            await self.local_file_driver.save_image(
-                image, os.path.join('tmp', 'get_skills_from_character_modal_image', 'resize_width_1024.png')
-            )
-
-        # rough adjust
-        image = crop_pil(image, (0, image.size[1] * 0.4, image.size[0], image.size[1] * 0.95))
-        if self.debug:
-            await self.local_file_driver.save_image(
-                image, os.path.join('tmp', 'get_skills_from_character_modal_image', 'rough_adjust.png')
-            )
-
         skills = await self.get_skills_from_image(image)
         skills_dict_array = skills.to_dict_array()
 
@@ -124,7 +96,7 @@ class SkillInteractor(SkillUsecase):
         for i in range(len(skill_frame_locs)):
             skills.append(Skill('', 0))
 
-        binarized_image = binarized(image, 135)
+        binarized_image = binarized(image, 130)
 
         def p(index: int):
             (start_x, start_y), (end_x, end_y) = skill_frame_locs[index]
@@ -132,6 +104,16 @@ class SkillInteractor(SkillUsecase):
             cropped_skill = crop_pil(binarized_image, (
                 start_x + st_w * 0.07, start_y + st_h * 0.7, start_x + st_w * 0.435, end_y - st_h * 0.55))
             skill_name = asyncio.run(self.get_skill_name_from_image(cropped_skill))
+            if skill_name is None or len(skill_name) == 0:
+                # 文字列によって有効なしきい値が異なるので読み取れなければしきい値を上げてリトライ
+                cropped_skill = crop_pil(binarized(image, 140), (
+                    start_x + st_w * 0.07, start_y + st_h * 0.7, start_x + st_w * 0.435, end_y - st_h * 0.55))
+                skill_name = asyncio.run(self.get_skill_name_from_image(cropped_skill))
+            if skill_name is None or len(skill_name) == 0:
+                # 文字列によって有効なしきい値が異なるので読み取れなければしきい値を上げてリトライ
+                cropped_skill = crop_pil(binarized(image, 160), (
+                    start_x + st_w * 0.07, start_y + st_h * 0.7, start_x + st_w * 0.435, end_y - st_h * 0.55))
+                skill_name = asyncio.run(self.get_skill_name_from_image(cropped_skill))
 
             if self.debug:
                 asyncio.run(self.local_file_driver.save_image(

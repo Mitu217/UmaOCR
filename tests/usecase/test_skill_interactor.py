@@ -10,7 +10,7 @@ import resources
 from app.domain.skill import Skill, Skills
 from app.driver.file_driver import LocalFileDriverImpl
 from app.usecase.skill_interactor import SkillInteractor
-
+from app.library.pillow import crop_pil, resize_pil
 
 class TestSkillInteractor(TestCase):
     def test_get_skills_from_image(self) -> None:
@@ -18,6 +18,28 @@ class TestSkillInteractor(TestCase):
             ('image1.png', 'image1.csv'),
             ('image2.png', 'image2.csv'),
             ('image3.png', 'image3.csv'),
+            ('image4.png', 'image4.csv'),
+            ('image5.png', 'image5.csv'),
+            ('image6.png', 'image6.csv'),
+            ('image7.png', 'image7.csv'),
+            ('image8.png', 'image8.csv'),
+            ('image9.png', 'image9.csv'),
+            ('image10.png', 'image10.csv'),
+            ('image11.png', 'image11.csv'),
+            ('image12.png', 'image12.csv'),
+            ('image13.png', 'image13.csv'),
+            ('image14.png', 'image14.csv'),
+            ('image15.png', 'image15.csv'),
+            ('image16.png', 'image16.csv'),
+            ('image17.png', 'image17.csv'),
+            ('image18.png', 'image18.csv'),
+            ('image19.png', 'image19.csv'),
+            ('image20.png', 'image20.csv'),
+            ('image21.png', 'image21.csv'),
+            ('image22.png', 'image22.csv'),
+            ('image23.png', 'image23.csv'),
+            ('image24.png', 'image24.csv'),
+            ('image25.png', 'image25.csv'),
         ):
             with self.subTest(image_name=image_name):
                 skill_interactor = SkillInteractor(
@@ -28,8 +50,10 @@ class TestSkillInteractor(TestCase):
                 with Image.open(
                         os.path.join(resources.__path__[0], 'tests',
                                      'cropped_skills', image_name)) as image:
+                    optimized_resize_image = resize_pil(image, 1024, None, Image.LANCZOS)
+                    rough_adjusted_skill_area_image = crop_pil(optimized_resize_image, (0, optimized_resize_image.size[1] * 0.4, optimized_resize_image.size[0], optimized_resize_image.size[1] * 0.95))
                     got = asyncio.run(
-                        skill_interactor.get_skills_from_image(image))
+                        skill_interactor.get_skills_from_image(rough_adjusted_skill_area_image))
 
                 with open(
                         os.path.join(resources.__path__[0], 'tests',
@@ -106,8 +130,7 @@ class TestSkillInteractor(TestCase):
         with Image.open(
                 os.path.join(resources.__path__[0], 'tests', 'character_modal',
                              'iphone_character_1.png')) as image:
-            got = asyncio.run(
-                skill_interactor.get_skill_tab_location(image))
+            got = asyncio.run(skill_interactor.get_skill_tab_location(image))
 
         want = ((42, 960), (973, 1008))
 
