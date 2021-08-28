@@ -1,4 +1,5 @@
 import asyncio
+import csv
 import logging
 import os
 from unittest import TestCase
@@ -12,6 +13,35 @@ from app.usecase.skill_interactor import SkillInteractor
 
 
 class TestSkillInteractor(TestCase):
+    def test_get_skills_from_image(self) -> None:
+        for image_name, result_name in (
+            ('image1.png', 'image1.csv'),
+            ('image2.png', 'image2.csv'),
+            ('image3.png', 'image3.csv'),
+        ):
+            with self.subTest(image_name=image_name):
+                skill_interactor = SkillInteractor(
+                    LocalFileDriverImpl(''),
+                    logging.getLogger(__name__),
+                )
+
+                with Image.open(
+                        os.path.join(resources.__path__[0], 'tests',
+                                     'cropped_skills', image_name)) as image:
+                    got = asyncio.run(
+                        skill_interactor.get_skills_from_image(image))
+
+                with open(
+                        os.path.join(resources.__path__[0], 'tests',
+                                     'cropped_skills', result_name)) as result:
+                    result_skill_array = []
+                    reader = csv.reader(result)
+                    for row in reader:
+                        result_skill_array.append(Skill(row[0], int(row[1])))
+                    want = Skills(result_skill_array)
+
+                self.assertEqual(got, want)
+
     def test_get_skills_from_character_modal_image_iphone_character_1(self):
         logger = logging.getLogger('TEST')
         skill_interactor = SkillInteractor(
