@@ -7,7 +7,6 @@ from logging import Logger
 
 import cv2
 import Levenshtein
-import cv2
 import numpy as np
 from PIL import Image
 
@@ -45,7 +44,7 @@ class SkillInteractor(SkillUsecase):
             )
 
         # rough adjust
-        image = crop_pil(image, (0, image.size[1] * 0.4, image.size[0], image.size[1] * 0.9))
+        image = crop_pil(image, (0, image.size[1] * 0.4, image.size[0], image.size[1] * 0.95))
         if self.debug:
             await self.local_file_driver.save_image(
                 image, os.path.join('tmp', 'get_skills_from_character_modal_image', 'rough_adjust.png')
@@ -80,7 +79,7 @@ class SkillInteractor(SkillUsecase):
             )
 
         # rough adjust
-        image = crop_pil(image, (0, image.size[1] * 0.4, image.size[0], image.size[1] * 0.9))
+        image = crop_pil(image, (0, image.size[1] * 0.4, image.size[0], image.size[1] * 0.95))
         if self.debug:
             await self.local_file_driver.save_image(
                 image, os.path.join('tmp', 'get_skills_from_character_modal_image', 'rough_adjust.png')
@@ -174,7 +173,7 @@ class SkillInteractor(SkillUsecase):
             )
 
         # rough adjust
-        image = crop_pil(image, (0, image.size[1] * 0.4, image.size[0], image.size[1] * 0.9))
+        image = crop_pil(image, (0, image.size[1] * 0.4, image.size[0], image.size[1] * 0.95))
         if self.debug:
             await self.local_file_driver.save_image(
                 image, os.path.join('tmp', 'get_skills_from_character_modal_image', 'rough_adjust.png')
