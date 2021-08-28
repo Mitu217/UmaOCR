@@ -2,7 +2,7 @@ from abc import ABCMeta, abstractmethod
 
 from PIL import Image
 
-from app.domain.skill import Skills, Skill
+from app.domain.skill import Skill, Skills
 
 
 class SkillUsecase(metaclass=ABCMeta):

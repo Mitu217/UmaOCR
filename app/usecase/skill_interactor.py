@@ -5,6 +5,7 @@ import re
 from concurrent import futures
 from logging import Logger
 
+import cv2
 import Levenshtein
 import cv2
 import numpy as np
