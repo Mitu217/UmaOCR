@@ -106,7 +106,11 @@ def gen_text_image(skill_name):
 
 
 def calc_text_weight(text):
-    word_width = 25.5
+    # 英字/記号を含んでいると計算が難しいので例外は別途対応
+    if text == '紅焔ギア/LP1211-M':
+        return 10
+
+    word_width = 25.3
     text_image = gen_text_image(text)
     return math.ceil(text_image.size[0] / word_width)
 
@@ -119,6 +123,8 @@ def normalize_name(name):
         name = 'G00 1st.F∞;'
     if name == '優等生×バクシン=大勝利ッ':
         name = '優等生✕バクシン＝大勝利ッ'
+    if name == 'win Q.E.D':
+        name = '∴win Q.E.D.'
 
     return name
 
@@ -127,11 +133,26 @@ def get_similar_skill_names(skill_name):
     # ocr結果として誤検知されやすい文字列を調整
     similar_names = []
 
-    # 逃げ -> 透け
     if '逃げ' in skill_name:
         similar_names.append(skill_name.replace('逃げ', '透け'))
     if '努力' in skill_name:
+        similar_names.append(skill_name.replace('努力', '胡力'))
         similar_names.append(skill_name.replace('努力', '即力'))
+        similar_names.append(skill_name.replace('努力', '勢力'))
+        similar_names.append(skill_name.replace('努力', '准力'))
+    if '短距離' in skill_name:
+        similar_names.append(skill_name.replace('短距離', '細距離'))
+        similar_names.append(skill_name.replace('短距離', '紅距離'))
+    if '深呼吸' in skill_name:
+        similar_names.append(skill_name.replace('深呼吸', '漂陸明'))
+        similar_names.append(skill_name.replace('深呼吸', '漂峡明'))
+    if '巧者' in skill_name:
+        similar_names.append(skill_name.replace('巧者', '巧書'))
+    if '一匹狼' in skill_name:
+        similar_names.append(skill_name.replace('一匹狼', '一忠独'))
+    if 'の風' in skill_name:
+        similar_names.append(skill_name.replace('の風', 'の如'))
+
 
     return similar_names
 

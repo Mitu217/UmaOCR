@@ -110,7 +110,9 @@
       "name": "コーナー巧者◯",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": [
+        "コーナー巧書◯"
+      ]
     },
     {
       "type": "normal",
@@ -264,7 +266,9 @@
       "name": "一匹狼",
       "weight": 3,
       "desc": "",
-      "similar": []
+      "similar": [
+        "一忠独"
+      ]
     },
     {
       "type": "normal",
@@ -796,7 +800,10 @@
       "name": "深呼吸",
       "weight": 3,
       "desc": "",
-      "similar": []
+      "similar": [
+        "漂陸明",
+        "漂峡明"
+      ]
     },
     {
       "type": "normal",
@@ -845,21 +852,29 @@
       "name": "直線巧者",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": [
+        "直線巧書"
+      ]
     },
     {
       "type": "normal",
       "name": "短距離コーナー◯",
       "weight": 8,
       "desc": "",
-      "similar": []
+      "similar": [
+        "細距離コーナー◯",
+        "紅距離コーナー◯"
+      ]
     },
     {
       "type": "normal",
       "name": "短距離直線◯",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": [
+        "細距離直線◯",
+        "紅距離直線◯"
+      ]
     },
     {
       "type": "normal",
@@ -1295,7 +1310,9 @@
       "name": "一陣の風",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": [
+        "一陣の如"
+      ]
     },
     {
       "type": "rare",
@@ -1380,7 +1397,10 @@
       "weight": 3,
       "desc": "",
       "similar": [
-        "即力家"
+        "胡力家",
+        "即力家",
+        "勢力家",
+        "准力家"
       ]
     },
     {
@@ -1688,8 +1708,8 @@
     },
     {
       "type": "unique",
-      "name": "win Q.E.D",
-      "weight": 5,
+      "name": "∴win Q.E.D.",
+      "weight": 7,
       "desc": "",
       "similar": []
     },
@@ -1843,7 +1863,7 @@
     {
       "type": "unique",
       "name": "レッツ・アナボリック！",
-      "weight": 10,
+      "weight": 11,
       "desc": "",
       "similar": []
     },
@@ -1920,7 +1940,7 @@
     {
       "type": "unique",
       "name": "勝利のチケットを、君にッ！",
-      "weight": 12,
+      "weight": 13,
       "desc": "",
       "similar": []
     },
@@ -1948,14 +1968,14 @@
     {
       "type": "unique",
       "name": "来てください来てください！",
-      "weight": 12,
+      "weight": 13,
       "desc": "",
       "similar": []
     },
     {
       "type": "unique",
       "name": "来ます来てます来させます！",
-      "weight": 12,
+      "weight": 13,
       "desc": "",
       "similar": []
     },
