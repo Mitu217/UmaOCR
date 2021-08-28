@@ -140,6 +140,7 @@ def get_similar_skill_names(skill_name):
         similar_names.append(skill_name.replace('努力', '即力'))
         similar_names.append(skill_name.replace('努力', '勢力'))
         similar_names.append(skill_name.replace('努力', '准力'))
+        similar_names.append(skill_name.replace('努力', '明力'))
     if '短距離' in skill_name:
         similar_names.append(skill_name.replace('短距離', '細距離'))
         similar_names.append(skill_name.replace('短距離', '紅距離'))
@@ -152,7 +153,17 @@ def get_similar_skill_names(skill_name):
         similar_names.append(skill_name.replace('一匹狼', '一忠独'))
     if 'の風' in skill_name:
         similar_names.append(skill_name.replace('の風', 'の如'))
-
+        similar_names.append(skill_name.replace('の風', 'の鳳'))
+    if '一陣' in skill_name:
+        similar_names.append(skill_name.replace('一陣', 'ー障'))
+    if '豪脚' in skill_name:
+        similar_names.append(skill_name.replace('豪脚', '各肢'))
+    if '末脚' in skill_name:
+        similar_names.append(skill_name.replace('末脚', '未肢'))
+    if '積極' in skill_name:
+        similar_names.append(skill_name.replace('積極', '策福'))
+    if '左回り' in skill_name:
+        similar_names.append(skill_name.replace('左回り', 'を回り'))
 
     return similar_names
 

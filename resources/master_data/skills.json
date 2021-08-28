@@ -597,7 +597,9 @@
       "name": "左回り◯",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": [
+        "を回り◯"
+      ]
     },
     {
       "type": "normal",
@@ -751,7 +753,9 @@
       "name": "末脚",
       "weight": 2,
       "desc": "",
-      "similar": []
+      "similar": [
+        "未肢"
+      ]
     },
     {
       "type": "normal",
@@ -895,7 +899,9 @@
       "name": "積極策",
       "weight": 3,
       "desc": "",
-      "similar": []
+      "similar": [
+        "策福策"
+      ]
     },
     {
       "type": "normal",
@@ -1311,7 +1317,9 @@
       "weight": 4,
       "desc": "",
       "similar": [
-        "一陣の如"
+        "一陣の如",
+        "一陣の鳳",
+        "ー障の風"
       ]
     },
     {
@@ -1400,7 +1408,8 @@
         "胡力家",
         "即力家",
         "勢力家",
-        "准力家"
+        "准力家",
+        "明力家"
       ]
     },
     {
@@ -1576,7 +1585,9 @@
       "name": "豪脚",
       "weight": 2,
       "desc": "",
-      "similar": []
+      "similar": [
+        "各肢"
+      ]
     },
     {
       "type": "rare",
