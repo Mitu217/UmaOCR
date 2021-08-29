@@ -14,7 +14,7 @@ import resources
 from app.domain.skill import Skill, Skills
 from app.interface.driver.file_driver import LocalFileDriver
 from app.interface.usecase.skill_usecase import SkillUsecase
-from app.library.matching_template import multi_scale_matching_template_impl
+from app.library.matching_template import matching_template, multi_scale_matching_template_impl
 from app.library.ocr import (
     get_digit_with_single_text_line_and_eng_from_image,
     get_line_box_with_single_text_line_and_jpn_from_image)
@@ -120,6 +120,43 @@ class SkillInteractor(SkillUsecase):
                     cropped_skill,
                     os.path.join('tmp', 'get_skills_from_image', 'skill' + str(index + 1) + '_name_cropped.png')
                 ))
+
+            # 通常の文字認識では○と◎と識別が難しいので追加で検証
+            if '◯' in skill_name:
+                cropped_for_check_circle_image = crop_pil(binarized(image, 160), (
+                    start_x + st_w * 0.07, start_y + st_h * 0.7, start_x + st_w * 0.435, end_y - st_h * 0.55))
+                line_box = get_line_box_with_single_text_line_and_jpn_from_image(cropped_for_check_circle_image)
+                if len(line_box) != 0:
+                    (s_x, s_y), (e_x, e_y) = line_box[0].position
+                    word_width = 25.3
+                    cropped_circle_image = crop_pil(cropped_for_check_circle_image, (e_x - word_width, s_y - 2, e_x + 2, e_y + 2))
+                    if self.debug:
+                        asyncio.run(self.local_file_driver.save_image(
+                            cropped_circle_image,
+                            os.path.join('tmp', 'get_skills_from_image', 'circle_test_' + str(index + 1) + '_cropped.png')
+                        ))
+
+                    # 要調整
+                    border = 0.6
+                    cv2_image = pil2cv(cropped_circle_image)
+                    cv2_image = cv2.cvtColor(cv2_image, cv2.COLOR_BGR2GRAY)
+                    circle_files = [
+                        ['single.png', '◯'],
+                        ['double.png', '◎'],
+                    ]
+                    for (circle_file, circle) in circle_files:
+                        templ_circle_file = asyncio.run(self.local_file_driver.open_image(
+                            os.path.join(resources.__path__[0], 'circles', circle_file)
+                        ))
+                        templ_circle_file = resize_pil(templ_circle_file, 25)
+                        cv2_templ_circle_file = pil2cv(templ_circle_file)
+                        cv2_templ_circle_file = cv2.cvtColor(
+                            cv2_templ_circle_file, cv2.COLOR_BGR2GRAY)
+                        result = matching_template(cv2_image, cv2_templ_circle_file)
+                        ys, _ = np.where(result >= border)
+                        if len(ys) > 0:
+                            skill_name = skill_name.replace('◯', circle)
+                            break
 
             if index == 0:
                 # Lvがあるのは固有スキル（index = 0）だけ
