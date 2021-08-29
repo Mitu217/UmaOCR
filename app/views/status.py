@@ -47,19 +47,13 @@ class StatusResource:
 
         image = Image.open(file.stream)
 
-        # resize image width to 1024px
-        optimized_resize_image = resize_pil(image, 1024, None, Image.LANCZOS)
-
-        # rough adjust
-        rough_adjusted_skill_area_image = crop_pil(optimized_resize_image, (0, optimized_resize_image.size[1] * 0.4, optimized_resize_image.size[0], optimized_resize_image.size[1] * 0.95))
-
         async def get_data():
             tasks = [
                 asyncio.create_task(self.character_usecase.get_character_name_from_image(image)),
                 asyncio.create_task(self.character_usecase.get_character_rank_from_image(image)),
                 asyncio.create_task(self.status_usecase.get_parameters_from_image(image)),
-                asyncio.create_task(self.skill_usecase.get_unique_skill_from_image(rough_adjusted_skill_area_image)),
-                asyncio.create_task(self.skill_usecase.get_skills_without_unique_from_image(rough_adjusted_skill_area_image)),
+                asyncio.create_task(self.skill_usecase.get_unique_skill_from_image(image)),
+                asyncio.create_task(self.skill_usecase.get_skills_without_unique_from_image(image)),
                 asyncio.create_task(self.ability_usecase.get_character_appropriate_fields_from_image(image)),
                 asyncio.create_task(self.ability_usecase.get_character_appropriate_distances_from_image(image)),
                 asyncio.create_task(self.ability_usecase.get_character_appropriate_strategies_from_image(image)),

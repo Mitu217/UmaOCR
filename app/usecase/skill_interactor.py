@@ -11,7 +11,7 @@ import numpy as np
 from PIL import Image
 
 import resources
-from app.domain.skill import Skill, Skills
+from app.domain.skill import NormalSkill, NormalSkills
 from app.interface.driver.file_driver import LocalFileDriver
 from app.interface.usecase.skill_usecase import SkillUsecase
 from app.library.matching_template import matching_template, multi_scale_matching_template_impl
@@ -35,8 +35,14 @@ class SkillInteractor(SkillUsecase):
         self.cache_master_skills_map_by_type = None
 
 
-    async def get_skills_without_unique_from_image(self, image: Image) -> Skills:
-        skills = await self.get_skills_from_image(image)
+    async def get_skills_without_unique_from_image(self, image: Image) -> NormalSkills:
+        # resize image width to 1024px
+        optimized_resize_image = resize_pil(image, 1024, None, Image.LANCZOS)
+
+        # rough adjust
+        rough_adjusted_image = crop_pil(optimized_resize_image, (0, optimized_resize_image.size[1] * 0.4, optimized_resize_image.size[0], optimized_resize_image.size[1] * 0.95))
+
+        skills = await self.get_skills_from_image(rough_adjusted_image)
         skills_dict_array = skills.to_dict_array()
 
         master_skills_map_by_type = await self.get_master_skills_map_by_type()
@@ -52,12 +58,18 @@ class SkillInteractor(SkillUsecase):
                 if unique_skill_name == skill_name and skill_level > 0:
                     is_unique_skill = True
             if is_unique_skill is False:
-                result.append(Skill(skill_name, skill_level))
+                result.append(NormalSkill(skill_name, skill_level))
 
-        return Skills(result)
+        return NormalSkills(result)
 
-    async def get_unique_skill_from_image(self, image: Image) -> Skill:
-        skills = await self.get_skills_from_image(image)
+    async def get_unique_skill_from_image(self, image: Image) -> NormalSkill:
+        # resize image width to 1024px
+        optimized_resize_image = resize_pil(image, 1024, None, Image.LANCZOS)
+
+        # rough adjust
+        rough_adjusted_image = crop_pil(optimized_resize_image, (0, optimized_resize_image.size[1] * 0.4, optimized_resize_image.size[0], optimized_resize_image.size[1] * 0.95))
+
+        skills = await self.get_skills_from_image(rough_adjusted_image)
         skills_dict_array = skills.to_dict_array()
 
         master_skills_map_by_type = await self.get_master_skills_map_by_type()
@@ -69,15 +81,15 @@ class SkillInteractor(SkillUsecase):
             for unique_skill in unique_skills:
                 unique_skill_name = unique_skill['name']
                 if unique_skill_name == skill_name and skill_level > 0:
-                    return Skill(skill_name, skill_level)
+                    return NormalSkill(skill_name, skill_level)
 
-        return Skill('', 0)
+        return NormalSkill('', 0)
 
-    async def get_skills_from_image(self, image: Image) -> Skills:
+    async def get_skills_from_image(self, image: Image) -> NormalSkills:
         # get skill_tab location
         skill_tab_loc = await self.get_skill_tab_location(image)
         if skill_tab_loc is None:
-            return Skills([])
+            return NormalSkills([])
         (skill_tab_loc_sx, skill_tab_loc_sy), (skill_tab_loc_ex, skill_tab_loc_ey) = skill_tab_loc
         (st_w, st_h) = skill_tab_loc_ex - skill_tab_loc_sx, skill_tab_loc_ey - skill_tab_loc_sy
 
@@ -94,7 +106,7 @@ class SkillInteractor(SkillUsecase):
 
         skills = []
         for i in range(len(skill_frame_locs)):
-            skills.append(Skill('', 0))
+            skills.append(NormalSkill('', 0))
 
         binarized_image = binarized(image, 130)
 
@@ -172,7 +184,7 @@ class SkillInteractor(SkillUsecase):
             else:
                 skill_level = 0
 
-            skills[index] = Skill(skill_name, skill_level)
+            skills[index] = NormalSkill(skill_name, skill_level)
 
         future_list = []
         with futures.ThreadPoolExecutor(max_workers=os.cpu_count()) as executor:
@@ -181,9 +193,9 @@ class SkillInteractor(SkillUsecase):
                 future_list.append(future)
             _ = futures.as_completed(fs=future_list)
 
-        return Skills(skills)
+        return NormalSkills(skills)
 
-    async def get_skills_from_character_modal_image(self, image: Image) -> Skills:
+    async def get_skills_from_character_modal_image(self, image: Image) -> NormalSkills:
         # resize image width to 1024px
         image = resize_pil(image, const.INPUT_IMAGE_WIDTH, None, Image.CUBIC)
         if self.debug:

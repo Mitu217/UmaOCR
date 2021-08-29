@@ -65,8 +65,8 @@ class TestSkillInteractor(TestCase):
                     result_skill_array = []
                     reader = csv.reader(result)
                     for row in reader:
-                        result_skill_array.append(Skill(row[0], int(row[1])))
-                    want = Skills(result_skill_array)
+                        result_skill_array.append(NormalSkill(row[0], int(row[1])))
+                    want = NormalSkills(result_skill_array)
 
                 self.assertEqual(got, want)
 
@@ -83,21 +83,21 @@ class TestSkillInteractor(TestCase):
             got = asyncio.run(
                 skill_interactor.get_skills_from_character_modal_image(image))
 
-        want = Skills([
-            Skill('カッティング×DRIVE！', 6),
-            Skill('勝利の鼓動', 0),
-            Skill('汝、皇帝の神威を見よ', 0),
-            Skill('右回り◯', 0),
-            Skill('外枠得意◯', 0),
-            Skill('弧線のプロフェッサー', 0),
-            Skill('直線巧者', 0),
-            Skill('好転一息', 0),
-            Skill('注目の踊り子', 0),
-            Skill('抜け出し準備', 0),
-            Skill('差し駆け引き', 0),
-            Skill('先行ためらい', 0),
-            Skill('マイル直線◯', 0),
-            Skill('危険回避', 0),
+        want = NormalSkills([
+            NormalSkill('カッティング×DRIVE！', 6),
+            NormalSkill('勝利の鼓動', 0),
+            NormalSkill('汝、皇帝の神威を見よ', 0),
+            NormalSkill('右回り◯', 0),
+            NormalSkill('外枠得意◯', 0),
+            NormalSkill('弧線のプロフェッサー', 0),
+            NormalSkill('直線巧者', 0),
+            NormalSkill('好転一息', 0),
+            NormalSkill('注目の踊り子', 0),
+            NormalSkill('抜け出し準備', 0),
+            NormalSkill('差し駆け引き', 0),
+            NormalSkill('先行ためらい', 0),
+            NormalSkill('マイル直線◯', 0),
+            NormalSkill('危険回避', 0),
         ])
 
         self.assertEqual(got, want)
@@ -115,11 +115,11 @@ class TestSkillInteractor(TestCase):
             got = asyncio.run(
                 skill_interactor.get_skills_from_character_modal_image(image))
 
-        want = Skills([
-            Skill('Call me KING', 1),
-            Skill('カッティング×DRIVE！', 0),
-            Skill('末脚', 0),
-            Skill('がんばり屋', 0),
+        want = NormalSkills([
+            NormalSkill('Call me KING', 1),
+            NormalSkill('カッティング×DRIVE！', 0),
+            NormalSkill('末脚', 0),
+            NormalSkill('がんばり屋', 0),
         ])
 
         self.assertEqual(got, want)

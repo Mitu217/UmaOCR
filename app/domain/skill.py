@@ -4,7 +4,7 @@ from app.domain.collection import Collection
 
 
 @dataclass(frozen=True)
-class Skill:
+class NormalSkill:
     name: str
     level: int
 
@@ -16,8 +16,8 @@ class Skill:
 
 
 @dataclass(frozen=True)
-class Skills(Collection[Skill]):
-    values: [Skill]
+class NormalSkills(Collection[NormalSkill]):
+    values: [NormalSkill]
 
     def to_dict_array(self):
         dict_array = []
