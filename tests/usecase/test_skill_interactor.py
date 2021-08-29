@@ -7,7 +7,7 @@ from unittest import TestCase
 from PIL import Image
 
 import resources
-from app.domain.skill import Skill, Skills
+from app.domain.skill import CharacterSkills, NormalSkill, NormalSkills, UniqueSkill
 from app.driver.file_driver import LocalFileDriverImpl
 from app.usecase.skill_interactor import SkillInteractor
 from app.library.pillow import crop_pil, resize_pil
@@ -70,7 +70,7 @@ class TestSkillInteractor(TestCase):
 
                 self.assertEqual(got, want)
 
-    def test_get_skills_from_character_modal_image_iphone_character_1(self):
+    def test_get_character_skills_from_character_modal_image_iphone_character_1(self):
         logger = logging.getLogger('TEST')
         skill_interactor = SkillInteractor(
             LocalFileDriverImpl(''),
@@ -81,28 +81,30 @@ class TestSkillInteractor(TestCase):
                 os.path.join(resources.__path__[0], 'tests', 'character_modal',
                              'iphone_character_1.png')) as image:
             got = asyncio.run(
-                skill_interactor.get_skills_from_character_modal_image(image))
+                skill_interactor.get_character_skills_from_character_modal_image(image))
 
-        want = NormalSkills([
-            NormalSkill('カッティング×DRIVE！', 6),
-            NormalSkill('勝利の鼓動', 0),
-            NormalSkill('汝、皇帝の神威を見よ', 0),
-            NormalSkill('右回り◯', 0),
-            NormalSkill('外枠得意◯', 0),
-            NormalSkill('弧線のプロフェッサー', 0),
-            NormalSkill('直線巧者', 0),
-            NormalSkill('好転一息', 0),
-            NormalSkill('注目の踊り子', 0),
-            NormalSkill('抜け出し準備', 0),
-            NormalSkill('差し駆け引き', 0),
-            NormalSkill('先行ためらい', 0),
-            NormalSkill('マイル直線◯', 0),
-            NormalSkill('危険回避', 0),
-        ])
+        want = CharacterSkills(
+            UniqueSkill('カッティング×DRIVE！', 6),
+            NormalSkills([
+                NormalSkill('勝利の鼓動', 0),
+                NormalSkill('汝、皇帝の神威を見よ', 0),
+                NormalSkill('右回り◯', 0),
+                NormalSkill('外枠得意◯', 0),
+                NormalSkill('弧線のプロフェッサー', 0),
+                NormalSkill('直線巧者', 0),
+                NormalSkill('好転一息', 0),
+                NormalSkill('注目の踊り子', 0),
+                NormalSkill('抜け出し準備', 0),
+                NormalSkill('差し駆け引き', 0),
+                NormalSkill('先行ためらい', 0),
+                NormalSkill('マイル直線◯', 0),
+                NormalSkill('危険回避', 0),
+            ]),
+        )
 
         self.assertEqual(got, want)
 
-    def test_get_skills_from_character_modal_image_iphone_character_2(self):
+    def test_get_character_skills_from_character_modal_image_iphone_character_2(self):
         logger = logging.getLogger('TEST')
         skill_interactor = SkillInteractor(
             LocalFileDriverImpl(''),
@@ -113,14 +115,16 @@ class TestSkillInteractor(TestCase):
                 os.path.join(resources.__path__[0], 'tests', 'character_modal',
                              'iphone_character_2.png')) as image:
             got = asyncio.run(
-                skill_interactor.get_skills_from_character_modal_image(image))
+                skill_interactor.get_character_skills_from_character_modal_image(image))
 
-        want = NormalSkills([
-            NormalSkill('Call me KING', 1),
-            NormalSkill('カッティング×DRIVE！', 0),
-            NormalSkill('末脚', 0),
-            NormalSkill('がんばり屋', 0),
-        ])
+        want = CharacterSkills(
+            UniqueSkill('Call me KING', 1),
+            NormalSkills([
+                NormalSkill('カッティング×DRIVE！', 0),
+                NormalSkill('末脚', 0),
+                NormalSkill('がんばり屋', 0),
+            ]),
+        )
 
         self.assertEqual(got, want)
 

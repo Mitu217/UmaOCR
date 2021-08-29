@@ -11,7 +11,7 @@ import numpy as np
 from PIL import Image
 
 import resources
-from app.domain.skill import NormalSkill, NormalSkills
+from app.domain.skill import CharacterSkills, UniqueSkill, NormalSkill, NormalSkills
 from app.interface.driver.file_driver import LocalFileDriver
 from app.interface.usecase.skill_usecase import SkillUsecase
 from app.library.matching_template import matching_template, multi_scale_matching_template_impl
@@ -195,9 +195,9 @@ class SkillInteractor(SkillUsecase):
 
         return NormalSkills(skills)
 
-    async def get_skills_from_character_modal_image(self, image: Image) -> NormalSkills:
+    async def get_character_skills_from_character_modal_image(self, image: Image) -> CharacterSkills:
         # resize image width to 1024px
-        image = resize_pil(image, const.INPUT_IMAGE_WIDTH, None, Image.CUBIC)
+        image = resize_pil(image, const.INPUT_IMAGE_WIDTH, None, Image.LANCZOS)
         if self.debug:
             await self.local_file_driver.save_image(
                 image, os.path.join('tmp', 'get_skills_from_character_modal_image', 'resize_width_1024.png')
@@ -210,8 +210,30 @@ class SkillInteractor(SkillUsecase):
                 image, os.path.join('tmp', 'get_skills_from_character_modal_image', 'rough_adjust.png')
             )
 
+        # get skills
         skills = await self.get_skills_from_image(image)
-        return skills
+        skill_dict_array = skills.to_dict_array()
+
+        # get master_data
+        master_skills_map_by_type = await self.get_master_skills_map_by_type()
+        master_unique_skills = master_skills_map_by_type['unique_skills']
+
+        # sort unique && normal skills
+        unique_skill = UniqueSkill('', 0)
+        normal_skill_array = []
+        for skill_dict in skill_dict_array:
+            is_unique_skill = False
+            skill_name = skill_dict['name']
+            skill_level = skill_dict['level']
+            for master_unique_skill in master_unique_skills:
+                if master_unique_skill['name'] == skill_name and skill_level > 0:
+                    is_unique_skill = True
+            if is_unique_skill:
+                unique_skill = UniqueSkill(skill_name, skill_level)
+            else:
+                normal_skill_array.append(NormalSkill(skill_name, skill_level))
+
+        return CharacterSkills(unique_skill, NormalSkills(normal_skill_array))
 
     async def get_skill_tab_location(self, image: Image):
         # optimize
