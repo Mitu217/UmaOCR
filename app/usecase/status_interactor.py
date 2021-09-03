@@ -33,10 +33,11 @@ class StatusInteractor(StatusUsecase):
         (tW, tH) = templ.size
         cv2_templ = pil2cv(templ)
 
+        image = resize_pil(image, TEMPLATE_WIDTH)
         cv2_image = pil2cv(image)
 
         # マルチスケールテンプレートマッチングでtemplateと一致する箇所の座標を抽出
-        loc = multi_scale_matching_template(cv2_image, cv2_templ, np.linspace(1.0, 2.5, 10))
+        loc = multi_scale_matching_template(cv2_image, cv2_templ, np.linspace(1.0, 1.5, 10))
         if loc is None:
             return SupportParameters(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
         if self.debug:
