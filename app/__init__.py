@@ -8,7 +8,7 @@ from app.usecase.ability import AbilityInteractor
 from app.usecase.character import CharacterInteractor
 from app.usecase.skill_interactor import SkillInteractor
 from app.usecase.status_interactor import StatusInteractor
-from app.views.status import StatusResource
+from app.views.api import APIResource
 from app.views.web import WebResource
 
 
@@ -21,7 +21,7 @@ def create_app():
     app.config.from_object("settings")
 
     web_resource = WebResource()
-    status_resource = StatusResource(
+    api_resource = APIResource(
         StatusInteractor(
             LocalFileDriverImpl(''),
             app.logger,
@@ -45,9 +45,7 @@ def create_app():
     )
 
     app.add_url_rule('/', view_func=web_resource.as_view('web_resource'))
-    app.add_url_rule(
-        '/api/v1/ocr/status',
-        view_func=status_resource.index,
-        methods=['POST'])
+    app.add_url_rule('/api/v1/ocr/status', view_func=api_resource.post_ocr_status, methods=['POST'])
+    app.add_url_rule('/api/v1/ocr/support_params', view_func=api_resource.post_ocr_support_params, methods=['POST'])
 
     return app

@@ -5,7 +5,7 @@ from logging import Logger
 import numpy as np
 from PIL import Image
 
-from app.domain.parameters import Parameters
+from app.domain.parameters import Parameters, SupportParameters
 from app.interface.driver.file_driver import LocalFileDriver
 from app.interface.usecase.status_usecase import StatusUsecase
 from app.library.matching_template import multi_scale_matching_template
@@ -24,6 +24,30 @@ class StatusInteractor(StatusUsecase):
         self.pattern_digital = r'\D'
         self.debug = debug
         self.cache_master_skills_map_by_weight = None
+
+    async def get_support_parameters_from_image(self, image: Image) -> SupportParameters:
+        speed = 100
+        stamina = 100
+        power = 100
+        guts = 100
+        wise = 100
+        max_speed = 100
+        max_stamina = 100
+        max_power = 100
+        max_guts = 100
+        max_wise = 100
+        return SupportParameters(
+            speed,
+            stamina,
+            power,
+            guts,
+            wise,
+            max_speed,
+            max_stamina,
+            max_power,
+            max_guts,
+            max_wise,
+        )
 
     async def get_parameters_from_image(self, image: Image) -> Parameters:
         templ = await self.local_file_driver.open_image(

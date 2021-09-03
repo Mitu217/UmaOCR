@@ -7,7 +7,6 @@ from app.interface.usecase.appropriate import AppropriateUsecase
 from app.interface.usecase.character import CharacterUsecase
 from app.interface.usecase.skill_usecase import SkillUsecase
 from app.interface.usecase.status_usecase import StatusUsecase
-from app.library.pillow import crop_pil, resize_pil
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
@@ -17,7 +16,7 @@ def allowed_file(filename: str):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-class StatusResource:
+class APIResource:
     character_usecase: CharacterUsecase
     status_usecase: StatusUsecase
     ability_usecase: AppropriateUsecase
@@ -33,7 +32,7 @@ class StatusResource:
         self.ability_usecase = ability_usecase
         self.skill_usecase = skill_usecase
 
-    def index(self):
+    def post_ocr_status(self):
         if 'file' not in request.files:
             return make_response(jsonify({'result': 'file is required'}), 400)
 
@@ -72,6 +71,30 @@ class StatusResource:
                     'distances': ability_distances.to_dict(),
                     'strategies': ability_strategies.to_dict(),
                 }
+            }
+
+        data = asyncio.run(get_data())
+
+        return make_response(jsonify({'result': 'OK', 'data': data}), 200)
+
+    def post_ocr_support_params(self):
+        if 'file' not in request.files:
+            return make_response(jsonify({'result': 'file is required'}), 400)
+
+        file = request.files['file']
+        if file.filename == '':
+            return make_response(
+                jsonify({'result': 'filename must not empty'}), 400)
+        if not allowed_file(file.filename):
+            return make_response(
+                jsonify({'result': 'support extension jpg, jpeg or png'}), 400)
+
+        image = Image.open(file.stream)
+
+        async def get_data():
+            support_params = await self.status_usecase.get_support_parameters_from_image(image)
+            return {
+                'params': support_params.to_dict(),
             }
 
         data = asyncio.run(get_data())
