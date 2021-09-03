@@ -9,8 +9,7 @@ from PIL import Image
 
 from app.interface.driver.file_driver import LocalFileDriver
 from app.interface.usecase.character import CharacterUsecase
-from app.library.matching_template import (matching_template,
-                                           multi_scale_matching_template_impl)
+from app.library.matching_template import (matching_template, multi_scale_matching_template, multi_scale_matching_template_impl)
 from app.library.ocr import get_text_with_single_text_line_and_jpn_from_image
 from app.library.pillow import binarized, crop_pil, pil2cv, resize_pil
 
@@ -32,6 +31,17 @@ class CharacterInteractor(CharacterUsecase):
 
         master_characters_json_file = await self.local_file_driver.open(
             os.path.join('resources', 'master_data', 'characters.json'))
+        master_characters_json = json.load(master_characters_json_file)
+
+        self.cache_master_characters = master_characters_json
+        return master_characters_json or []
+
+    async def get_master_all_characters(self):
+        if self.cache_master_characters is not None:
+            return self.cache_master_characters
+
+        master_characters_json_file = await self.local_file_driver.open(
+            os.path.join('resources', 'master_data', 'all_characters.json'))
         master_characters_json = json.load(master_characters_json_file)
 
         self.cache_master_characters = master_characters_json
@@ -194,6 +204,82 @@ class CharacterInteractor(CharacterUsecase):
                 return rank
 
         return ''
+
+    async def get_character_name_from_support_image(self, image: Image) -> str:
+        templ = await self.local_file_driver.open_image(
+            os.path.join('resources', 'images', 'support_params', 'template.png')
+        )
+        (tW, tH) = templ.size
+        cv2_templ = pil2cv(templ)
+
+        image = resize_pil(image, TEMPLATE_WIDTH)
+        cv2_image = pil2cv(image)
+
+        # マルチスケールテンプレートマッチングでtemplateと一致する箇所の座標を抽出
+        loc = multi_scale_matching_template(cv2_image, cv2_templ, np.linspace(1.0, 1.5, 10))
+        if loc is None:
+            return ''
+        if self.debug:
+            (start_x, start_y), (end_x, end_y) = loc
+            await self.local_file_driver.save_image(
+                crop_pil(image, (start_x, start_y, end_x, end_y)),
+                os.path.join('tmp', 'get_character_name_from_support_image', 'multi_scale_matching_template.png')
+            )
+
+        (start_x, start_y), (end_x, end_y) = loc
+        (st_x, st_y) = (end_x - start_x, end_y - start_y)
+
+        border_found = 0.8
+
+        # for guest
+        cropped_character_name = crop_pil(image, (start_x + (st_x * 0.2), start_y - (st_y * 7), end_x - (st_x * 0.3), start_y - (st_y * 5.7)))
+        binarized_character_name = binarized(
+            cropped_character_name, 150)
+        text = get_text_with_single_text_line_and_jpn_from_image(
+            binarized_character_name)
+        if self.debug:
+            await self.local_file_driver.save_image(
+                binarized_character_name,
+                os.path.join('tmp', 'get_character_name_from_support_image', 'cropped_character_name.png')
+            )
+
+        # 類似度が高いキャラクター名を返す
+        master_characters = await self.get_master_all_characters()
+        found_str = ''
+        found = 0
+        for master_character in master_characters:
+            character_name = master_character['name']
+            aro_dist = Levenshtein.jaro_winkler(text, character_name)
+            if aro_dist > found and aro_dist > border_found:
+                found_str = character_name
+                found = aro_dist
+
+        if found == 0:
+            # for other
+            cropped_character_name = crop_pil(image, (
+            start_x + (st_x * 0.2), start_y - (st_y * 11.5), end_x - (st_x * 0.3), start_y - (st_y * 10.2)))
+            binarized_character_name = binarized(
+                cropped_character_name, 150)
+            text = get_text_with_single_text_line_and_jpn_from_image(
+                binarized_character_name)
+            if self.debug:
+                await self.local_file_driver.save_image(
+                    binarized_character_name,
+                    os.path.join('tmp', 'get_character_name_from_support_image', 'cropped_character_name.png')
+                )
+
+            # 類似度が高いキャラクター名を返す
+            master_characters = await self.get_master_all_characters()
+            found_str = ''
+            found = 0
+            for master_character in master_characters:
+                character_name = master_character['name']
+                aro_dist = Levenshtein.jaro_winkler(text, character_name)
+                if aro_dist > found and aro_dist > border_found:
+                    found_str = character_name
+                    found = aro_dist
+
+        return found_str
 
 
 async def get_matching_template_location(image: Image, templ: Image, *, linspace=np.linspace(1.1, 1.5, 10)):

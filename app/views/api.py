@@ -92,8 +92,16 @@ class APIResource:
         image = Image.open(file.stream)
 
         async def get_data():
-            support_params = await self.status_usecase.get_support_parameters_from_image(image)
+            tasks = [
+                asyncio.create_task(self.status_usecase.get_support_parameters_from_image(image)),
+                asyncio.create_task(self.character_usecase.get_character_name_from_support_image(image)),
+            ]
+            results = await asyncio.gather(*tasks)
+
+            support_params, character_name = results
+
             return {
+                'character': character_name,
                 'params': support_params.to_dict(),
             }
 
