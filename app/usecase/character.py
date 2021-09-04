@@ -9,7 +9,7 @@ from PIL import Image
 
 from app.interface.driver.file_driver import LocalFileDriver
 from app.interface.usecase.character import CharacterUsecase
-from app.library.matching_template import (matching_template, multi_scale_matching_template, multi_scale_matching_template_impl)
+from app.library.matching_template import (matching_template, multi_scale_matching_template_impl)
 from app.library.ocr import get_text_with_single_text_line_and_jpn_from_image
 from app.library.pillow import binarized, crop_pil, pil2cv, resize_pil
 

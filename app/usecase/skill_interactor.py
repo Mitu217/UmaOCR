@@ -346,10 +346,14 @@ class SkillInteractor(SkillUsecase):
             return None
         else:
             (s_x, s_y), (e_x, e_y) = line_box[0].position
-            word_width = 25.5
+            word_width = 25
 
             text = line_box[0].content.replace(' ', '')
             weight = int((e_x - s_x) / word_width + 1)
+
+            self.logger.info(text)
+            self.logger.info((e_x - s_x))
+            self.logger.info(weight)
 
             if weight not in master_skills_map_by_weight:
                 return None
