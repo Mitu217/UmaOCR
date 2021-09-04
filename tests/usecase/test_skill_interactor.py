@@ -12,6 +12,7 @@ from app.driver.file_driver import LocalFileDriverImpl
 from app.usecase.skill_interactor import SkillInteractor
 from app.library.pillow import crop_pil, resize_pil
 
+
 class TestSkillInteractor(TestCase):
     def test_get_skills_from_image(self) -> None:
         for image_name, result_name in (

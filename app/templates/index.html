@@ -80,22 +80,27 @@
       <tr>
         <td>Speed</td>
         <td id="speed-value"></td>
+        <td id="max-speed-value"></td>
       </tr>
       <tr>
         <td>Stamina</td>
         <td id="stamina-value"></td>
+        <td id="max-stamina-value"></td>
       </tr>
       <tr>
         <td>Power</td>
         <td id="power-value"></td>
+        <td id="max-power-value"></td>
       </tr>
       <tr>
         <td>Guts</td>
         <td id="guts-value"></td>
+        <td id="max-guts-value"></td>
       </tr>
       <tr>
         <td>Wise</td>
         <td id="wise-value"></td>
+        <td id="max-wise-value"></td>
       </tr>
     </table>
   </div>
@@ -223,6 +228,12 @@ const power = document.getElementById("power-value");
 const guts = document.getElementById("guts-value");
 const wise = document.getElementById("wise-value");
 
+const maxSpeed = document.getElementById("max-speed-value");
+const maxStamina = document.getElementById("max-stamina-value");
+const maxPower = document.getElementById("max-power-value");
+const maxGuts = document.getElementById("max-guts-value");
+const maxWise = document.getElementById("max-wise-value");
+
 window.onload = () =>{
   document.querySelector("#upload").addEventListener("submit", (e)=>{
     e.preventDefault();
@@ -250,17 +261,22 @@ window.onload = () =>{
     last.textContent = '';
 
     speed.textContent = '';
+    maxSpeed.textContent = '';
     stamina.textContent = '';
+    maxStamina.textContent = '';
     power.textContent = '';
+    maxPower.textContent = '';
     guts.textContent = '';
+    maxGuts.textContent = '';
     wise.textContent = '';
+    maxWise.textContent = '';
 
     for (let i = 0; i < 14; i++) {
       document.querySelector("#skill-" + (i+1)).textContent = ''
       document.querySelector("#skill-level-" + (i+1)).textContent = ''
     }
 
-    fetch("/api/v1/ocr/status", param)
+    fetch("/api/v1/ocr/support_params", param)
       .then((res)=>{
         return( res.json() );
       })
@@ -295,16 +311,23 @@ window.onload = () =>{
                 power.textContent = json.data.params.power;
                 guts.textContent = json.data.params.guts;
                 wise.textContent = json.data.params.wise;
+                maxSpeed.textContent = json.data.params.max_speed;
+                maxStamina.textContent = json.data.params.max_stamina;
+                maxPower.textContent = json.data.params.max_power;
+                maxGuts.textContent = json.data.params.max_guts;
+                maxWise.textContent = json.data.params.max_wise;
             }
 
             if (json.data.unique_skill) {
                 document.querySelector("#unique-skill-1").textContent = json.data.unique_skill.name
                 document.querySelector("#unique-skill-level-1").textContent = json.data.unique_skill.level
             }
-            
-            for (let i = 0; i < json.data.skills.length; i++) {
-                document.querySelector("#skill-" + (i+1)).textContent = json.data.skills[i].name
-                document.querySelector("#skill-level-" + (i+1)).textContent = json.data.skills[i].level
+
+            if (json.data.skills) {
+                for (let i = 0; i < json.data.skills.length; i++) {
+                    document.querySelector("#skill-" + (i+1)).textContent = json.data.skills[i].name
+                    document.querySelector("#skill-level-" + (i+1)).textContent = json.data.skills[i].level
+                }
             }
           }
       })
