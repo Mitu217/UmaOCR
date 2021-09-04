@@ -51,7 +51,6 @@ class StatusInteractor(StatusUsecase):
 
         h = (end_y - start_y) * 1.05
         w = (end_x - start_x) * 1.01
-        o = w * 0.015
         p = w / 5
         lo = p * 0.38
         ro = p * 0
@@ -63,14 +62,14 @@ class StatusInteractor(StatusUsecase):
             return SupportParameters(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
         # パラメータ表示部分のcropped
-        cropped_speed = crop_pil(image, (start_x - o + p * 0 + lo, end_y, start_x + p * 1 - ro, end_y + h * 1.05))
+        cropped_speed = crop_pil(image, (start_x + p * 0 + lo, end_y, start_x + p * 1 - ro, end_y + h * 1.05))
         binarized_speed = binarized(cropped_speed, 210)
         speed = await self.get_parameter_from_image(binarized_speed)
         if self.debug:
             await self.local_file_driver.save_image(
                 cropped_speed, os.path.join('tmp', 'get_support_parameters_from_image', 'cropped_speed.png')
             )
-        cropped_max_speed = crop_pil(image, (start_x - o + p * 0 + lo2, end_y + h, start_x + p * 1 - ro, end_y + h * 1.9))
+        cropped_max_speed = crop_pil(image, (start_x + p * 0 + lo2, end_y + h, start_x + p * 1 - ro, end_y + h * 1.9))
         binarized_max_speed = binarized(cropped_max_speed, 210)
         max_speed = await self.get_parameter_from_image(binarized_max_speed)
         if len(max_speed) > 3:
