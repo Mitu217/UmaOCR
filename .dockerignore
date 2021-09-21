@@ -3,6 +3,7 @@
 .envrc
 
 tests/
+scripts/
 
 Makefile
 README.md
