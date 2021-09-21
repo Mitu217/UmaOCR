@@ -58,6 +58,41 @@
     },
     {
       "type": "normal",
+      "name": "アオハル点火・体",
+      "weight": 8,
+      "desc": "",
+      "similar": []
+    },
+    {
+      "type": "normal",
+      "name": "アオハル点火・力",
+      "weight": 8,
+      "desc": "",
+      "similar": []
+    },
+    {
+      "type": "normal",
+      "name": "アオハル点火・根",
+      "weight": 8,
+      "desc": "",
+      "similar": []
+    },
+    {
+      "type": "normal",
+      "name": "アオハル点火・賢",
+      "weight": 8,
+      "desc": "",
+      "similar": []
+    },
+    {
+      "type": "normal",
+      "name": "アオハル点火・速",
+      "weight": 8,
+      "desc": "",
+      "similar": []
+    },
+    {
+      "type": "normal",
       "name": "アクセラレーション",
       "weight": 9,
       "desc": "",
@@ -456,6 +491,13 @@
       "type": "normal",
       "name": "別腹タンク",
       "weight": 5,
+      "desc": "",
+      "similar": []
+    },
+    {
+      "type": "normal",
+      "name": "前列狙い",
+      "weight": 4,
       "desc": "",
       "similar": []
     },
@@ -1180,6 +1222,41 @@
     },
     {
       "type": "rare",
+      "name": "アオハル燃焼・体",
+      "weight": 8,
+      "desc": "",
+      "similar": []
+    },
+    {
+      "type": "rare",
+      "name": "アオハル燃焼・力",
+      "weight": 8,
+      "desc": "",
+      "similar": []
+    },
+    {
+      "type": "rare",
+      "name": "アオハル燃焼・根",
+      "weight": 8,
+      "desc": "",
+      "similar": []
+    },
+    {
+      "type": "rare",
+      "name": "アオハル燃焼・賢",
+      "weight": 8,
+      "desc": "",
+      "similar": []
+    },
+    {
+      "type": "rare",
+      "name": "アオハル燃焼・速",
+      "weight": 8,
+      "desc": "",
+      "similar": []
+    },
+    {
+      "type": "rare",
       "name": "アガッてきた！",
       "weight": 7,
       "desc": "",
@@ -1189,6 +1266,13 @@
       "type": "rare",
       "name": "アクセル全開！",
       "weight": 7,
+      "desc": "",
+      "similar": []
+    },
+    {
+      "type": "rare",
+      "name": "ウママニア",
+      "weight": 5,
       "desc": "",
       "similar": []
     },
@@ -1484,6 +1568,13 @@
     },
     {
       "type": "rare",
+      "name": "怒涛の追い上げ",
+      "weight": 7,
+      "desc": "",
+      "similar": []
+    },
+    {
+      "type": "rare",
       "name": "悩殺術",
       "weight": 3,
       "desc": "",
@@ -1533,7 +1624,21 @@
     },
     {
       "type": "rare",
+      "name": "準備万全！",
+      "weight": 5,
+      "desc": "",
+      "similar": []
+    },
+    {
+      "type": "rare",
       "name": "火事場のバ鹿力",
+      "weight": 7,
+      "desc": "",
+      "similar": []
+    },
+    {
+      "type": "rare",
+      "name": "狙うは最前列！",
       "weight": 7,
       "desc": "",
       "similar": []
@@ -1665,6 +1770,13 @@
       "type": "unique",
       "name": "I Never Goof Up!",
       "weight": 9,
+      "desc": "",
+      "similar": []
+    },
+    {
+      "type": "unique",
+      "name": "I'M☆FULL☆SPEED!!",
+      "weight": 11,
       "desc": "",
       "similar": []
     },
@@ -1971,6 +2083,13 @@
     },
     {
       "type": "unique",
+      "name": "尊み☆ﾗｽﾄｽﾊﾟー(ﾟ∀ﾟ)ーﾄ!",
+      "weight": 12,
+      "desc": "",
+      "similar": []
+    },
+    {
+      "type": "unique",
       "name": "最強の名をかけて",
       "weight": 8,
       "desc": "",
@@ -2022,6 +2141,13 @@
       "type": "unique",
       "name": "燃えろ筋肉！",
       "weight": 6,
+      "desc": "",
+      "similar": []
+    },
+    {
+      "type": "unique",
+      "name": "禾スナハチ登ル",
+      "weight": 7,
       "desc": "",
       "similar": []
     },
