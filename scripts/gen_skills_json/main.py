@@ -189,6 +189,7 @@ def get_similar_skill_names(skill_name):
         similar_names.append(skill_name.replace('秋ウマ娘◯', '邊ウマ娘'))
     if '・速' in skill_name:
         similar_names.append(skill_name.replace('・速', '・通'))
+        similar_names.append(skill_name.replace('・速', '・問'))
 
     return similar_names
 
@@ -205,6 +206,8 @@ def get_similar_skill_weights(skill_name):
     if 'ブリリアント・レッドエース' == skill_name:
         similar_weights.append(12)
     if 'アングリング×スキーミング' == skill_name:
+        similar_weights.append(12)
+    if '優等生✕バクシン＝大勝利ッ' == skill_name:
         similar_weights.append(12)
 
     return similar_weights
