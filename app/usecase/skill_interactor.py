@@ -140,7 +140,7 @@ class SkillInteractor(SkillUsecase):
                 line_box = get_line_box_with_single_text_line_and_jpn_from_image(cropped_for_check_circle_image)
                 if len(line_box) != 0:
                     (s_x, s_y), (e_x, e_y) = line_box[0].position
-                    word_width = 25.3
+                    word_width = 24.9
                     cropped_circle_image = crop_pil(cropped_for_check_circle_image, (e_x - word_width, s_y - 2, e_x + 2, e_y + 2))
                     if self.debug:
                         asyncio.run(self.local_file_driver.save_image(
@@ -157,18 +157,22 @@ class SkillInteractor(SkillUsecase):
                         ['double.png', '◎'],
                     ]
                     for (circle_file, circle) in circle_files:
-                        templ_circle_file = asyncio.run(self.local_file_driver.open_image(
-                            os.path.join(resources.__path__[0], 'circles', circle_file)
-                        ))
-                        templ_circle_file = resize_pil(templ_circle_file, 25)
-                        cv2_templ_circle_file = pil2cv(templ_circle_file)
-                        cv2_templ_circle_file = cv2.cvtColor(
-                            cv2_templ_circle_file, cv2.COLOR_BGR2GRAY)
-                        result = matching_template(cv2_image, cv2_templ_circle_file)
-                        ys, _ = np.where(result >= border)
-                        if len(ys) > 0:
-                            skill_name = skill_name.replace('◯', circle)
-                            break
+                        try:
+                            templ_circle_file = asyncio.run(self.local_file_driver.open_image(
+                                os.path.join(resources.__path__[0], 'circles', circle_file)
+                            ))
+                            templ_circle_file = resize_pil(templ_circle_file, 25)
+                            cv2_templ_circle_file = pil2cv(templ_circle_file)
+                            cv2_templ_circle_file = cv2.cvtColor(cv2_templ_circle_file, cv2.COLOR_BGR2GRAY)
+                            result = matching_template(cv2_image, cv2_templ_circle_file)
+                            ys, _ = np.where(result >= border)
+                            if len(ys) > 0:
+                                skill_name = skill_name.replace('◯', circle)
+                                break
+                        except Exception as e:
+                            self.logger.info(e)
+                            continue
+
 
             if index == 0:
                 # Lvがあるのは固有スキル（index = 0）だけ
@@ -338,42 +342,45 @@ class SkillInteractor(SkillUsecase):
         return sorted_locs
 
     async def get_skill_name_from_image(self, image: Image) -> str or None:
-
-        master_skills_map_by_weight = await self.get_master_skills_map_by_weight()
-
         line_box = get_line_box_with_single_text_line_and_jpn_from_image(image)
         if len(line_box) == 0:
             return None
         else:
             (s_x, s_y), (e_x, e_y) = line_box[0].position
-            word_width = 25.5
+            word_width = 24.9
 
             text = line_box[0].content.replace(' ', '')
             weight = int((e_x - s_x) / word_width + 1)
 
-            if weight not in master_skills_map_by_weight:
-                return None
+            skill_name = await self.get_skill_name_from_text_and_weight(text, weight)
+            return skill_name
 
-            # master定義されているスキルネームと類似度を計算し、最も類似度が高いスキルを返す
-            # OCRの限界で読み間違えが発生しがちな文字列でも類似度を計算する
-            found_str = ''
-            found = 0
-            for master_skill in master_skills_map_by_weight[weight]:
-                skill_name = master_skill['name']
-                similar = master_skill['similar']
+    async def get_skill_name_from_text_and_weight(self, text: str, weight: int) -> str or None:
+        master_skills_map_by_weight = await self.get_master_skills_map_by_weight()
+        if weight not in master_skills_map_by_weight:
+            return None
 
-                aro_dist = Levenshtein.jaro_winkler(text, skill_name)
-                if aro_dist > found:
+        # master定義されているスキルネームと類似度を計算し、最も類似度が高いスキルを返す
+        # OCRの限界で読み間違えが発生しがちな文字列でも類似度を計算する
+        found_str = ''
+        found = 0
+        border_found = 0.5
+        for master_skill in master_skills_map_by_weight[weight]:
+            skill_name = master_skill['name']
+            similar = master_skill['similar']
+
+            aro_dist = Levenshtein.jaro_winkler(text, skill_name)
+            if aro_dist > found and aro_dist > border_found:
+                found_str = skill_name
+                found = aro_dist
+
+            for similar_skill_name in similar:
+                aro_dist = Levenshtein.jaro_winkler(text, similar_skill_name)
+                if aro_dist > found and aro_dist > border_found:
                     found_str = skill_name
                     found = aro_dist
 
-                for similar_skill_name in similar:
-                    aro_dist = Levenshtein.jaro_winkler(text, similar_skill_name)
-                    if aro_dist > found:
-                        found_str = skill_name
-                        found = aro_dist
-
-            return found_str
+        return found_str
 
     async def get_skill_level_from_image(self, image: Image) -> int:
         digit_text = re.sub(self.pattern_digital, '', get_digit_with_single_text_line_and_eng_from_image(image))
