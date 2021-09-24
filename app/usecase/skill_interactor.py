@@ -170,7 +170,7 @@ class SkillInteractor(SkillUsecase):
                                 skill_name = skill_name.replace('◯', circle)
                                 break
                         except Exception as e:
-                            self.logger.info(e)
+                            self.logger.error(e)
                             continue
 
 
@@ -369,14 +369,14 @@ class SkillInteractor(SkillUsecase):
         border_found = 0.55
         for master_skill in master_skills_map_by_weight[weight]:
             skill_name = master_skill['name']
-            similar = master_skill['similar']
+            similar_names = master_skill['similar']['name']
 
             aro_dist = Levenshtein.jaro_winkler(text, skill_name)
             if aro_dist > found and aro_dist > border_found:
                 found_str = skill_name
                 found = aro_dist
 
-            for similar_skill_name in similar:
+            for similar_skill_name in similar_names:
                 aro_dist = Levenshtein.jaro_winkler(text, similar_skill_name)
                 if aro_dist > found and aro_dist > border_found:
                     found_str = skill_name
@@ -403,6 +403,10 @@ class SkillInteractor(SkillUsecase):
                 if weight not in result:
                     result[weight] = []
                 result[weight].append(master_skill)
+                for similar_weight in master_skill['similar']['weight']:
+                    if similar_weight not in result:
+                        result[similar_weight] = []
+                    result[similar_weight].append(master_skill)
         master_skills_json_file.close()
 
         self.cache_master_skills_map_by_weight = result
