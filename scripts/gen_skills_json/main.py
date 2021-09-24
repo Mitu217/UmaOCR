@@ -170,6 +170,7 @@ def get_similar_skill_names(skill_name):
         similar_names.append(skill_name.replace('一陣', 'ー障'))
     if '豪脚' in skill_name:
         similar_names.append(skill_name.replace('豪脚', '各肢'))
+        similar_names.append(skill_name.replace('豪脚', '入陸'))
     if '末脚' in skill_name:
         similar_names.append(skill_name.replace('末脚', '未肢'))
     if '積極' in skill_name:

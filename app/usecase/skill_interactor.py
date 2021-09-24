@@ -95,36 +95,41 @@ class SkillInteractor(SkillUsecase):
 
         # cropped skill_area by skill_tab location
         skill_area_box = (0, skill_tab_loc_ey, image.size[0], st_h * 20)
-        image = crop_pil(image, skill_area_box)
+        cropped_image = crop_pil(image, skill_area_box)
         if self.debug:
             await self.local_file_driver.save_image(
-                image, os.path.join('tmp', 'get_skills_from_image', 'cropped_skill_area.png')
+                cropped_image, os.path.join('tmp', 'get_skills_from_image', 'cropped_skill_area.png')
             )
 
         # get skill_frame locations
-        skill_frame_locs = await self.get_skill_frame_locations(image)
+        skill_frame_locs = await self.get_skill_frame_locations(cropped_image)
 
         skills = []
         for i in range(len(skill_frame_locs)):
             skills.append(NormalSkill('', 0))
 
-        binarized_image = binarized(image, 130)
+        binarized_image = binarized(cropped_image, 130)
 
         def p(index: int):
             (start_x, start_y), (end_x, end_y) = skill_frame_locs[index]
 
             cropped_skill = crop_pil(binarized_image, (
-                start_x + st_w * 0.07, start_y + st_h * 0.7, start_x + st_w * 0.435, end_y - st_h * 0.55))
+                start_x + st_w * 0.07, start_y + st_h * 0.7, start_x + st_w * 0.43, end_y - st_h * 0.55))
             skill_name = asyncio.run(self.get_skill_name_from_image(cropped_skill))
             if skill_name is None or len(skill_name) == 0:
                 # 文字列によって有効なしきい値が異なるので読み取れなければしきい値を上げてリトライ
-                cropped_skill = crop_pil(binarized(image, 140), (
-                    start_x + st_w * 0.07, start_y + st_h * 0.7, start_x + st_w * 0.435, end_y - st_h * 0.55))
+                cropped_skill = crop_pil(binarized(cropped_image, 120), (
+                    start_x + st_w * 0.07, start_y + st_h * 0.7, start_x + st_w * 0.43, end_y - st_h * 0.55))
                 skill_name = asyncio.run(self.get_skill_name_from_image(cropped_skill))
             if skill_name is None or len(skill_name) == 0:
                 # 文字列によって有効なしきい値が異なるので読み取れなければしきい値を上げてリトライ
-                cropped_skill = crop_pil(binarized(image, 160), (
-                    start_x + st_w * 0.07, start_y + st_h * 0.7, start_x + st_w * 0.435, end_y - st_h * 0.55))
+                cropped_skill = crop_pil(binarized(cropped_image, 140), (
+                    start_x + st_w * 0.07, start_y + st_h * 0.7, start_x + st_w * 0.43, end_y - st_h * 0.55))
+                skill_name = asyncio.run(self.get_skill_name_from_image(cropped_skill))
+            if skill_name is None or len(skill_name) == 0:
+                # 文字列によって有効なしきい値が異なるので読み取れなければしきい値を上げてリトライ
+                cropped_skill = crop_pil(binarized(cropped_image, 160), (
+                    start_x + st_w * 0.07, start_y + st_h * 0.7, start_x + st_w * 0.43, end_y - st_h * 0.55))
                 skill_name = asyncio.run(self.get_skill_name_from_image(cropped_skill))
 
             if self.debug:
@@ -135,12 +140,12 @@ class SkillInteractor(SkillUsecase):
 
             # 通常の文字認識では○と◎と識別が難しいので追加で検証
             if '◯' in skill_name:
-                cropped_for_check_circle_image = crop_pil(binarized(image, 160), (
+                cropped_for_check_circle_image = crop_pil(binarized(cropped_image, 160), (
                     start_x + st_w * 0.07, start_y + st_h * 0.7, start_x + st_w * 0.435, end_y - st_h * 0.55))
                 line_box = get_line_box_with_single_text_line_and_jpn_from_image(cropped_for_check_circle_image)
                 if len(line_box) != 0:
                     (s_x, s_y), (e_x, e_y) = line_box[0].position
-                    word_width = 24.9
+                    word_width = 24.7
                     cropped_circle_image = crop_pil(cropped_for_check_circle_image, (e_x - word_width, s_y - 2, e_x + 2, e_y + 2))
                     if self.debug:
                         asyncio.run(self.local_file_driver.save_image(
