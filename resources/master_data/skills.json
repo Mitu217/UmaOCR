@@ -5,1197 +5,1695 @@
       "name": "おひとり様◯",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "お見通し",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "かく乱",
       "weight": 3,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "がんばり屋",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "ささやき",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "ふり絞り",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "まき直し",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "まなざし",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "アオハル点火・体",
       "weight": 8,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "アオハル点火・力",
       "weight": 8,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "アオハル点火・根",
       "weight": 8,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "アオハル点火・賢",
       "weight": 8,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "アオハル点火・速",
       "weight": 8,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "アクセラレーション",
       "weight": 9,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "イナズマステップ",
       "weight": 8,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "ウマ好み",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "ウマ込み冷静",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "ギアシフト",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "コーナー加速◯",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "コーナー回復◯",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "コーナー巧者◯",
       "weight": 7,
       "desc": "",
-      "similar": [
-        "コーナー巧書◯"
-      ]
+      "similar": {
+        "name": [
+          "コーナー巧書◯"
+        ],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "シンパシー",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "スタミナイーター",
       "weight": 8,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "スタミナキープ",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "スピードイーター",
       "weight": 8,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "スプリントギア",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "スリップストリーム",
       "weight": 9,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "スリーセブン",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "テンポアップ",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "トリック（前）",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "トリック（後）",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "パス上手",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "ペースアップ",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "ペースキープ",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "ホークアイ",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "ポジションセンス",
       "weight": 8,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "マイルコーナー◯",
       "weight": 8,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "マイル直線◯",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "ラッキーセブン",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "リスタート",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "リードキープ",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "レコメンド",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "一匹狼",
       "weight": 3,
       "desc": "",
-      "similar": [
-        "一忠独"
-      ]
+      "similar": {
+        "name": [
+          "一忠独"
+        ],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "上昇気流",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "下校の楽しみ",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "中京レース場◯",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "中山レース場◯",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "中距離コーナー◯",
       "weight": 8,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "中距離直線◯",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "二の矢",
       "weight": 3,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "京都レース場◯",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "仕掛け抜群",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "仕掛け準備",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "伏兵◯",
       "weight": 3,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "位置取り押し上げ",
       "weight": 8,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "先行けん制",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "先行ためらい",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "先行のコツ◯",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "先行コーナー◯",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "先行焦り",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "先行直線◯",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "先行駆け引き",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "先頭プライド",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "先駆け",
       "weight": 3,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "内弁慶",
       "weight": 3,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "内枠得意◯",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "冬ウマ娘◯",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "冷静",
       "weight": 2,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "函館レース場◯",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "別腹タンク",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "前列狙い",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "前途洋々",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "勢い任せ",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "十万バリキ",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "危険回避",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "右回り◯",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "善後策",
       "weight": 3,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "地固め",
       "weight": 3,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "垂れウマ回避",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "夏ウマ娘◯",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "外差し準備",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "外枠得意◯",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "大きなリード",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "大井レース場◯",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "好位追走",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "対抗意識◯",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "小休憩",
       "weight": 3,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "小倉レース場◯",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "尻尾上がり",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "展開窺い",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "左回り◯",
       "weight": 4,
       "desc": "",
-      "similar": [
-        "を回り◯"
-      ]
+      "similar": {
+        "name": [
+          "を回り◯"
+        ],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "巧みなステップ",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "差しけん制",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "差しためらい",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "差しのコツ◯",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "差しコーナー◯",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "差し切り体勢",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "差し焦り",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "差し直線◯",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "差し駆け引き",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "布石",
       "weight": 2,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "後方待機",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "後方釘付",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "徹底マーク◯",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "急ぎ足",
       "weight": 3,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "抜け出し準備",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "抜け駆け禁止",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "押し切り準備",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "新潟レース場◯",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "春ウマ娘◯",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "晴れの日◯",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "曇りの日◯",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "末脚",
       "weight": 2,
       "desc": "",
-      "similar": [
-        "未肢"
-      ]
+      "similar": {
+        "name": [
+          "未肢"
+        ],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "札幌レース場◯",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "束縛",
       "weight": 2,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "東京レース場◯",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "栄養補給",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "根幹距離◯",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "様子見",
       "weight": 3,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "深呼吸",
       "weight": 3,
       "desc": "",
-      "similar": [
-        "漂陸明",
-        "漂峡明"
-      ]
+      "similar": {
+        "name": [
+          "漂陸明",
+          "漂峡明"
+        ],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "登山家",
       "weight": 3,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "目くらまし",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "直滑降",
       "weight": 3,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "直線一気",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "直線加速",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "直線回復",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "直線巧者",
       "weight": 4,
       "desc": "",
-      "similar": [
-        "直線巧書"
-      ]
+      "similar": {
+        "name": [
+          "直線巧書"
+        ],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "短距離コーナー◯",
       "weight": 8,
       "desc": "",
-      "similar": [
-        "細距離コーナー◯",
-        "紅距離コーナー◯"
-      ]
+      "similar": {
+        "name": [
+          "細距離コーナー◯",
+          "紅距離コーナー◯"
+        ],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "短距離直線◯",
       "weight": 6,
       "desc": "",
-      "similar": [
-        "細距離直線◯",
-        "紅距離直線◯"
-      ]
+      "similar": {
+        "name": [
+          "細距離直線◯",
+          "紅距離直線◯"
+        ],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "福島レース場◯",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "秋ウマ娘◯",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "積極策",
       "weight": 3,
       "desc": "",
-      "similar": [
-        "策福策"
-      ]
+      "similar": {
+        "name": [
+          "策福策"
+        ],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "策士",
       "weight": 2,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "臨機応変",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "良バ場◯",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "詰め寄り",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "読解力",
       "weight": 3,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "負けん気",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "軽やかステップ",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "追い上げ",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "追込けん制",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "追込ためらい",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "追込のコツ◯",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "追込コーナー◯",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "追込焦り",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "追込直線◯",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "追込駆け引き",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "逃げけん制",
       "weight": 5,
       "desc": "",
-      "similar": [
-        "透けけん制"
-      ]
+      "similar": {
+        "name": [
+          "透けけん制"
+        ],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "逃げためらい",
       "weight": 6,
       "desc": "",
-      "similar": [
-        "透けためらい"
-      ]
+      "similar": {
+        "name": [
+          "透けためらい"
+        ],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "逃げのコツ◯",
       "weight": 6,
       "desc": "",
-      "similar": [
-        "透けのコツ◯"
-      ]
+      "similar": {
+        "name": [
+          "透けのコツ◯"
+        ],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "逃げコーナー◯",
       "weight": 7,
       "desc": "",
-      "similar": [
-        "透けコーナー◯"
-      ]
+      "similar": {
+        "name": [
+          "透けコーナー◯"
+        ],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "逃げ焦り",
       "weight": 4,
       "desc": "",
-      "similar": [
-        "透け焦り"
-      ]
+      "similar": {
+        "name": [
+          "透け焦り"
+        ],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "逃げ直線◯",
       "weight": 5,
       "desc": "",
-      "similar": [
-        "透け直線◯"
-      ]
+      "similar": {
+        "name": [
+          "透け直線◯"
+        ],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "逃げ駆け引き",
       "weight": 6,
       "desc": "",
-      "similar": [
-        "透け駆け引き"
-      ]
+      "similar": {
+        "name": [
+          "透け駆け引き"
+        ],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "遊びはおしまいっ！",
       "weight": 9,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "道悪◯",
       "weight": 3,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "鋭い眼光",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "長距離コーナー◯",
       "weight": 8,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "長距離直線◯",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "阪神レース場◯",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "隠れ蓑",
       "weight": 3,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "集中力",
       "weight": 3,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "雨の日◯",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "雪の日◯",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "非根幹距離◯",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "normal",
       "name": "食い下がり",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     }
   ],
   "rare_skills": [
@@ -1204,544 +1702,772 @@
       "name": "くじけぬ精神",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "じゃじゃウマ娘",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "どこ吹く風",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "アオハル燃焼・体",
       "weight": 8,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "アオハル燃焼・力",
       "weight": 8,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "アオハル燃焼・根",
       "weight": 8,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "アオハル燃焼・賢",
       "weight": 8,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "アオハル燃焼・速",
       "weight": 8,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "アガッてきた！",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "アクセル全開！",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "ウママニア",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "キラーチューン",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "ギアチェンジ",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "クールダウン",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "コンセントレーション",
       "weight": 10,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "シックスセンス",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "スピードスター",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "スプリントターボ",
       "weight": 8,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "スーパーラッキーセブン",
       "weight": 11,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "チャート急上昇！",
       "weight": 8,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "ノンストップガール",
       "weight": 9,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "ハヤテ一文字",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "プランX",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "マイルの支配者",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "ライトニングステップ",
       "weight": 10,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "リラックス",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "レースプランナー",
       "weight": 8,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "レーンの魔術師",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "一陣の風",
       "weight": 4,
       "desc": "",
-      "similar": [
-        "一陣の如",
-        "一陣の鳳",
-        "ー障の風"
-      ]
+      "similar": {
+        "name": [
+          "一陣の如",
+          "一陣の鳳",
+          "ー障の風"
+        ],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "下校後のスペシャリスト",
       "weight": 11,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "不屈の心",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "乗り換え上手",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "余裕綽々",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "先手必勝",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "先陣の心得",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "全身全霊",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "八方にらみ",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "内的体験",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "円弧のマエストロ",
       "weight": 8,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "切り開く者",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "努力家",
       "weight": 3,
       "desc": "",
-      "similar": [
-        "胡力家",
-        "即力家",
-        "勢力家",
-        "准力家",
-        "明力家"
-      ]
+      "similar": {
+        "name": [
+          "胡力家",
+          "即力家",
+          "勢力家",
+          "准力家",
+          "明力家"
+        ],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "勝利への執念",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "千里眼",
       "weight": 3,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "圧倒的リード",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "大局観",
       "weight": 3,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "天命士",
       "weight": 3,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "奇術師",
       "weight": 3,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "好転一息",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "姉御肌",
       "weight": 3,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "幻惑のかく乱",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "弧線のプロフェッサー",
       "weight": 10,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "怒涛の追い上げ",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "悩殺術",
       "weight": 3,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "慧眼",
       "weight": 2,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "技巧派",
       "weight": 3,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "昇り龍",
       "weight": 3,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "曲線のソムリエ",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "決意の直滑降",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "注目の踊り子",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "準備万全！",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "火事場のバ鹿力",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "狙うは最前列！",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "独占力",
       "weight": 3,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "疾風怒濤",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "眠れる獅子",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "神業ステップ",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "脱出術",
       "weight": 3,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "視界良好！異常なし！",
       "weight": 10,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "豪脚",
       "weight": 2,
       "desc": "",
-      "similar": [
-        "各肢"
-      ]
+      "similar": {
+        "name": [
+          "各肢"
+        ],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "迅速果断",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "迫る影",
       "weight": 3,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "逃亡者",
       "weight": 3,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "鋼の意志",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "電撃の煌めき",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "食いしん坊",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "rare",
       "name": "魅惑のささやき",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     }
   ],
   "unique_skills": [
@@ -1750,455 +2476,650 @@
       "name": "#LookatCurren",
       "weight": 8,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "Call me KING",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "G00 1st.F∞;",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "I Never Goof Up!",
       "weight": 9,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "I'M☆FULL☆SPEED!!",
       "weight": 11,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "KEEP IT REAL.",
       "weight": 8,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "Nemesis",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "Pride of KING",
       "weight": 8,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "Schwarze Schwert",
       "weight": 10,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "Shadow Break",
       "weight": 8,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "U=ma2",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "introduction:My body",
       "weight": 12,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "∴win Q.E.D.",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "きっとその先へ…！",
       "weight": 9,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "ひらめき☆ランディング",
       "weight": 11,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "わやかわ♪マリンダイヴ",
       "weight": 11,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "アクセルX",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "アタシもたまには、ね？",
       "weight": 11,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "アングリング×スキーミング",
       "weight": 13,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "エンプレス・プライド",
       "weight": 10,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "カッティング×DRIVE！",
       "weight": 11,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "キラキラ☆STARDOM",
       "weight": 10,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "クリアハート",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "グッときて♪Chu",
       "weight": 8,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "ゲインヒール・スペリアー",
       "weight": 12,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "コンドル猛撃波",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "シューティングスター",
       "weight": 10,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "タイマン！デッドヒート！",
       "weight": 12,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "ピュリティオブハート",
       "weight": 10,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "フラワリー☆マニューバ",
       "weight": 11,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "ブリリアント・レッドエース",
       "weight": 13,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "ブルーローズチェイサー",
       "weight": 11,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "ブレイズ・オブ・プライド",
       "weight": 12,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "プランチャ☆ガナドール",
       "weight": 11,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "レッツ・アナボリック！",
       "weight": 11,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "レッドエース",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "ワクワクよーいドン",
       "weight": 9,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "ワクワククライマックス",
       "weight": 11,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "ヴィクトリーショット！",
       "weight": 11,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "ヴィットーリアに捧ぐ舞踏",
       "weight": 12,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "不沈艦、抜錨ォッ！",
       "weight": 9,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "優等生✕バクシン＝大勝利ッ",
       "weight": 13,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "先頭の景色は譲らない…！",
       "weight": 12,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "全力Vサインッ！",
       "weight": 8,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "勝利のキッス☆",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "勝利のチケットを、君にッ！",
       "weight": 13,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "勝利の鼓動",
       "weight": 5,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "学級委員長＋速さ＝バクシン",
       "weight": 13,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "尊み☆ﾗｽﾄｽﾊﾟー(ﾟ∀ﾟ)ーﾄ!",
       "weight": 12,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "最強の名をかけて",
       "weight": 8,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "来てください来てください！",
       "weight": 13,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "来ます来てます来させます！",
       "weight": 13,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "汝、皇帝の神威を見よ",
       "weight": 10,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "波乱注意砲！",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "煌星のヴォードヴィル",
       "weight": 10,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "熱血☆アミーゴ",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "燃えろ筋肉！",
       "weight": 6,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "禾スナハチ登ル",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "究極テイオーステップ",
       "weight": 10,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "精神一到",
       "weight": 4,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "精神一到何事か成らざらん",
       "weight": 12,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "紅焔ギア/LP1211-M",
       "weight": 10,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "絶対は、ボクだ",
       "weight": 7,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "薫風、永遠なる瞬間を",
       "weight": 10,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     },
     {
       "type": "unique",
       "name": "貴顕の使命を果たすべく",
       "weight": 11,
       "desc": "",
-      "similar": []
+      "similar": {
+        "name": [],
+        "weight": []
+      }
     }
   ]
 }

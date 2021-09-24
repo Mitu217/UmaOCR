@@ -37,7 +37,10 @@ def get_normal_skills():
                 'name': name,
                 'weight': calc_text_weight(name),
                 'desc': '',
-                'similar': get_similar_skill_names(name),
+                'similar': {
+                    'name': get_similar_skill_names(name),
+                    'weight': [],
+                }
             })
 
     return sorted(data, key=lambda x: x['name'])
@@ -59,7 +62,10 @@ def get_rare_skills():
                 'name': name,
                 'weight': calc_text_weight(name),
                 'desc': '',
-                'similar': get_similar_skill_names(name),
+                'similar': {
+                    'name': get_similar_skill_names(name),
+                    'weight': [],
+                }
             })
 
     return sorted(data, key=lambda x: x['name'])
@@ -80,7 +86,10 @@ def get_unique_skills():
                 'name': name,
                 'weight': calc_text_weight(name),
                 'desc': '',
-                'similar': get_similar_skill_names(name),
+                'similar': {
+                    'name': get_similar_skill_names(name),
+                    'weight': [],
+                }
             })
 
     return sorted(data, key=lambda x: x['name'])
