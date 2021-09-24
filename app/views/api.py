@@ -48,7 +48,7 @@ class APIResource:
 
         async def get_data():
             tasks = [
-                asyncio.create_task(self.character_usecase.get_character_name_from_image(image)),
+                asyncio.create_task(self.character_usecase.get_character_from_image(image)),
                 asyncio.create_task(self.character_usecase.get_character_rank_from_image(image)),
                 asyncio.create_task(self.status_usecase.get_parameters_from_image(image)),
                 asyncio.create_task(self.skill_usecase.get_character_skills_from_character_modal_image(image)),
@@ -58,10 +58,11 @@ class APIResource:
             ]
             results = await asyncio.gather(*tasks)
 
-            character_name, character_rank, parameters, character_skills, ability_fields, ability_distances, ability_strategies = results
+            character, character_rank, parameters, character_skills, ability_fields, ability_distances, ability_strategies = results
             character_skills_dict = character_skills.to_dict()
             return {
-                'character': character_name,
+                'character': character.name,
+                'nickname': character.nickname,
                 'rank': character_rank,
                 'params': parameters.to_dict(),
                 'unique_skill': character_skills_dict['unique_skill'],

@@ -7,11 +7,13 @@ import Levenshtein
 import numpy as np
 from PIL import Image
 
+import resources
 from app.interface.driver.file_driver import LocalFileDriver
 from app.interface.usecase.character import CharacterUsecase
 from app.library.matching_template import (matching_template, multi_scale_matching_template, multi_scale_matching_template_impl)
 from app.library.ocr import get_text_with_single_text_line_and_jpn_from_image
 from app.library.pillow import binarized, crop_pil, pil2cv, resize_pil
+from app.domain.character import Character
 
 TEMPLATE_WIDTH = 1024
 
@@ -30,7 +32,7 @@ class CharacterInteractor(CharacterUsecase):
             return self.cache_master_characters
 
         master_characters_json_file = await self.local_file_driver.open(
-            os.path.join('resources', 'master_data', 'characters.json'))
+            os.path.join(resources.__path__[0], 'master_data', 'characters.json'))
         master_characters_json = json.load(master_characters_json_file)
 
         self.cache_master_characters = master_characters_json
@@ -41,11 +43,81 @@ class CharacterInteractor(CharacterUsecase):
             return self.cache_master_characters
 
         master_characters_json_file = await self.local_file_driver.open(
-            os.path.join('resources', 'master_data', 'all_characters.json'))
+            os.path.join(resources.__path__[0], 'master_data', 'all_characters.json'))
         master_characters_json = json.load(master_characters_json_file)
 
         self.cache_master_characters = master_characters_json
         return master_characters_json or []
+
+    async def get_character_from_image(self, image: Image) -> Character:
+        name = await self.get_character_name_from_image(image)
+        nickname = await self.get_character_nickname_from_image_and_name(image, name)
+        return Character(name, nickname)
+
+    async def get_character_nickname_from_image_and_name(self, image: Image, name: str) -> str:
+        # 処理高速化のため、次の操作を行う
+        #  * templateと画像のwidthを合わせる
+        #  * パラメーターとキャラクター名は画像上半分にしかないため、画像の下半分を捨てる
+        image = resize_pil(image, TEMPLATE_WIDTH)
+        image = crop_pil(
+            image,
+            (0,
+             image.size[1] *
+             0.1,
+             image.size[0],
+             image.size[1] *
+             0.5))
+        if self.debug:
+            await self.local_file_driver.save_image(
+                image, os.path.join('tmp', 'get_character_nickname_from_image_and_name', 'init_image.png')
+            )
+
+        parameter_frame_templ = await self.local_file_driver.open_image(
+            os.path.join(resources.__path__[0], 'images', 'ocr_params', 'template_1024.png')
+        )
+        parameter_frame_loc = await get_matching_template_location(image, parameter_frame_templ)
+        if parameter_frame_loc is None:
+            self.logger.debug('not found parameter_frame_loc')
+            return ''
+        (start_x, start_y), (end_x, end_y) = parameter_frame_loc
+        (st_x, st_y) = (end_x - start_x, end_y - start_y)
+
+        if self.debug:
+            await self.local_file_driver.save_image(
+                crop_pil(image, (start_x, start_y, end_x, end_y)),
+                os.path.join('tmp', 'get_character_nickname_from_image_and_name', 'multi_scale_matching_template.png')
+            )
+
+        cropped_character_nickname = crop_pil(image,
+                                          (start_x + (st_x * 0.5),
+                                           start_y - (st_y * 6.25),
+                                           end_x - (st_x * 0.05),
+                                           start_y - (st_y * 5.15)))
+        binarized_character_nickname = binarized(cropped_character_nickname, 150)
+        text = get_text_with_single_text_line_and_jpn_from_image(binarized_character_nickname)
+        if self.debug:
+            await self.local_file_driver.save_image(
+                cropped_character_nickname,
+                os.path.join('tmp', 'get_character_nickname_from_image_and_name', 'cropped_character_nickname.png')
+            )
+            await self.local_file_driver.save_image(
+                binarized_character_nickname,
+                os.path.join('tmp', 'get_character_nickname_from_image_and_name', 'binarized_character_nickname.png')
+            )
+
+        master_characters = await self.get_master_characters()
+        found_str = ''
+        found = 0
+        border_found = 0.5
+        for master_character in master_characters:
+            if name == master_character['name']:
+                for character_nickname in master_character['nickname']:
+                    aro_dist = Levenshtein.jaro_winkler(text, character_nickname)
+                    if aro_dist > found and aro_dist > border_found:
+                        found_str = character_nickname
+                        found = aro_dist
+
+        return found_str
 
     async def get_character_name_from_image(self, image: Image) -> str:
         """
@@ -72,7 +144,7 @@ class CharacterInteractor(CharacterUsecase):
             )
 
         parameter_frame_templ = await self.local_file_driver.open_image(
-            os.path.join('resources', 'images', 'ocr_params', 'template_1024.png')
+            os.path.join(resources.__path__[0], 'images', 'ocr_params', 'template_1024.png')
         )
         parameter_frame_loc = await get_matching_template_location(image, parameter_frame_templ)
         if parameter_frame_loc is None:
@@ -142,7 +214,7 @@ class CharacterInteractor(CharacterUsecase):
             )
 
         parameter_frame_templ = await self.local_file_driver.open_image(
-            os.path.join('resources', 'images', 'ocr_params', 'template_1024.png')
+            os.path.join(resources.__path__[0], 'images', 'ocr_params', 'template_1024.png')
         )
         parameter_frame_loc = await get_matching_template_location(image, parameter_frame_templ)
         if parameter_frame_loc is None:
@@ -192,7 +264,7 @@ class CharacterInteractor(CharacterUsecase):
         ]
         for (rank_file, rank) in rank_files:
             templ_rank_file = await self.local_file_driver.open_image(
-                os.path.join('resources', 'ranks', rank_file)
+                os.path.join(resources.__path__[0], 'ranks', rank_file)
             )
             templ_rank_file = resize_pil(templ_rank_file, 120)
             cv2_templ_rank_file = pil2cv(templ_rank_file)
@@ -207,7 +279,7 @@ class CharacterInteractor(CharacterUsecase):
 
     async def get_character_name_from_support_image(self, image: Image) -> str:
         templ = await self.local_file_driver.open_image(
-            os.path.join('resources', 'images', 'support_params', 'template.png')
+            os.path.join(resources.__path__[0], 'images', 'support_params', 'template.png')
         )
         (tW, tH) = templ.size
         cv2_templ = pil2cv(templ)
