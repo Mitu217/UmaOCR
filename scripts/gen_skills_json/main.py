@@ -173,7 +173,9 @@ def get_similar_skill_names(skill_name):
         similar_names.append(skill_name.replace('豪脚', '入陸'))
         similar_names.append(skill_name.replace('豪脚', '京脚'))
     if '末脚' in skill_name:
-        similar_names.append(skill_name.replace('末脚', '未肢'))
+        similar_names.append(skill_name.replace('末', '未'))
+        similar_names.append(skill_name.replace('脚', '肢'))
+        similar_names.append(skill_name.replace('脚', '膨'))
     if '積極' in skill_name:
         similar_names.append(skill_name.replace('積極', '策福'))
     if '左回り' in skill_name:
@@ -208,6 +210,8 @@ def get_similar_skill_weights(skill_name):
     if 'アングリング×スキーミング' == skill_name:
         similar_weights.append(12)
     if '優等生✕バクシン＝大勝利ッ' == skill_name:
+        similar_weights.append(12)
+    if '学級委員長＋速さ＝バクシン' == skill_name:
         similar_weights.append(12)
 
     return similar_weights
