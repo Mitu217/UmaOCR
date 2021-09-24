@@ -6,8 +6,12 @@
       "weight": 6,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "おひとり様"
+        ],
+        "weight": [
+          5
+        ]
       }
     },
     {
@@ -186,8 +190,12 @@
       "weight": 7,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "コーナー加速"
+        ],
+        "weight": [
+          6
+        ]
       }
     },
     {
@@ -196,8 +204,12 @@
       "weight": 7,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "コーナー回復"
+        ],
+        "weight": [
+          6
+        ]
       }
     },
     {
@@ -207,9 +219,12 @@
       "desc": "",
       "similar": {
         "name": [
+          "コーナー巧者",
           "コーナー巧書◯"
         ],
-        "weight": []
+        "weight": [
+          6
+        ]
       }
     },
     {
@@ -368,8 +383,12 @@
       "weight": 8,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "マイルコーナー"
+        ],
+        "weight": [
+          7
+        ]
       }
     },
     {
@@ -378,8 +397,12 @@
       "weight": 6,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "マイル直線"
+        ],
+        "weight": [
+          5
+        ]
       }
     },
     {
@@ -460,8 +483,12 @@
       "weight": 7,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "中京レース場"
+        ],
+        "weight": [
+          6
+        ]
       }
     },
     {
@@ -470,8 +497,12 @@
       "weight": 7,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "中山レース場"
+        ],
+        "weight": [
+          6
+        ]
       }
     },
     {
@@ -480,8 +511,12 @@
       "weight": 8,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "中距離コーナー"
+        ],
+        "weight": [
+          7
+        ]
       }
     },
     {
@@ -490,8 +525,12 @@
       "weight": 6,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "中距離直線"
+        ],
+        "weight": [
+          5
+        ]
       }
     },
     {
@@ -510,8 +549,12 @@
       "weight": 7,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "京都レース場"
+        ],
+        "weight": [
+          6
+        ]
       }
     },
     {
@@ -540,8 +583,12 @@
       "weight": 3,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "伏兵"
+        ],
+        "weight": [
+          2
+        ]
       }
     },
     {
@@ -580,8 +627,12 @@
       "weight": 6,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "先行のコツ"
+        ],
+        "weight": [
+          5
+        ]
       }
     },
     {
@@ -590,8 +641,12 @@
       "weight": 7,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "先行コーナー"
+        ],
+        "weight": [
+          6
+        ]
       }
     },
     {
@@ -610,8 +665,12 @@
       "weight": 5,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "先行直線"
+        ],
+        "weight": [
+          4
+        ]
       }
     },
     {
@@ -660,8 +719,12 @@
       "weight": 5,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "内枠得意"
+        ],
+        "weight": [
+          4
+        ]
       }
     },
     {
@@ -670,8 +733,12 @@
       "weight": 5,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "冬ウマ娘"
+        ],
+        "weight": [
+          4
+        ]
       }
     },
     {
@@ -690,8 +757,12 @@
       "weight": 7,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "函館レース場"
+        ],
+        "weight": [
+          6
+        ]
       }
     },
     {
@@ -760,8 +831,12 @@
       "weight": 4,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "右回り"
+        ],
+        "weight": [
+          3
+        ]
       }
     },
     {
@@ -800,8 +875,12 @@
       "weight": 5,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "夏ウマ娘"
+        ],
+        "weight": [
+          4
+        ]
       }
     },
     {
@@ -820,8 +899,12 @@
       "weight": 5,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "外枠得意"
+        ],
+        "weight": [
+          4
+        ]
       }
     },
     {
@@ -840,8 +923,12 @@
       "weight": 7,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "大井レース場"
+        ],
+        "weight": [
+          6
+        ]
       }
     },
     {
@@ -860,8 +947,12 @@
       "weight": 5,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "対抗意識"
+        ],
+        "weight": [
+          4
+        ]
       }
     },
     {
@@ -880,8 +971,12 @@
       "weight": 7,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "小倉レース場"
+        ],
+        "weight": [
+          6
+        ]
       }
     },
     {
@@ -911,9 +1006,12 @@
       "desc": "",
       "similar": {
         "name": [
+          "左回り",
           "を回り◯"
         ],
-        "weight": []
+        "weight": [
+          3
+        ]
       }
     },
     {
@@ -952,8 +1050,12 @@
       "weight": 6,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "差しのコツ"
+        ],
+        "weight": [
+          5
+        ]
       }
     },
     {
@@ -962,8 +1064,12 @@
       "weight": 7,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "差しコーナー"
+        ],
+        "weight": [
+          6
+        ]
       }
     },
     {
@@ -992,8 +1098,12 @@
       "weight": 5,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "差し直線"
+        ],
+        "weight": [
+          4
+        ]
       }
     },
     {
@@ -1042,8 +1152,12 @@
       "weight": 6,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "徹底マーク"
+        ],
+        "weight": [
+          5
+        ]
       }
     },
     {
@@ -1092,8 +1206,12 @@
       "weight": 7,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "新潟レース場"
+        ],
+        "weight": [
+          6
+        ]
       }
     },
     {
@@ -1102,8 +1220,12 @@
       "weight": 5,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "春ウマ娘"
+        ],
+        "weight": [
+          4
+        ]
       }
     },
     {
@@ -1112,8 +1234,12 @@
       "weight": 5,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "晴れの日"
+        ],
+        "weight": [
+          4
+        ]
       }
     },
     {
@@ -1122,8 +1248,12 @@
       "weight": 5,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "曇りの日"
+        ],
+        "weight": [
+          4
+        ]
       }
     },
     {
@@ -1144,8 +1274,12 @@
       "weight": 7,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "札幌レース場"
+        ],
+        "weight": [
+          6
+        ]
       }
     },
     {
@@ -1164,8 +1298,12 @@
       "weight": 7,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "東京レース場"
+        ],
+        "weight": [
+          6
+        ]
       }
     },
     {
@@ -1184,8 +1322,13 @@
       "weight": 5,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "根幹距離",
+          "相見距離◯"
+        ],
+        "weight": [
+          4
+        ]
       }
     },
     {
@@ -1290,10 +1433,13 @@
       "desc": "",
       "similar": {
         "name": [
+          "短距離コーナー",
           "細距離コーナー◯",
           "紅距離コーナー◯"
         ],
-        "weight": []
+        "weight": [
+          7
+        ]
       }
     },
     {
@@ -1303,10 +1449,13 @@
       "desc": "",
       "similar": {
         "name": [
+          "短距離直線",
           "細距離直線◯",
           "紅距離直線◯"
         ],
-        "weight": []
+        "weight": [
+          5
+        ]
       }
     },
     {
@@ -1315,8 +1464,12 @@
       "weight": 7,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "福島レース場"
+        ],
+        "weight": [
+          6
+        ]
       }
     },
     {
@@ -1325,8 +1478,12 @@
       "weight": 5,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "秋ウマ娘"
+        ],
+        "weight": [
+          4
+        ]
       }
     },
     {
@@ -1367,8 +1524,12 @@
       "weight": 4,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "良バ場"
+        ],
+        "weight": [
+          3
+        ]
       }
     },
     {
@@ -1447,8 +1608,12 @@
       "weight": 6,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "追込のコツ"
+        ],
+        "weight": [
+          5
+        ]
       }
     },
     {
@@ -1457,8 +1622,12 @@
       "weight": 7,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "追込コーナー"
+        ],
+        "weight": [
+          6
+        ]
       }
     },
     {
@@ -1477,8 +1646,12 @@
       "weight": 5,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "追込直線"
+        ],
+        "weight": [
+          4
+        ]
       }
     },
     {
@@ -1522,9 +1695,12 @@
       "desc": "",
       "similar": {
         "name": [
+          "逃げのコツ",
           "透けのコツ◯"
         ],
-        "weight": []
+        "weight": [
+          5
+        ]
       }
     },
     {
@@ -1534,9 +1710,12 @@
       "desc": "",
       "similar": {
         "name": [
+          "逃げコーナー",
           "透けコーナー◯"
         ],
-        "weight": []
+        "weight": [
+          6
+        ]
       }
     },
     {
@@ -1558,9 +1737,12 @@
       "desc": "",
       "similar": {
         "name": [
+          "逃げ直線",
           "透け直線◯"
         ],
-        "weight": []
+        "weight": [
+          4
+        ]
       }
     },
     {
@@ -1591,8 +1773,12 @@
       "weight": 3,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "道悪"
+        ],
+        "weight": [
+          2
+        ]
       }
     },
     {
@@ -1611,8 +1797,12 @@
       "weight": 8,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "長距離コーナー"
+        ],
+        "weight": [
+          7
+        ]
       }
     },
     {
@@ -1621,8 +1811,12 @@
       "weight": 6,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "長距離直線"
+        ],
+        "weight": [
+          5
+        ]
       }
     },
     {
@@ -1631,8 +1825,12 @@
       "weight": 7,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "阪神レース場"
+        ],
+        "weight": [
+          6
+        ]
       }
     },
     {
@@ -1661,8 +1859,12 @@
       "weight": 4,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "雨の日"
+        ],
+        "weight": [
+          3
+        ]
       }
     },
     {
@@ -1671,8 +1873,12 @@
       "weight": 4,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "雪の日"
+        ],
+        "weight": [
+          3
+        ]
       }
     },
     {
@@ -1681,8 +1887,13 @@
       "weight": 6,
       "desc": "",
       "similar": {
-        "name": [],
-        "weight": []
+        "name": [
+          "非根幹距離",
+          "非相見距離◯"
+        ],
+        "weight": [
+          5
+        ]
       }
     },
     {

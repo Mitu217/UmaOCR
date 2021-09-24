@@ -39,7 +39,7 @@ def get_normal_skills():
                 'desc': '',
                 'similar': {
                     'name': get_similar_skill_names(name),
-                    'weight': [],
+                    'weight': get_similar_skill_weights(name),
                 }
             })
 
@@ -64,7 +64,7 @@ def get_rare_skills():
                 'desc': '',
                 'similar': {
                     'name': get_similar_skill_names(name),
-                    'weight': [],
+                    'weight': get_similar_skill_weights(name),
                 }
             })
 
@@ -88,7 +88,7 @@ def get_unique_skills():
                 'desc': '',
                 'similar': {
                     'name': get_similar_skill_names(name),
-                    'weight': [],
+                    'weight': get_similar_skill_weights(name),
                 }
             })
 
@@ -142,6 +142,9 @@ def get_similar_skill_names(skill_name):
     # ocr結果として誤検知されやすい文字列を調整
     similar_names = []
 
+    if '◯' in skill_name:
+        similar_names.append(skill_name.replace('◯', ''))
+
     if '逃げ' in skill_name:
         similar_names.append(skill_name.replace('逃げ', '透け'))
     if '努力' in skill_name:
@@ -173,9 +176,19 @@ def get_similar_skill_names(skill_name):
         similar_names.append(skill_name.replace('積極', '策福'))
     if '左回り' in skill_name:
         similar_names.append(skill_name.replace('左回り', 'を回り'))
+    if '根幹' in skill_name:
+        similar_names.append(skill_name.replace('根幹', '相見'))
 
     return similar_names
 
+def get_similar_skill_weights(skill_name):
+    # ocr結果として誤検知されやすい文字列を調整
+    similar_weights = []
+
+    if '◯' in skill_name:
+        similar_weights.append(len(skill_name.replace('◯', '')))
+
+    return similar_weights
 
 if __name__ == "__main__":
     skills = dict()
