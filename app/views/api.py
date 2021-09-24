@@ -1,4 +1,5 @@
 import asyncio
+import imghdr
 
 from flask import jsonify, make_response, request
 from PIL import Image
@@ -11,9 +12,8 @@ from app.interface.usecase.status_usecase import StatusUsecase
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 
-def allowed_file(filename: str):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+def allowed_file(format: str):
+    return format.lower() in ALLOWED_EXTENSIONS
 
 
 class APIResource:
@@ -40,11 +40,11 @@ class APIResource:
         if file.filename == '':
             return make_response(
                 jsonify({'result': 'filename must not empty'}), 400)
-        if not allowed_file(file.filename):
-            return make_response(
-                jsonify({'result': 'support extension jpg, jpeg or png'}), 400)
 
         image = Image.open(file.stream)
+        if not allowed_file(image.format):
+            return make_response(
+                jsonify({'result': 'support extension jpg, jpeg or png'}), 400)
 
         async def get_data():
             tasks = [
@@ -85,11 +85,11 @@ class APIResource:
         if file.filename == '':
             return make_response(
                 jsonify({'result': 'filename must not empty'}), 400)
-        if not allowed_file(file.filename):
-            return make_response(
-                jsonify({'result': 'support extension jpg, jpeg or png'}), 400)
 
         image = Image.open(file.stream)
+        if not allowed_file(image.format):
+            return make_response(
+                jsonify({'result': 'support extension jpg, jpeg or png'}), 400)
 
         async def get_data():
             tasks = [
