@@ -276,7 +276,7 @@ window.onload = () =>{
       document.querySelector("#skill-level-" + (i+1)).textContent = ''
     }
 
-    fetch("/api/v1/ocr/support_params", param)
+    fetch("/api/v1/ocr/status", param)
       .then((res)=>{
         return( res.json() );
       })
