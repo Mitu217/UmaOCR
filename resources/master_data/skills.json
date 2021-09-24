@@ -130,7 +130,9 @@
       "weight": 8,
       "desc": "",
       "similar": {
-        "name": [],
+        "name": [
+          "アオハル点火・通"
+        ],
         "weight": []
       }
     },
@@ -1479,7 +1481,8 @@
       "desc": "",
       "similar": {
         "name": [
-          "秋ウマ娘"
+          "秋ウマ娘",
+          "入ウマ娘◯"
         ],
         "weight": [
           4
@@ -1944,7 +1947,9 @@
       "weight": 8,
       "desc": "",
       "similar": {
-        "name": [],
+        "name": [
+          "アオハル移退・体"
+        ],
         "weight": []
       }
     },
@@ -1954,7 +1959,9 @@
       "weight": 8,
       "desc": "",
       "similar": {
-        "name": [],
+        "name": [
+          "アオハル移退・力"
+        ],
         "weight": []
       }
     },
@@ -1964,7 +1971,9 @@
       "weight": 8,
       "desc": "",
       "similar": {
-        "name": [],
+        "name": [
+          "アオハル移退・根"
+        ],
         "weight": []
       }
     },
@@ -1974,7 +1983,9 @@
       "weight": 8,
       "desc": "",
       "similar": {
-        "name": [],
+        "name": [
+          "アオハル移退・賢"
+        ],
         "weight": []
       }
     },
@@ -1984,7 +1995,10 @@
       "weight": 8,
       "desc": "",
       "similar": {
-        "name": [],
+        "name": [
+          "アオハル移退・速",
+          "アオハル燃焼・通"
+        ],
         "weight": []
       }
     },
@@ -2990,7 +3004,9 @@
       "desc": "",
       "similar": {
         "name": [],
-        "weight": []
+        "weight": [
+          12
+        ]
       }
     },
     {
@@ -3110,7 +3126,9 @@
       "desc": "",
       "similar": {
         "name": [],
-        "weight": []
+        "weight": [
+          11
+        ]
       }
     },
     {

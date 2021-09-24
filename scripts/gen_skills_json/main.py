@@ -179,6 +179,12 @@ def get_similar_skill_names(skill_name):
         similar_names.append(skill_name.replace('左回り', 'を回り'))
     if '根幹' in skill_name:
         similar_names.append(skill_name.replace('根幹', '相見'))
+    if '燃焼' in skill_name:
+        similar_names.append(skill_name.replace('燃焼', '移退'))
+    if '秋ウマ' in skill_name:
+        similar_names.append(skill_name.replace('秋ウマ', '入ウマ'))
+    if '・速' in skill_name:
+        similar_names.append(skill_name.replace('・速', '・通'))
 
     return similar_names
 
@@ -188,6 +194,12 @@ def get_similar_skill_weights(skill_name):
 
     if '◯' in skill_name:
         similar_weights.append(len(skill_name.replace('◯', '')))
+
+    # 記号で文字数ブレが激しいケースを吸収
+    if '先頭の景色は譲らない…！' == skill_name:
+        similar_weights.append(11)
+    if 'ブリリアント・レッドエース' == skill_name:
+        similar_weights.append(12)
 
     return similar_weights
 

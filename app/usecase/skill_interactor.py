@@ -22,6 +22,7 @@ from app.library.pillow import binarized, crop_pil, pil2cv, resize_pil
 from app.usecase import const
 
 TEMPLATE_HEIGHT = 100
+IMAGE_MIN_WIDTH = 720
 
 
 class SkillInteractor(SkillUsecase):
@@ -205,6 +206,11 @@ class SkillInteractor(SkillUsecase):
         return NormalSkills(skills)
 
     async def get_character_skills_from_character_modal_image(self, image: Image) -> CharacterSkills:
+        if image.width < IMAGE_MIN_WIDTH:
+            unique_skill = UniqueSkill('', 0)
+            normal_skill_array = []
+            return CharacterSkills(unique_skill, NormalSkills(normal_skill_array))
+
         # resize image width to 1024px
         image = resize_pil(image, const.INPUT_IMAGE_WIDTH, None, Image.LANCZOS)
         if self.debug:
