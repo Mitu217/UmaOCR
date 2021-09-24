@@ -171,6 +171,7 @@ def get_similar_skill_names(skill_name):
     if '豪脚' in skill_name:
         similar_names.append(skill_name.replace('豪脚', '各肢'))
         similar_names.append(skill_name.replace('豪脚', '入陸'))
+        similar_names.append(skill_name.replace('豪脚', '京脚'))
     if '末脚' in skill_name:
         similar_names.append(skill_name.replace('末脚', '未肢'))
     if '積極' in skill_name:
@@ -181,8 +182,11 @@ def get_similar_skill_names(skill_name):
         similar_names.append(skill_name.replace('根幹', '相見'))
     if '燃焼' in skill_name:
         similar_names.append(skill_name.replace('燃焼', '移退'))
-    if '秋ウマ' in skill_name:
-        similar_names.append(skill_name.replace('秋ウマ', '入ウマ'))
+    if '秋ウマ娘◯' in skill_name:
+        similar_names.append(skill_name.replace('秋ウマ娘◯', '入ウマ娘◯'))
+        similar_names.append(skill_name.replace('秋ウマ娘◯', '入ウマ娘'))
+        similar_names.append(skill_name.replace('秋ウマ娘◯', '邊ウマ娘◯'))
+        similar_names.append(skill_name.replace('秋ウマ娘◯', '邊ウマ娘'))
     if '・速' in skill_name:
         similar_names.append(skill_name.replace('・速', '・通'))
 
@@ -199,6 +203,8 @@ def get_similar_skill_weights(skill_name):
     if '先頭の景色は譲らない…！' == skill_name:
         similar_weights.append(11)
     if 'ブリリアント・レッドエース' == skill_name:
+        similar_weights.append(12)
+    if 'アングリング×スキーミング' == skill_name:
         similar_weights.append(12)
 
     return similar_weights
