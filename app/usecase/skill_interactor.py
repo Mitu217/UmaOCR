@@ -347,11 +347,13 @@ class SkillInteractor(SkillUsecase):
             return None
         else:
             (s_x, s_y), (e_x, e_y) = line_box[0].position
-            word_width = 24.9
+            word_width = 24.7
 
             text = line_box[0].content.replace(' ', '')
             weight = int((e_x - s_x) / word_width + 1)
 
+            self.logger.info(text)
+            self.logger.info(weight)
             skill_name = await self.get_skill_name_from_text_and_weight(text, weight)
             return skill_name
 
@@ -364,7 +366,7 @@ class SkillInteractor(SkillUsecase):
         # OCRの限界で読み間違えが発生しがちな文字列でも類似度を計算する
         found_str = ''
         found = 0
-        border_found = 0.5
+        border_found = 0.55
         for master_skill in master_skills_map_by_weight[weight]:
             skill_name = master_skill['name']
             similar = master_skill['similar']
