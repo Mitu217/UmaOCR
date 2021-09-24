@@ -147,6 +147,7 @@ def get_similar_skill_names(skill_name):
 
     if '逃げ' in skill_name:
         similar_names.append(skill_name.replace('逃げ', '透け'))
+        similar_names.append(skill_name.replace('逃げ', '逃け'))
     if '努力' in skill_name:
         similar_names.append(skill_name.replace('努力', '胡力'))
         similar_names.append(skill_name.replace('努力', '即力'))
@@ -161,6 +162,7 @@ def get_similar_skill_names(skill_name):
         similar_names.append(skill_name.replace('深呼吸', '漂峡明'))
     if '巧者' in skill_name:
         similar_names.append(skill_name.replace('巧者', '巧書'))
+        similar_names.append(skill_name.replace('巧者', '世暫'))
     if '一匹狼' in skill_name:
         similar_names.append(skill_name.replace('一匹狼', '一忠独'))
     if 'の風' in skill_name:
@@ -183,19 +185,33 @@ def get_similar_skill_names(skill_name):
         similar_names.append(skill_name.replace('左回り', 'を回り'))
     if '根幹' in skill_name:
         similar_names.append(skill_name.replace('根幹', '相見'))
+        similar_names.append(skill_name.replace('根幹', '穫本'))
     if '燃焼' in skill_name:
         similar_names.append(skill_name.replace('燃焼', '移退'))
         similar_names.append(skill_name.replace('燃焼', '燈壇'))
         similar_names.append(skill_name.replace('燃焼', '姫矯'))
+        similar_names.append(skill_name.replace('燃焼', '媛妨'))
         if '・速' in skill_name:
             similar_names.append(skill_name.replace('燃焼・速', '移退・通'))
             similar_names.append(skill_name.replace('燃焼・速', '燈壇・通'))
             similar_names.append(skill_name.replace('燃焼・速', '姫矯・通'))
+            similar_names.append(skill_name.replace('燃焼・速', '媛妨・通'))
             similar_names.append(skill_name.replace('燃焼・速', '移退・問'))
             similar_names.append(skill_name.replace('燃焼・速', '燈壇・問'))
+            similar_names.append(skill_name.replace('燃焼・速', '姫矯・問'))
+            similar_names.append(skill_name.replace('燃焼・速', '媛妨・問'))
             similar_names.append(skill_name.replace('燃焼・速', '移退・加'))
             similar_names.append(skill_name.replace('燃焼・速', '燈壇・加'))
             similar_names.append(skill_name.replace('燃焼・速', '姫矯・加'))
+            similar_names.append(skill_name.replace('燃焼・速', '媛妨・加'))
+            similar_names.append(skill_name.replace('燃焼・速', '移退・連'))
+            similar_names.append(skill_name.replace('燃焼・速', '燈壇・連'))
+            similar_names.append(skill_name.replace('燃焼・速', '姫矯・連'))
+            similar_names.append(skill_name.replace('燃焼・速', '媛妨・連'))
+            similar_names.append(skill_name.replace('燃焼・速', '移退・適'))
+            similar_names.append(skill_name.replace('燃焼・速', '燈壇・適'))
+            similar_names.append(skill_name.replace('燃焼・速', '姫矯・適'))
+            similar_names.append(skill_name.replace('燃焼・速', '媛妨・適'))
     if '秋ウマ娘◯' in skill_name:
         similar_names.append(skill_name.replace('秋ウマ娘◯', '入ウマ娘◯'))
         similar_names.append(skill_name.replace('秋ウマ娘◯', '入ウマ娘'))
@@ -207,8 +223,12 @@ def get_similar_skill_names(skill_name):
         similar_names.append(skill_name.replace('・速', '・通'))
         similar_names.append(skill_name.replace('・速', '・問'))
         similar_names.append(skill_name.replace('・速', '・加'))
+        similar_names.append(skill_name.replace('・速', '・連'))
+        similar_names.append(skill_name.replace('・速', '・適'))
     if '東京' in skill_name:
         similar_names.append(skill_name.replace('東京', '昌京'))
+    if '逃亡' in skill_name:
+        similar_names.append(skill_name.replace('逃亡', '大亡'))
 
     return similar_names
 
