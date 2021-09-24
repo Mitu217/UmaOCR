@@ -178,20 +178,37 @@ def get_similar_skill_names(skill_name):
         similar_names.append(skill_name.replace('脚', '膨'))
     if '積極' in skill_name:
         similar_names.append(skill_name.replace('積極', '策福'))
+        similar_names.append(skill_name.replace('積極', '柄租'))
     if '左回り' in skill_name:
         similar_names.append(skill_name.replace('左回り', 'を回り'))
     if '根幹' in skill_name:
         similar_names.append(skill_name.replace('根幹', '相見'))
     if '燃焼' in skill_name:
         similar_names.append(skill_name.replace('燃焼', '移退'))
+        similar_names.append(skill_name.replace('燃焼', '燈壇'))
+        similar_names.append(skill_name.replace('燃焼', '姫矯'))
+        if '・速' in skill_name:
+            similar_names.append(skill_name.replace('燃焼・速', '移退・通'))
+            similar_names.append(skill_name.replace('燃焼・速', '燈壇・通'))
+            similar_names.append(skill_name.replace('燃焼・速', '姫矯・通'))
+            similar_names.append(skill_name.replace('燃焼・速', '移退・問'))
+            similar_names.append(skill_name.replace('燃焼・速', '燈壇・問'))
+            similar_names.append(skill_name.replace('燃焼・速', '移退・加'))
+            similar_names.append(skill_name.replace('燃焼・速', '燈壇・加'))
+            similar_names.append(skill_name.replace('燃焼・速', '姫矯・加'))
     if '秋ウマ娘◯' in skill_name:
         similar_names.append(skill_name.replace('秋ウマ娘◯', '入ウマ娘◯'))
         similar_names.append(skill_name.replace('秋ウマ娘◯', '入ウマ娘'))
         similar_names.append(skill_name.replace('秋ウマ娘◯', '邊ウマ娘◯'))
         similar_names.append(skill_name.replace('秋ウマ娘◯', '邊ウマ娘'))
+        similar_names.append(skill_name.replace('秋ウマ娘◯', '其ウマ娘◯'))
+        similar_names.append(skill_name.replace('秋ウマ娘◯', '其ウマ娘'))
     if '・速' in skill_name:
         similar_names.append(skill_name.replace('・速', '・通'))
         similar_names.append(skill_name.replace('・速', '・問'))
+        similar_names.append(skill_name.replace('・速', '・加'))
+    if '東京' in skill_name:
+        similar_names.append(skill_name.replace('東京', '昌京'))
 
     return similar_names
 
@@ -213,6 +230,10 @@ def get_similar_skill_weights(skill_name):
         similar_weights.append(12)
     if '学級委員長＋速さ＝バクシン' == skill_name:
         similar_weights.append(12)
+    if 'G00 1st.F∞;' == skill_name:
+        similar_weights.append(6)
+    if 'ヴィクトリーショット！' == skill_name:
+        similar_weights.append(10)
 
     return similar_weights
 
