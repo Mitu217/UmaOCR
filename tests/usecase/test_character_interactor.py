@@ -52,13 +52,13 @@ class TestCharacterInteractor(TestCase):
                 )
 
                 with Image.open(
-                        os.path.join(resources.__path__[0], 'tests', 'characters', image_name)) as image:
+                        os.path.join(resources.__path__[0], 'tests', 'get_character_nickname_from_image_and_name', image_name)) as image:
                     character_detail_image = asyncio.run(image_interactor.create_character_detail_image(image)) # TODO: テスト独自のhelper関数へ変更する
                     got = asyncio.run(
                         character_interactor.get_character_nickname_from_image_and_name(character_detail_image, character_name))
 
                 with open(
-                        os.path.join(resources.__path__[0], 'tests', 'characters', result_name)) as result:
+                        os.path.join(resources.__path__[0], 'tests', 'get_character_nickname_from_image_and_name', result_name)) as result:
                     result_character_array = []
                     reader = csv.reader(result)
                     for row in reader:
