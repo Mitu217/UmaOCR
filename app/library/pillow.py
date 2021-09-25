@@ -17,6 +17,9 @@ def resize_pil(image, width=None, height=None, inter=Image.BILINEAR):
     if width is None and height is None:
         return image
 
+    if width is not None and w == width:
+        return image
+
     if width is None:
         r = height / float(h)
         dim = (int(w * r), height)

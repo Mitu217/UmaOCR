@@ -5,6 +5,7 @@ from logging import Logger
 import numpy as np
 from PIL import Image
 
+import resources
 from app.domain.parameters import Parameters, SupportParameters
 from app.interface.driver.file_driver import LocalFileDriver
 from app.interface.usecase.status_usecase import StatusUsecase
@@ -28,7 +29,7 @@ class StatusInteractor(StatusUsecase):
     async def get_support_parameters_from_image(self, image: Image) -> SupportParameters:
 
         templ = await self.local_file_driver.open_image(
-            os.path.join('resources', 'images', 'support_params', 'template.png')
+            os.path.join(resources.__path__[0], 'images', 'support_params', 'template.png')
         )
         (tW, tH) = templ.size
         cv2_templ = pil2cv(templ)
@@ -157,7 +158,7 @@ class StatusInteractor(StatusUsecase):
 
     async def get_parameters_from_image(self, image: Image) -> Parameters:
         templ = await self.local_file_driver.open_image(
-            os.path.join('resources', 'images', 'ocr_params', 'template_1024.png')
+            os.path.join(resources.__path__[0], 'images', 'ocr_params', 'template_1024.png')
         )
         (tW, tH) = templ.size
         cv2_templ = pil2cv(templ)

@@ -363,8 +363,6 @@ class SkillInteractor(SkillUsecase):
             text = line_box[0].content.replace(' ', '')
             weight = int((e_x - s_x) / word_width + 1)
 
-            self.logger.info(text)
-            self.logger.info(weight)
             skill_name = await self.get_skill_name_from_text_and_weight(text, weight)
             return skill_name
 

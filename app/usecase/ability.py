@@ -5,6 +5,7 @@ import cv2
 import numpy as np
 from PIL import Image
 
+import resources
 from app.domain.ability import (DistanceAbilities, FieldAbilities,
                                 StrategiesAbilities)
 from app.interface.driver.file_driver import LocalFileDriver
@@ -52,7 +53,7 @@ class AbilityInteractor(AppropriateUsecase):
 
         # load template
         params_frame_templ = await self.local_file_driver.open_image(
-            os.path.join('resources', 'template_matching', 'character', 'template_1024.png')
+            os.path.join(resources.__path__[0], 'template_matching', 'character', 'template_1024.png')
         )
 
         # matching template
@@ -121,7 +122,7 @@ class AbilityInteractor(AppropriateUsecase):
 
         # load template
         params_frame_templ = await self.local_file_driver.open_image(
-            os.path.join('resources', 'template_matching', 'character', 'template_1024.png')
+            os.path.join(resources.__path__[0], 'template_matching', 'character', 'template_1024.png')
         )
 
         # matching template
@@ -214,7 +215,7 @@ class AbilityInteractor(AppropriateUsecase):
 
         # load template
         params_frame_templ = await self.local_file_driver.open_image(
-            os.path.join('resources', 'template_matching', 'character', 'template_1024.png')
+            os.path.join(resources.__path__[0], 'template_matching', 'character', 'template_1024.png')
         )
 
         # matching template
@@ -302,7 +303,7 @@ class AbilityInteractor(AppropriateUsecase):
 
         for (rank_file, rank) in rank_files:
             templ_rank_file = await self.local_file_driver.open_image(
-                os.path.join('resources', 'template_matching', 'ability', rank_file)
+                os.path.join(resources.__path__[0], 'template_matching', 'ability', rank_file)
             )
             templ_rank_file = resize_pil(templ_rank_file, 38)
             cv2_templ_rank_file = pil2cv(templ_rank_file)
