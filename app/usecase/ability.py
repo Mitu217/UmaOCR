@@ -12,8 +12,8 @@ from app.interface.driver.file_driver import LocalFileDriver
 from app.interface.usecase.appropriate import AppropriateUsecase
 from app.library.matching_template import matching_template
 from app.library.pillow import crop_pil, pil2cv, resize_pil
-from app.usecase.character import get_matching_template_location
 from app.usecase.const import INPUT_IMAGE_WIDTH
+from app.domain.image import CharacterDetailImage
 
 
 class AbilityInteractor(AppropriateUsecase):
@@ -30,49 +30,17 @@ class AbilityInteractor(AppropriateUsecase):
         self.debug = debug
         self.cache_master_characters = None
 
-    async def get_character_appropriate_fields_from_image(self, image: Image) -> FieldAbilities:
-        """
-        バ場適正を抽出する
-        :param image:
-        :return:
-        """
-
-        # TODO:画像の最適化は上のレイヤーで行う
-        image = crop_pil(
-            image,
-            (0, image.size[1] * 0.1, image.size[0], image.size[1] * 0.5),
-        )
-        if self.debug:
-            await self.local_file_driver.save_image(
-                image, os.path.join('tmp', 'get_character_appropriate_fields_from_image', 'init_image.png')
-            )
-
-        # optimize
-        if image.size[0] != INPUT_IMAGE_WIDTH:
-            image = resize_pil(image, INPUT_IMAGE_WIDTH)
-
-        # load template
-        params_frame_templ = await self.local_file_driver.open_image(
-            os.path.join(resources.__path__[0], 'template_matching', 'character', 'template_1024.png')
-        )
-
-        # matching template
-        params_frame_loc = await get_matching_template_location(image, params_frame_templ)
-        if params_frame_loc is None:
+    async def get_character_appropriate_fields_from_image(self, character_detail_image: CharacterDetailImage) -> FieldAbilities:
+        if character_detail_image.params_frame_loc is None:
             self.logger.debug('not found params_frame_loc')
             return FieldAbilities('', '')
-        (start_x, start_y), (end_x, end_y) = params_frame_loc
+        (start_x, start_y), (end_x, end_y) = character_detail_image.params_frame_loc
         (st_x, st_y) = (end_x - start_x, end_y - start_y)
-        if self.debug:
-            await self.local_file_driver.save_image(
-                crop_pil(image, (start_x, start_y, end_x, end_y)),
-                os.path.join('tmp', 'get_character_appropriate_fields_from_image', 'multi_scale_matching_template.png')
-            )
 
         abilities = dict()
 
         # ocr seed ability
-        cropped_ability_turf = crop_pil(image,
+        cropped_ability_turf = crop_pil(character_detail_image.image,
                                         (start_x + (st_x * 0.315),
                                          end_y + (st_y * 2.8),
                                          start_x + (st_x * 0.37),
@@ -85,7 +53,7 @@ class AbilityInteractor(AppropriateUsecase):
             )
 
         # ダート
-        cropped_ability_dirt = crop_pil(image,
+        cropped_ability_dirt = crop_pil(character_detail_image.image,
                                         (start_x + (st_x * 0.515),
                                          end_y + (st_y * 2.8),
                                          start_x + (st_x * 0.57),
@@ -99,47 +67,15 @@ class AbilityInteractor(AppropriateUsecase):
 
         return FieldAbilities(ability_turf, ability_dirt)
 
-    async def get_character_appropriate_distances_from_image(self, image: Image) -> DistanceAbilities:
-        """
-                距離適正を抽出する
-                :param image:
-                :return:
-                """
-
-        # TODO:画像の最適化は上のレイヤーで行う
-        image = crop_pil(
-            image,
-            (0, image.size[1] * 0.1, image.size[0], image.size[1] * 0.5),
-        )
-        if self.debug:
-            await self.local_file_driver.save_image(
-                image, os.path.join('tmp', 'get_character_appropriate_distances_from_image', 'init_image.png')
-            )
-
-        # optimize
-        if image.size[0] != INPUT_IMAGE_WIDTH:
-            image = resize_pil(image, INPUT_IMAGE_WIDTH)
-
-        # load template
-        params_frame_templ = await self.local_file_driver.open_image(
-            os.path.join(resources.__path__[0], 'template_matching', 'character', 'template_1024.png')
-        )
-
-        # matching template
-        params_frame_loc = await get_matching_template_location(image, params_frame_templ)
-        if params_frame_loc is None:
+    async def get_character_appropriate_distances_from_image(self, character_detail_image: CharacterDetailImage) -> DistanceAbilities:
+        if character_detail_image.params_frame_loc is None:
             self.logger.debug('not found params_frame_loc')
             return DistanceAbilities('', '', '', '')
-        (start_x, start_y), (end_x, end_y) = params_frame_loc
+        (start_x, start_y), (end_x, end_y) = character_detail_image.params_frame_loc
         (st_x, st_y) = (end_x - start_x, end_y - start_y)
-        if self.debug:
-            await self.local_file_driver.save_image(
-                crop_pil(image, (start_x, start_y, end_x, end_y)),
-                os.path.join('tmp', 'get_character_appropriate_distances_from_image', 'multi_scale_matching_template.png')
-            )
 
         # 短距離
-        cropped_ability_short = crop_pil(image,
+        cropped_ability_short = crop_pil(character_detail_image.image,
                                          (start_x + (st_x * 0.315),
                                           end_y + (st_y * 4.35),
                                           start_x + (st_x * 0.37),
@@ -152,7 +88,7 @@ class AbilityInteractor(AppropriateUsecase):
             )
 
         # マイル
-        cropped_ability_miles = crop_pil(image,
+        cropped_ability_miles = crop_pil(character_detail_image.image,
                                          (start_x + (st_x * 0.515),
                                           end_y + (st_y * 4.35),
                                           start_x + (st_x * 0.57),
@@ -165,7 +101,7 @@ class AbilityInteractor(AppropriateUsecase):
             )
 
         # 中距離
-        cropped_ability_medium = crop_pil(image,
+        cropped_ability_medium = crop_pil(character_detail_image.image,
                                           (start_x + (st_x * 0.715),
                                            end_y + (st_y * 4.35),
                                            start_x + (st_x * 0.77),
@@ -178,7 +114,7 @@ class AbilityInteractor(AppropriateUsecase):
             )
 
         # 長距離
-        cropped_ability_long = crop_pil(image,
+        cropped_ability_long = crop_pil(character_detail_image.image,
                                         (start_x + (st_x * 0.915),
                                          end_y + (st_y * 4.35),
                                          start_x + (st_x * 0.97),
@@ -192,47 +128,15 @@ class AbilityInteractor(AppropriateUsecase):
 
         return DistanceAbilities(ability_short, ability_miles, ability_medium, ability_long)
 
-    async def get_character_appropriate_strategies_from_image(self, image: Image) -> StrategiesAbilities:
-        """
-                脚質適正を抽出する
-                :param image:
-                :return:
-                """
-
-        # TODO:画像の最適化は上のレイヤーで行う
-        image = crop_pil(
-            image,
-            (0, image.size[1] * 0.1, image.size[0], image.size[1] * 0.5),
-        )
-        if self.debug:
-            await self.local_file_driver.save_image(
-                image, os.path.join('tmp', 'get_character_appropriate_strategies_from_image', 'init_image.png')
-            )
-
-        # optimize
-        if image.size[0] != INPUT_IMAGE_WIDTH:
-            image = resize_pil(image, INPUT_IMAGE_WIDTH)
-
-        # load template
-        params_frame_templ = await self.local_file_driver.open_image(
-            os.path.join(resources.__path__[0], 'template_matching', 'character', 'template_1024.png')
-        )
-
-        # matching template
-        params_frame_loc = await get_matching_template_location(image, params_frame_templ)
-        if params_frame_loc is None:
+    async def get_character_appropriate_strategies_from_image(self, character_detail_image: CharacterDetailImage) -> StrategiesAbilities:
+        if character_detail_image.params_frame_loc is None:
             self.logger.debug('not found params_frame_loc')
             return StrategiesAbilities('', '', '', '')
-        (start_x, start_y), (end_x, end_y) = params_frame_loc
+        (start_x, start_y), (end_x, end_y) = character_detail_image.params_frame_loc
         (st_x, st_y) = (end_x - start_x, end_y - start_y)
-        if self.debug:
-            await self.local_file_driver.save_image(
-                crop_pil(image, (start_x, start_y, end_x, end_y)),
-                os.path.join('tmp', 'get_character_appropriate_strategies_from_image', 'multi_scale_matching_template.png')
-            )
 
         # 逃げ
-        cropped_ability_first = crop_pil(image,
+        cropped_ability_first = crop_pil(character_detail_image.image,
                                          (start_x + (st_x * 0.315),
                                           end_y + (st_y * 5.9),
                                           start_x + (st_x * 0.37),
@@ -245,7 +149,7 @@ class AbilityInteractor(AppropriateUsecase):
             )
 
         # 先行
-        cropped_ability_half_first = crop_pil(image,
+        cropped_ability_half_first = crop_pil(character_detail_image.image,
                                               (start_x + (st_x * 0.515),
                                                end_y + (st_y * 5.9),
                                                start_x + (st_x * 0.57),
@@ -258,7 +162,7 @@ class AbilityInteractor(AppropriateUsecase):
             )
 
         # 差し
-        cropped_ability_half_last = crop_pil(image,
+        cropped_ability_half_last = crop_pil(character_detail_image.image,
                                               (start_x + (st_x * 0.715),
                                                end_y + (st_y * 5.9),
                                                start_x + (st_x * 0.77),
@@ -271,7 +175,7 @@ class AbilityInteractor(AppropriateUsecase):
             )
 
         # 追込
-        cropped_ability_last = crop_pil(image,
+        cropped_ability_last = crop_pil(character_detail_image.image,
                                          (start_x + (st_x * 0.915),
                                           end_y + (st_y * 5.9),
                                           start_x + (st_x * 0.97),

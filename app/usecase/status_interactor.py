@@ -12,6 +12,7 @@ from app.interface.usecase.status_usecase import StatusUsecase
 from app.library.matching_template import multi_scale_matching_template
 from app.library.ocr import get_digit_with_single_text_line_and_eng_from_image
 from app.library.pillow import binarized, crop_pil, pil2cv, resize_pil
+from app.domain.image import CharacterDetailImage
 
 TEMPLATE_WIDTH = 1024
 TEMPLATE_HEIGHT = 100
@@ -156,37 +157,12 @@ class StatusInteractor(StatusUsecase):
             int(max_wise),
         )
 
-    async def get_parameters_from_image(self, image: Image) -> Parameters:
-        templ = await self.local_file_driver.open_image(
-            os.path.join(resources.__path__[0], 'images', 'ocr_params', 'template_1024.png')
-        )
-        (tW, tH) = templ.size
-        cv2_templ = pil2cv(templ)
-
-        # 処理高速化のため、次の操作を行う
-        #  * templateと画像のwidthを合わせる
-        #  * パラメーターは画像上半分にしかないため、画像の下半分を捨てる
-        image = resize_pil(image, tW)
-        (iW, iH) = image.size
-        image = crop_pil(image, (0, iH * 0.1, iW, iH * 0.5))
-        cv2_image = pil2cv(image)
-        if self.debug:
-            await self.local_file_driver.save_image(
-                image, os.path.join('tmp', 'get_parameters_from_image', 'init_image.png')
-            )
-
-        # マルチスケールテンプレートマッチングでtemplateと一致する箇所の座標を抽出
-        loc = multi_scale_matching_template(cv2_image, cv2_templ, np.linspace(1.1, 1.5, 3))
-        if loc is None:
+    async def get_parameters_from_image(self, character_detail_image: CharacterDetailImage) -> Parameters:
+        if character_detail_image.params_frame_loc is None:
+            self.logger.debug('not found params_frame_loc')
             return Parameters(0, 0, 0, 0, 0)
-        if self.debug:
-            (start_x, start_y), (end_x, end_y) = loc
-            await self.local_file_driver.save_image(
-                crop_pil(image, (start_x, start_y, end_x, end_y)),
-                os.path.join('tmp', 'get_parameters_from_image', 'multi_scale_matching_template.png')
-            )
 
-        (start_x, start_y), (end_x, end_y) = loc
+        (start_x, start_y), (end_x, end_y) = character_detail_image.params_frame_loc
 
         h = (end_y - start_y) * 2
         w = end_x - start_x
@@ -195,7 +171,7 @@ class StatusInteractor(StatusUsecase):
         ro = p * 0.05
 
         # TODO: 並列化
-        cropped_speed = crop_pil(image, (start_x + p * 0 + lo, end_y, start_x + p * 1 - ro, end_y + h))
+        cropped_speed = crop_pil(character_detail_image.image, (start_x + p * 0 + lo, end_y, start_x + p * 1 - ro, end_y + h))
         binarized_speed = binarized(cropped_speed, 210)
         speed = await self.get_parameter_from_image(binarized_speed)
         if self.debug:
@@ -206,7 +182,7 @@ class StatusInteractor(StatusUsecase):
                 binarized_speed, os.path.join('tmp', 'get_parameters_from_image', 'binarized_speed.png')
             )
 
-        cropped_stamina = crop_pil(image, (start_x + p * 1 + lo, end_y, start_x + p * 2 - ro, end_y + h))
+        cropped_stamina = crop_pil(character_detail_image.image, (start_x + p * 1 + lo, end_y, start_x + p * 2 - ro, end_y + h))
         binarized_stamina = binarized(cropped_stamina, 210)
         stamina = await self.get_parameter_from_image(binarized_stamina)
         if self.debug:
@@ -217,7 +193,7 @@ class StatusInteractor(StatusUsecase):
                 binarized_stamina, os.path.join('tmp', 'get_parameters_from_image', 'binarized_stamina.png')
             )
 
-        cropped_power = crop_pil(image, (start_x + p * 2 + lo, end_y, start_x + p * 3 - ro, end_y + h))
+        cropped_power = crop_pil(character_detail_image.image, (start_x + p * 2 + lo, end_y, start_x + p * 3 - ro, end_y + h))
         binarized_power = binarized(cropped_power, 210)
         power = await self.get_parameter_from_image(binarized_power)
         if self.debug:
@@ -228,7 +204,7 @@ class StatusInteractor(StatusUsecase):
                 binarized_power, os.path.join('tmp', 'get_parameters_from_image', 'binarized_power.png')
             )
 
-        cropped_guts = crop_pil(image, (start_x + p * 3 + lo, end_y, start_x + p * 4 - ro, end_y + h))
+        cropped_guts = crop_pil(character_detail_image.image, (start_x + p * 3 + lo, end_y, start_x + p * 4 - ro, end_y + h))
         binarized_guts = binarized(cropped_guts, 210)
         guts = await self.get_parameter_from_image(binarized_guts)
         if self.debug:
@@ -239,7 +215,7 @@ class StatusInteractor(StatusUsecase):
                 binarized_guts, os.path.join('tmp', 'get_parameters_from_image', 'binarized_guts.png')
             )
 
-        cropped_wise = crop_pil(image, (start_x + p * 4 + lo, end_y, start_x + p * 5 - ro, end_y + h))
+        cropped_wise = crop_pil(character_detail_image.image, (start_x + p * 4 + lo, end_y, start_x + p * 5 - ro, end_y + h))
         binarized_wise = binarized(cropped_wise, 210)
         wise = await self.get_parameter_from_image(binarized_wise)
         if self.debug:

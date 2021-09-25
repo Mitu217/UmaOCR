@@ -15,7 +15,7 @@ class CharacterUsecase(metaclass=ABCMeta):
         raise NotImplementedError
 
     @abstractmethod
-    async def get_character_rank_from_image(self, image: Image) -> str:
+    async def get_character_rank_from_image(self, image: CharacterDetailImage) -> str:
         raise NotImplementedError
 
     @abstractmethod

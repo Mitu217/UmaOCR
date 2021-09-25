@@ -8,6 +8,7 @@ from app.usecase.ability import AbilityInteractor
 from app.usecase.character import CharacterInteractor
 from app.usecase.skill_interactor import SkillInteractor
 from app.usecase.status_interactor import StatusInteractor
+from app.usecase.image import ImageInteractor
 from app.views.api import APIResource
 from app.views.web import WebResource
 
@@ -38,6 +39,11 @@ def create_app():
             debug=debug,
         ),
         SkillInteractor(
+            LocalFileDriverImpl(''),
+            app.logger,
+            debug=debug,
+        ),
+        ImageInteractor(
             LocalFileDriverImpl(''),
             app.logger,
             debug=debug,

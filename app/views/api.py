@@ -8,6 +8,7 @@ from app.interface.usecase.appropriate import AppropriateUsecase
 from app.interface.usecase.character import CharacterUsecase
 from app.interface.usecase.skill_usecase import SkillUsecase
 from app.interface.usecase.status_usecase import StatusUsecase
+from app.interface.usecase.image import ImageUsecase
 from app.domain.image import CharacterDetailImage
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
@@ -22,16 +23,19 @@ class APIResource:
     status_usecase: StatusUsecase
     ability_usecase: AppropriateUsecase
     skill_usecase: SkillUsecase
+    image_usecase: ImageUsecase
 
     def __init__(self,
                  status_usecase: StatusUsecase,
                  character_usecase: CharacterUsecase,
                  ability_usecase: AppropriateUsecase,
-                 skill_usecase: SkillUsecase):
+                 skill_usecase: SkillUsecase,
+                 image_usecase: ImageUsecase):
         self.status_usecase = status_usecase
         self.character_usecase = character_usecase
         self.ability_usecase = ability_usecase
         self.skill_usecase = skill_usecase
+        self.image_usecase = image_usecase
 
     def post_ocr_status(self):
         if 'file' not in request.files:
@@ -47,17 +51,17 @@ class APIResource:
             return make_response(
                 jsonify({'result': 'support extension jpg, jpeg or png'}), 400)
 
-        character_detail_image = CharacterDetailImage(image)
+        character_detail_image = asyncio.run(self.image_usecase.create_character_detail_image(image))
 
         async def get_data():
             tasks = [
                 asyncio.create_task(self.character_usecase.get_character_from_image(character_detail_image)),
-                asyncio.create_task(self.character_usecase.get_character_rank_from_image(image)),
-                asyncio.create_task(self.status_usecase.get_parameters_from_image(image)),
+                asyncio.create_task(self.character_usecase.get_character_rank_from_image(character_detail_image)),
+                asyncio.create_task(self.status_usecase.get_parameters_from_image(character_detail_image)),
                 asyncio.create_task(self.skill_usecase.get_character_skills_from_character_modal_image(image)),
-                asyncio.create_task(self.ability_usecase.get_character_appropriate_fields_from_image(image)),
-                asyncio.create_task(self.ability_usecase.get_character_appropriate_distances_from_image(image)),
-                asyncio.create_task(self.ability_usecase.get_character_appropriate_strategies_from_image(image)),
+                asyncio.create_task(self.ability_usecase.get_character_appropriate_fields_from_image(character_detail_image)),
+                asyncio.create_task(self.ability_usecase.get_character_appropriate_distances_from_image(character_detail_image)),
+                asyncio.create_task(self.ability_usecase.get_character_appropriate_strategies_from_image(character_detail_image)),
             ]
             results = await asyncio.gather(*tasks)
 

@@ -50,46 +50,19 @@ class CharacterInteractor(CharacterUsecase):
         self.cache_master_characters = master_characters_json
         return master_characters_json or []
 
-    async def get_character_from_image(self, image: CharacterDetailImage) -> Character:
-        name = await self.get_character_name_from_image(image.image)
-        nickname = await self.get_character_nickname_from_image_and_name(image.image, name)
+    async def get_character_from_image(self, character_detail_image: CharacterDetailImage) -> Character:
+        name = await self.get_character_name_from_image(character_detail_image)
+        nickname = await self.get_character_nickname_from_image_and_name(character_detail_image, name)
         return Character(name, nickname)
 
-    async def get_character_nickname_from_image_and_name(self, image: Image, name: str) -> str:
-        # 処理高速化のため、次の操作を行う
-        #  * templateと画像のwidthを合わせる
-        #  * パラメーターとキャラクター名は画像上半分にしかないため、画像の下半分を捨てる
-        image = resize_pil(image, TEMPLATE_WIDTH)
-        image = crop_pil(
-            image,
-            (0,
-             image.size[1] *
-             0.1,
-             image.size[0],
-             image.size[1] *
-             0.5))
-        if self.debug:
-            await self.local_file_driver.save_image(
-                image, os.path.join('tmp', 'get_character_nickname_from_image_and_name', 'init_image.png')
-            )
-
-        parameter_frame_templ = await self.local_file_driver.open_image(
-            os.path.join(resources.__path__[0], 'images', 'ocr_params', 'template_1024.png')
-        )
-        parameter_frame_loc = await get_matching_template_location(image, parameter_frame_templ)
-        if parameter_frame_loc is None:
+    async def get_character_nickname_from_image_and_name(self, character_detail_image: CharacterDetailImage, name: str) -> str:
+        if character_detail_image.params_frame_loc is None:
             self.logger.debug('not found parameter_frame_loc')
             return ''
-        (start_x, start_y), (end_x, end_y) = parameter_frame_loc
+        (start_x, start_y), (end_x, end_y) = character_detail_image.params_frame_loc
         (st_x, st_y) = (end_x - start_x, end_y - start_y)
 
-        if self.debug:
-            await self.local_file_driver.save_image(
-                crop_pil(image, (start_x, start_y, end_x, end_y)),
-                os.path.join('tmp', 'get_character_nickname_from_image_and_name', 'multi_scale_matching_template.png')
-            )
-
-        cropped_character_nickname = crop_pil(image,
+        cropped_character_nickname = crop_pil(character_detail_image.image,
                                           (start_x + (st_x * 0.5),
                                            start_y - (st_y * 6.5),
                                            end_x - (st_x * 0.05),
@@ -120,47 +93,14 @@ class CharacterInteractor(CharacterUsecase):
 
         return found_str
 
-    async def get_character_name_from_image(self, image: Image) -> str:
-        """
-        画像内のパラメーターの位置から、キャラクター名を取得する
-        :param image:
-        :return:
-        """
-
-        # 処理高速化のため、次の操作を行う
-        #  * templateと画像のwidthを合わせる
-        #  * パラメーターとキャラクター名は画像上半分にしかないため、画像の下半分を捨てる
-        image = resize_pil(image, TEMPLATE_WIDTH)
-        image = crop_pil(
-            image,
-            (0,
-             image.size[1] *
-             0.1,
-             image.size[0],
-             image.size[1] *
-             0.5))
-        if self.debug:
-            await self.local_file_driver.save_image(
-                image, os.path.join('tmp', 'get_character_name_from_image', 'init_image.png')
-            )
-
-        parameter_frame_templ = await self.local_file_driver.open_image(
-            os.path.join(resources.__path__[0], 'images', 'ocr_params', 'template_1024.png')
-        )
-        parameter_frame_loc = await get_matching_template_location(image, parameter_frame_templ)
-        if parameter_frame_loc is None:
+    async def get_character_name_from_image(self, character_detail_image: CharacterDetailImage) -> str:
+        if character_detail_image.params_frame_loc is None:
             self.logger.debug('not found parameter_frame_loc')
             return ''
-        (start_x, start_y), (end_x, end_y) = parameter_frame_loc
+        (start_x, start_y), (end_x, end_y) = character_detail_image.params_frame_loc
         (st_x, st_y) = (end_x - start_x, end_y - start_y)
 
-        if self.debug:
-            await self.local_file_driver.save_image(
-                crop_pil(image, (start_x, start_y, end_x, end_y)),
-                os.path.join('tmp', 'get_character_name_from_image', 'multi_scale_matching_template.png')
-            )
-
-        cropped_character_name = crop_pil(image,
+        cropped_character_name = crop_pil(character_detail_image.image,
                                           (start_x + (st_x * 0.5),
                                            start_y - (st_y * 5.25),
                                               end_x - (st_x * 0.05),
@@ -190,47 +130,14 @@ class CharacterInteractor(CharacterUsecase):
 
         return found_str
 
-    async def get_character_rank_from_image(self, image: Image) -> str:
-        """
-        画像内のパラメーターの位置から、キャラクターのランクを取得する
-        :param image:
-        :return:
-        """
-
-        # 処理高速化のため、次の操作を行う
-        #  * templateと画像のwidthを合わせる
-        #  * パラメーターとキャラクター名は画像上半分にしかないため、画像の下半分を捨てる
-        image = resize_pil(image, TEMPLATE_WIDTH)
-        image = crop_pil(
-            image,
-            (0,
-             image.size[1] *
-             0.1,
-             image.size[0],
-             image.size[1] *
-             0.5))
-        if self.debug:
-            await self.local_file_driver.save_image(
-                image, os.path.join('tmp', 'get_character_rank_from_image', 'init_image.png')
-            )
-
-        parameter_frame_templ = await self.local_file_driver.open_image(
-            os.path.join(resources.__path__[0], 'images', 'ocr_params', 'template_1024.png')
-        )
-        parameter_frame_loc = await get_matching_template_location(image, parameter_frame_templ)
-        if parameter_frame_loc is None:
+    async def get_character_rank_from_image(self, character_detail_image: CharacterDetailImage) -> str:
+        if character_detail_image.params_frame_loc is None:
             self.logger.debug('not found parameter_frame_loc')
             return ''
-        (start_x, start_y), (end_x, end_y) = parameter_frame_loc
+        (start_x, start_y), (end_x, end_y) = character_detail_image.params_frame_loc
         (st_x, st_y) = (end_x - start_x, end_y - start_y)
 
-        if self.debug:
-            await self.local_file_driver.save_image(
-                crop_pil(image, (start_x, start_y, end_x, end_y)),
-                os.path.join('tmp', 'get_character_rank_from_image', 'multi_scale_matching_template.png')
-            )
-
-        cropped_character_rank = crop_pil(image,
+        cropped_character_rank = crop_pil(character_detail_image.image,
                                           (start_x + (st_x * 0.325),
                                            start_y - (st_y * 7),
                                               end_x - (st_x * 0.515),
