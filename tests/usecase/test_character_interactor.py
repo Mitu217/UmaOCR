@@ -10,6 +10,7 @@ import resources
 from app.domain.character import Character
 from app.driver.file_driver import LocalFileDriverImpl
 from app.usecase.character import CharacterInteractor
+from app.usecase.image import ImageInteractor
 from app.library.pillow import crop_pil, resize_pil
 
 
@@ -45,12 +46,16 @@ class TestCharacterInteractor(TestCase):
                     LocalFileDriverImpl(''),
                     logging.getLogger(__name__),
                 )
+                image_interactor = ImageInteractor(
+                    LocalFileDriverImpl(''),
+                    logging.getLogger(__name__),
+                )
 
                 with Image.open(
                         os.path.join(resources.__path__[0], 'tests', 'characters', image_name)) as image:
-                    optimized_resize_image = resize_pil(image, 1024, None, Image.LANCZOS)
+                    character_detail_image = asyncio.run(image_interactor.create_character_detail_image(image)) # TODO: テスト独自のhelper関数へ変更する
                     got = asyncio.run(
-                        character_interactor.get_character_nickname_from_image_and_name(optimized_resize_image, character_name))
+                        character_interactor.get_character_nickname_from_image_and_name(character_detail_image, character_name))
 
                 with open(
                         os.path.join(resources.__path__[0], 'tests', 'characters', result_name)) as result:
