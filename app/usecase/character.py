@@ -90,10 +90,10 @@ class CharacterInteractor(CharacterUsecase):
 
         cropped_character_nickname = crop_pil(image,
                                           (start_x + (st_x * 0.5),
-                                           start_y - (st_y * 6.25),
+                                           start_y - (st_y * 6.5),
                                            end_x - (st_x * 0.05),
-                                           start_y - (st_y * 5.15)))
-        binarized_character_nickname = binarized(cropped_character_nickname, 150)
+                                           start_y - (st_y * 5.25)))
+        binarized_character_nickname = binarized(cropped_character_nickname, 130)
         text = get_text_with_single_text_line_and_jpn_from_image(binarized_character_nickname)
         if self.debug:
             await self.local_file_driver.save_image(
