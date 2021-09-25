@@ -8,6 +8,7 @@ from app.interface.usecase.appropriate import AppropriateUsecase
 from app.interface.usecase.character import CharacterUsecase
 from app.interface.usecase.skill_usecase import SkillUsecase
 from app.interface.usecase.status_usecase import StatusUsecase
+from app.domain.image import CharacterDetailImage
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
@@ -46,9 +47,11 @@ class APIResource:
             return make_response(
                 jsonify({'result': 'support extension jpg, jpeg or png'}), 400)
 
+        character_detail_image = CharacterDetailImage(image)
+
         async def get_data():
             tasks = [
-                asyncio.create_task(self.character_usecase.get_character_from_image(image)),
+                asyncio.create_task(self.character_usecase.get_character_from_image(character_detail_image)),
                 asyncio.create_task(self.character_usecase.get_character_rank_from_image(image)),
                 asyncio.create_task(self.status_usecase.get_parameters_from_image(image)),
                 asyncio.create_task(self.skill_usecase.get_character_skills_from_character_modal_image(image)),

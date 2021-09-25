@@ -14,6 +14,7 @@ from app.library.matching_template import (matching_template, multi_scale_matchi
 from app.library.ocr import get_text_with_single_text_line_and_jpn_from_image
 from app.library.pillow import binarized, crop_pil, pil2cv, resize_pil
 from app.domain.character import Character
+from app.domain.image import CharacterDetailImage
 
 TEMPLATE_WIDTH = 1024
 
@@ -49,9 +50,9 @@ class CharacterInteractor(CharacterUsecase):
         self.cache_master_characters = master_characters_json
         return master_characters_json or []
 
-    async def get_character_from_image(self, image: Image) -> Character:
-        name = await self.get_character_name_from_image(image)
-        nickname = await self.get_character_nickname_from_image_and_name(image, name)
+    async def get_character_from_image(self, image: CharacterDetailImage) -> Character:
+        name = await self.get_character_name_from_image(image.image)
+        nickname = await self.get_character_nickname_from_image_and_name(image.image, name)
         return Character(name, nickname)
 
     async def get_character_nickname_from_image_and_name(self, image: Image, name: str) -> str:
