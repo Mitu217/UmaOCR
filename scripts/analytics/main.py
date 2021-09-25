@@ -10,6 +10,7 @@ from app.usecase.ability import AbilityInteractor
 from app.usecase.character import CharacterInteractor
 from app.usecase.skill_interactor import SkillInteractor
 from app.usecase.status_interactor import StatusInteractor
+from app.usecase.image import ImageInteractor
 from app.views.api import APIResource
 from app.library.pillow import resize_pil
 from app.usecase.const import INPUT_IMAGE_WIDTH
@@ -33,6 +34,10 @@ skill_usecase = SkillInteractor(
     LocalFileDriverImpl(''),
     logger,
 )
+image_usecase = ImageInteractor(
+    LocalFileDriverImpl(''),
+    logger,
+)
 
 def get_samples_ids():
     return os.listdir(path='./samples')
@@ -52,17 +57,17 @@ def get_chunks(lst, n):
 
 def get_status(path):
     image = Image.open(path)
-    image = resize_pil(image, INPUT_IMAGE_WIDTH)
+    character_detail_image = asyncio.run(image_usecase.create_character_detail_image(image))
 
     async def get_data():
         tasks = [
-            asyncio.create_task(character_usecase.get_character_from_image(image)),
-            asyncio.create_task(character_usecase.get_character_rank_from_image(image)),
-            asyncio.create_task(status_usecase.get_parameters_from_image(image)),
+            asyncio.create_task(character_usecase.get_character_from_image(character_detail_image)),
+            asyncio.create_task(character_usecase.get_character_rank_from_image(character_detail_image)),
+            asyncio.create_task(status_usecase.get_parameters_from_image(character_detail_image)),
             asyncio.create_task(skill_usecase.get_character_skills_from_character_modal_image(image)),
-            asyncio.create_task(ability_usecase.get_character_appropriate_fields_from_image(image)),
-            asyncio.create_task(ability_usecase.get_character_appropriate_distances_from_image(image)),
-            asyncio.create_task(ability_usecase.get_character_appropriate_strategies_from_image(image)),
+            asyncio.create_task(ability_usecase.get_character_appropriate_fields_from_image(character_detail_image)),
+            asyncio.create_task(ability_usecase.get_character_appropriate_distances_from_image(character_detail_image)),
+            asyncio.create_task(ability_usecase.get_character_appropriate_strategies_from_image(character_detail_image)),
         ]
         results = await asyncio.gather(*tasks)
 
