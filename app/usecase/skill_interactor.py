@@ -2,6 +2,7 @@ import asyncio
 import json
 import os
 import re
+import cv2
 from concurrent import futures
 from logging import Logger
 
@@ -18,7 +19,7 @@ from app.library.matching_template import matching_template, multi_scale_matchin
 from app.library.ocr import (
     get_digit_with_single_text_line_and_eng_from_image,
     get_line_box_with_single_text_line_and_jpn_from_image)
-from app.library.pillow import binarized, crop_pil, pil2cv, resize_pil
+from app.library.pillow import binarized, crop_pil, pil2cv, resize_pil, cv2pil
 from app.usecase import const
 
 TEMPLATE_HEIGHT = 100
@@ -113,6 +114,38 @@ class SkillInteractor(SkillUsecase):
 
         def p(index: int):
             (start_x, start_y), (end_x, end_y) = skill_frame_locs[index]
+
+            # 色の割合でスキルタイプを取得してみるテスト
+            try:
+                cropped_skill_type_image = crop_pil(cropped_image, (start_x + st_w * 0.02, start_y + st_h * 0.6, start_x + st_w * 0.06, end_y - st_h * 0.5))
+                if self.debug:
+                    asyncio.run(self.local_file_driver.save_image(
+                        cropped_skill_type_image,
+                        os.path.join('tmp', 'get_skills_from_image', 'skill' + str(index + 1) + '_type_cropped.png')
+                    ))
+
+                cv2_cropped_skill_type_image = pil2cv(cropped_skill_type_image)
+
+                # 回復・疲労軽減（青）
+                # img_mask = cv2.inRange(cv2_cropped_skill_type_image, (220, 150, 0), (255, 255, 220))
+                # バフ（黄）
+                img_mask = cv2.inRange(cv2_cropped_skill_type_image, (0, 180, 220), (245, 245, 255))
+                # デバフ（赤）
+                # img_mask = cv2.inRange(cv2_cropped_skill_type_image, (95, 60, 220), (255, 245, 245))
+                # 特定条件・レース場強化系（緑）
+                # img_mask = cv2.inRange(cv2_cropped_skill_type_image, (50, 150, 150), (255, 255, 230))
+                if self.debug:
+                    output = cv2.bitwise_and(cv2_cropped_skill_type_image, cv2_cropped_skill_type_image, mask=img_mask)
+                    asyncio.run(self.local_file_driver.save_image(
+                        cv2pil(output),
+                        os.path.join('tmp', 'get_skills_from_image', 'skill' + str(index + 1) + '_mask_cropped.png')
+                    ))
+                red_ratio1 = cv2.countNonZero(img_mask) / img_mask.size
+                self.logger.info('index: {}, {:.2%}'.format(index+1, red_ratio1))  # 11.62%
+
+            except Exception as e:
+                self.logger.error(e)
+                return
 
             cropped_skill = crop_pil(binarized_image, (
                 start_x + st_w * 0.07, start_y + st_h * 0.7, start_x + st_w * 0.43, end_y - st_h * 0.55))
