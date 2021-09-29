@@ -54,6 +54,8 @@ class TestSkillInteractor(TestCase):
             ('image36.png', 'image36.csv'),
             ('image37.png', 'image37.csv'),
             ('image38.png', 'image38.csv'),
+            ('ぐるぐるマミートリック.png', 'ぐるぐるマミートリック.csv'),
+            ('Drain_for_rose.png', 'Drain_for_rose.csv'),
         ):
             with self.subTest(image_name=image_name):
                 skill_interactor = SkillInteractor(
