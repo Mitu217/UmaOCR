@@ -1909,6 +1909,16 @@
     },
     {
       "type": "normal",
+      "name": "静かな呼吸",
+      "weight": 5,
+      "desc": "",
+      "similar": {
+        "name": [],
+        "weight": []
+      }
+    },
+    {
+      "type": "normal",
       "name": "非根幹距離◯",
       "weight": 6,
       "desc": "",
@@ -2597,6 +2607,16 @@
     },
     {
       "type": "rare",
+      "name": "潜伏態勢",
+      "weight": 4,
+      "desc": "",
+      "similar": {
+        "name": [],
+        "weight": []
+      }
+    },
+    {
+      "type": "rare",
       "name": "火事場のバ鹿力",
       "weight": 7,
       "desc": "",
@@ -2637,6 +2657,16 @@
     },
     {
       "type": "rare",
+      "name": "百万バリキ",
+      "weight": 5,
+      "desc": "",
+      "similar": {
+        "name": [],
+        "weight": []
+      }
+    },
+    {
+      "type": "rare",
       "name": "眠れる獅子",
       "weight": 5,
       "desc": "",
@@ -2659,6 +2689,16 @@
       "type": "rare",
       "name": "脱出術",
       "weight": 3,
+      "desc": "",
+      "similar": {
+        "name": [],
+        "weight": []
+      }
+    },
+    {
+      "type": "rare",
+      "name": "見惚れるトリック",
+      "weight": 8,
       "desc": "",
       "similar": {
         "name": [],
@@ -2785,6 +2825,16 @@
     },
     {
       "type": "unique",
+      "name": "Drain for rose",
+      "weight": 8,
+      "desc": "",
+      "similar": {
+        "name": [],
+        "weight": []
+      }
+    },
+    {
+      "type": "unique",
       "name": "G00 1st.F∞;",
       "weight": 7,
       "desc": "",
@@ -2899,6 +2949,16 @@
       "type": "unique",
       "name": "きっとその先へ…！",
       "weight": 9,
+      "desc": "",
+      "similar": {
+        "name": [],
+        "weight": []
+      }
+    },
+    {
+      "type": "unique",
+      "name": "ぐるぐるマミートリック♡",
+      "weight": 12,
       "desc": "",
       "similar": {
         "name": [],
